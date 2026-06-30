@@ -27,7 +27,8 @@ export const legalLinks = [
 ] as const;
 
 export const socialLinks = [
-  { href: "https://www.instagram.com/", label: "Instagram" },
-  { href: "https://www.linkedin.com/", label: "LinkedIn" },
+  // TODO: Replace these placeholder destinations with POP Impact Lab's real social profile URLs.
+  { href: "/contact", label: "Instagram placeholder" },
+  { href: "/contact", label: "LinkedIn placeholder" },
   { href: `mailto:${siteConfig.email}`, label: "Email" },
 ] as const;
