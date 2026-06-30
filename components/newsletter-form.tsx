@@ -37,7 +37,8 @@ export function NewsletterForm() {
       setStatus("success");
       setMessage(data.message ?? "Thanks for joining the POP newsletter.");
       setEmail("");
-    } catch {
+    } catch (error) {
+      console.error("Newsletter signup failed", error);
       setStatus("error");
       setMessage("Unable to submit right now. Please try again later.");
     }
