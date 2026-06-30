@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { buttonClasses } from "@/components/ui/button";
 import { navLinks } from "@/lib/site";
@@ -12,14 +12,18 @@ export function SiteNavbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
+  function handleLinkClick() {
     setIsOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <header className="border-brand-ink/10 bg-brand-paper/95 sticky top-0 z-50 border-b backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 sm:px-8 lg:px-12">
-        <Link className="flex items-center gap-3" href="/">
+        <Link
+          className="flex items-center gap-3"
+          href="/"
+          onClick={handleLinkClick}
+        >
           <span className="bg-brand-ink flex h-11 w-11 items-center justify-center rounded-full text-sm font-bold text-white">
             POP
           </span>
@@ -40,6 +44,7 @@ export function SiteNavbar() {
                 "text-brand-slate hover:text-brand-ink text-sm font-medium transition",
                 pathname === link.href && "text-brand-ink",
               )}
+              onClick={handleLinkClick}
             >
               {link.label}
             </Link>
@@ -47,6 +52,7 @@ export function SiteNavbar() {
           <Link
             className={buttonClasses({ variant: "secondary", size: "sm" })}
             href="/#newsletter"
+            onClick={handleLinkClick}
           >
             Newsletter
           </Link>
@@ -103,6 +109,7 @@ export function SiteNavbar() {
                 "text-brand-slate hover:text-brand-ink rounded-2xl px-4 py-3 text-sm font-medium transition hover:bg-white",
                 pathname === link.href && "text-brand-ink bg-white",
               )}
+              onClick={handleLinkClick}
             >
               {link.label}
             </Link>
@@ -110,6 +117,7 @@ export function SiteNavbar() {
           <Link
             className={buttonClasses({ variant: "secondary", size: "md" })}
             href="/#newsletter"
+            onClick={handleLinkClick}
           >
             Newsletter
           </Link>
