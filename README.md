@@ -60,9 +60,9 @@ public/                 Placeholder local SVG assets for team and gallery visual
 
 All editable placeholder content is centralized in the `content/` directory:
 
-- `/home/runner/work/POP_website/POP_website/content/events.ts`
-- `/home/runner/work/POP_website/POP_website/content/team.ts`
-- `/home/runner/work/POP_website/POP_website/content/gallery.ts`
+- `content/events.ts`
+- `content/team.ts`
+- `content/gallery.ts`
 
 These files export typed arrays/objects so non-developers or future contributors can update copy, dates, registration settings, and placeholder media references in one place.
 
