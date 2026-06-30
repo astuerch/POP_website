@@ -74,6 +74,10 @@ Copy `.env.example` to `.env.local` for local development:
 cp .env.example .env.local
 ```
 
+### Dependency note
+
+- `package.json` includes a `postcss` override to `8.5.16` to avoid the vulnerable transitive `postcss@8.4.31` pulled by the current Next.js release during `npm audit`.
+
 ### MailerLite newsletter stub
 
 Environment variables:
