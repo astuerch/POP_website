@@ -1,17 +1,16 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import {type FormEvent, useState} from "react";
+import {useTranslations} from "next-intl";
 
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
+import {cn} from "@/lib/utils";
 
 export function NewsletterForm() {
+  const t = useTranslations("newsletter");
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [message, setMessage] = useState(
-    "Sign up for future event drops, recap notes, and POP news.",
-  );
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState(t("subhead"));
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,10 +22,10 @@ export function NewsletterForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, source: "site-newsletter-form" }),
+        body: JSON.stringify({email, source: "site-newsletter-form"}),
       });
 
-      const data = (await response.json()) as { message?: string };
+      const data = (await response.json()) as {message?: string};
 
       if (!response.ok) {
         setStatus("error");
@@ -35,7 +34,7 @@ export function NewsletterForm() {
       }
 
       setStatus("success");
-      setMessage(data.message ?? "Thanks for joining the POP newsletter.");
+      setMessage(t("success"));
       setEmail("");
     } catch (error) {
       console.error("Newsletter signup failed", error);
@@ -49,27 +48,25 @@ export function NewsletterForm() {
       <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
         <div>
           <label className="sr-only" htmlFor="newsletter-email">
-            Email address
+            {t("placeholder")}
           </label>
           <input
             required
             id="newsletter-email"
             type="email"
             autoComplete="email"
-            placeholder="Email address"
+            placeholder={t("placeholder")}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            className="border-brand-ink/15 text-brand-ink focus:border-brand-coral h-12 w-full rounded-full border bg-white px-5 transition outline-none"
+            className="h-12 w-full rounded-full border border-white/15 bg-white px-5 text-brand-ink outline-none transition focus:border-brand-lila"
           />
         </div>
         <Button size="md" type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "Submitting..." : "Join newsletter"}
+          {status === "loading" ? t("loading") : t("button")}
         </Button>
       </div>
       <p
-        className={`text-sm ${
-          status === "error" ? "text-red-700" : "text-brand-slate"
-        }`}
+        className={cn("text-sm", status === "error" ? "text-red-300" : "text-white/75")}
         role="status"
       >
         {message}

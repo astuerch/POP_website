@@ -6,51 +6,37 @@ export interface GalleryItem {
   alt: string;
 }
 
-// TODO: Swap these placeholder visuals for approved event photos from the Wix site or the POP archive.
 export const galleryItems: GalleryItem[] = [
   {
     id: "gallery-1",
-    title: "Crowd conversations",
+    title: "The room before the first question",
     caption:
-      "Placeholder highlight showing POP’s open, discussion-led atmosphere.",
-    src: "/gallery-conversation.svg",
-    alt: "Placeholder image representing an engaged audience in conversation.",
+      "A wide view of the POP atmosphere: informal, full, and ready for exchange.",
+    src: "/images/hero/crowd_pop.jpg",
+    alt: "Audience gathered at a POP Impact Lab event in Zürich.",
   },
   {
     id: "gallery-2",
-    title: "Researchers in the room",
-    caption: "A visual stand-in for the researcher-meets-community format.",
-    src: "/gallery-researchers.svg",
-    alt: "Placeholder image representing researchers hosting an event.",
+    title: "Conversation over performance",
+    caption:
+      "POP formats are designed so researchers stay in the room and the discussion stays open.",
+    src: "/images/events/event1_pic.png",
+    alt: "People speaking together during a POP Impact Lab event.",
   },
   {
     id: "gallery-3",
-    title: "Evening event energy",
-    caption: "Placeholder image for a relaxed Zurich event setting.",
-    src: "/gallery-evening.svg",
-    alt: "Placeholder image representing an evening science event.",
+    title: "Different perspectives, same table",
+    caption:
+      "The format makes room for lived experience, curiosity and scientific insight at the same time.",
+    src: "/images/events/event2_pic.png",
+    alt: "Participants listening during a POP Impact Lab event.",
   },
   {
     id: "gallery-4",
-    title: "Curious questions",
-    caption: "Future home for candid audience moments and Q&A snapshots.",
-    src: "/gallery-questions.svg",
-    alt: "Placeholder image representing curious audience questions.",
-  },
-  {
-    id: "gallery-5",
-    title: "Ideas at the table",
+    title: "A Zürich evening with POP",
     caption:
-      "Placeholder for the no-panel, no-podium table conversation format.",
-    src: "/gallery-table.svg",
-    alt: "Placeholder image representing a table discussion.",
-  },
-  {
-    id: "gallery-6",
-    title: "POP moments",
-    caption:
-      "Reserved for a future mix of gallery highlights and event recaps.",
-    src: "/gallery-moments.svg",
-    alt: "Placeholder image representing POP event moments.",
+      "Science enters the spaces people already go — and the room changes with it.",
+    src: "/images/hero/crowd_pop.jpg",
+    alt: "Another view of a POP Impact Lab audience in Zürich.",
   },
 ];

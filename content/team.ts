@@ -9,38 +9,35 @@ export interface TeamMember {
   };
 }
 
-// TODO: Replace these placeholder bios and images with approved founder materials.
 export const team: TeamMember[] = [
   {
-    name: "Ale Stürchler",
-    role: "PhD in Biotechnology, ETH Zurich",
-    focus:
-      "Translating complex science into conversations people want to join.",
-    bio: "Ale helps shape POP’s approachable format so scientific insight feels grounded, welcoming, and useful beyond the lab.",
+    name: "Maria Dimitriu",
+    role: "Neuroscience PhD, ETH Zurich",
+    bio: "Maria anchors POP's science-first credibility while keeping the tone human, interactive, and free of unnecessary jargon.",
+    focus: "Turning emerging research into open, question-led discussions.",
     image: {
-      src: "/team-ale.svg",
-      alt: "Placeholder portrait for Ale Stürchler.",
+      src: "/images/team/pic maria.png",
+      alt: "Maria Dimitriu, Neuroscience PhD, ETH Zurich",
     },
   },
   {
     name: "Jess Simon",
     role: "Media & Networks, ex-Forbes",
-    focus:
-      "Building bridges between research, storytelling, and public curiosity.",
     bio: "Jess brings editorial and network-building experience that helps every POP event feel bold, clear, and easy to share.",
+    focus: "Building bridges between research, storytelling, and public curiosity.",
     image: {
-      src: "/team-jess.svg",
-      alt: "Placeholder portrait for Jess Simon.",
+      src: "/images/team/pic jess.png",
+      alt: "Jess Simon, Media & Networks, ex-Forbes",
     },
   },
   {
-    name: "Maria Dimitriu",
-    role: "Neuroscience PhD candidate, ETH & UZH",
-    focus: "Turning emerging research into open, question-led discussions.",
-    bio: "Maria anchors POP’s science-first credibility while keeping the tone human, interactive, and free of unnecessary jargon.",
+    name: "Alessandra Stürchler",
+    role: "Biotech PhD, ETH Zurich",
+    bio: "Ale helps shape POP's approachable format so scientific insight feels grounded, welcoming, and useful beyond the lab.",
+    focus: "Translating complex science into conversations people want to join.",
     image: {
-      src: "/team-maria.svg",
-      alt: "Placeholder portrait for Maria Dimitriu.",
+      src: "/images/team/pic ale.png",
+      alt: "Alessandra Stürchler, Biotech PhD, ETH Zurich",
     },
   },
 ];

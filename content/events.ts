@@ -1,5 +1,8 @@
 export type RegistrationType =
-  "ticket-tailor-paid" | "ticket-tailor-free" | "external" | "closed";
+  | "ticket-tailor-paid"
+  | "ticket-tailor-free"
+  | "external"
+  | "closed";
 
 export type EventStatus = "upcoming" | "past";
 
@@ -25,49 +28,71 @@ export interface Event {
   };
 }
 
-// TODO: Replace these placeholder event entries with the final approved POP Impact Lab schedule and copy.
 export const events: Event[] = [
+  {
+    slug: "next-event-september-2026",
+    title: "Topic to be announced — be the first to know.",
+    summary:
+      "The next POP evening is taking shape now. Join the list to hear the question, the researchers, and the venue details first.",
+    description: [
+      "Our next event lands in September 2026 at Vergani, Löwenplatz, Zürich. The theme will be announced soon, but the format stays the same: a strong public question, researchers in the room, and a conversation that feels open from the first minute.",
+      "Seats will be limited. Subscribe to the newsletter to get first access when the full programme goes live.",
+    ],
+    isoDate: "2026-09-01",
+    dateLabel: "September 2026 · Evening event",
+    location: "Zürich, Switzerland",
+    venue: "Vergani, Löwenplatz, Zürich",
+    city: "Zürich",
+    status: "upcoming",
+    registrationType: "ticket-tailor-free",
+    ticketTailorEventId: "next-event-september-2026",
+    priceLabel: "Limited seats",
+    speakers: ["Maria Dimitriu", "Alessandra Stürchler"],
+    image: {
+      src: "/images/events/event1_pic.png",
+      alt: "Guests gathered at a POP Impact Lab event in Zürich.",
+    },
+  },
   {
     slug: "social-media-how-it-changes-your-mind",
     title: "Social Media & How it changes your Mind",
     summary:
-      "A bold, jargon-free evening unpacking how attention, emotions, and algorithms shape what we believe online.",
+      "A past POP conversation exploring how platforms, attention and emotion shape what we believe online.",
     description: [
-      "Join POP Impact Lab in Zurich for a conversation-driven evening about the neuroscience and social dynamics of digital feeds. Expect researchers in the room, no panel, no podium, and plenty of time to ask your own questions.",
-      "This Phase 1 build uses placeholder copy that reflects the intended tone of the future site. Swap in the owner-provided event narrative, speaker details, and registration links here later.",
+      "This edition brought a live audience into a shared conversation about digital habits, attention, and influence. Instead of a panel, POP kept the room open and question-led.",
+      "This event is part of the growing POP archive and will later be expanded with a fuller recap.",
     ],
-    isoDate: "2026-09-17",
-    dateLabel: "September 17, 2026 · 19:00",
-    location: "Zurich, Switzerland",
-    venue: "Neighbourhood café venue placeholder",
-    city: "Zurich",
-    status: "upcoming",
-    registrationType: "ticket-tailor-free",
-    registrationUrl: "https://www.tickettailor.com/",
-    ticketTailorEventId: "social-media-placeholder-2026",
-    priceLabel: "Free RSVP",
-    speakers: ["Maria Dimitriu", "Guest researcher placeholder"],
+    isoDate: "2025-11-12",
+    dateLabel: "Past POP edition",
+    location: "Zürich, Switzerland",
+    venue: "POP archive event",
+    city: "Zürich",
+    status: "past",
+    registrationType: "closed",
+    priceLabel: "Archive entry",
+    speakers: ["Maria Dimitriu", "Jess Simon"],
     image: {
-      src: "/gallery-social.svg",
-      alt: "Placeholder artwork for a POP Impact Lab social media event in Zurich.",
+      src: "/images/events/event2_pic.png",
+      alt: "Participants listening and speaking during a POP Impact Lab event.",
     },
   },
   {
     slug: "microplastics-after-work-conversation",
     title: "Microplastics After Work Conversation",
     summary:
-      "A previous POP gathering exploring how microplastics move through daily life, media narratives, and policy debates.",
+      "Placeholder archive entry for a future POP recap focused on microplastics, public understanding, and everyday choices.",
     description: [
-      "This placeholder past-event summary demonstrates how earlier events can stay visible as a growing archive. Use this section later for photos, partners, or takeaways from the real event.",
+      "This slug remains in place as a placeholder for a future past-event page. Replace this copy with the final recap when the approved content is ready.",
     ],
-    isoDate: "2025-11-12",
-    dateLabel: "November 12, 2025",
-    location: "Zurich, Switzerland",
-    venue: "Bar venue placeholder",
-    city: "Zurich",
+    isoDate: "2025-06-05",
+    dateLabel: "Placeholder archive entry",
+    location: "Zürich, Switzerland",
+    venue: "Venue to be confirmed",
+    city: "Zürich",
     status: "past",
     registrationType: "closed",
-    speakers: ["Ale Stürchler", "Industry guest placeholder"],
+    priceLabel: "Placeholder",
+    speakers: ["POP Impact Lab"],
     image: {
       src: "/gallery-microplastics.svg",
       alt: "Placeholder artwork representing a microplastics discussion.",
@@ -77,18 +102,19 @@ export const events: Event[] = [
     slug: "brain-hacks-in-everyday-life",
     title: "Brain Hacks in Everyday Life",
     summary:
-      "A past evening on habits, attention, and what neuroscience can realistically say about changing behaviour.",
+      "Placeholder archive entry for a future POP recap on habits, attention, and what neuroscience can realistically offer daily life.",
     description: [
-      "This placeholder event keeps the page structure ready for a fuller POP archive with recap copy, gallery images, and future SEO updates.",
+      "This slug remains in place as a placeholder for a future past-event page. Replace this copy with the final recap when the approved content is ready.",
     ],
-    isoDate: "2025-06-05",
-    dateLabel: "June 5, 2025",
-    location: "Zurich, Switzerland",
-    venue: "Community café placeholder",
-    city: "Zurich",
+    isoDate: "2025-03-20",
+    dateLabel: "Placeholder archive entry",
+    location: "Zürich, Switzerland",
+    venue: "Venue to be confirmed",
+    city: "Zürich",
     status: "past",
     registrationType: "closed",
-    speakers: ["Jess Simon", "Maria Dimitriu"],
+    priceLabel: "Placeholder",
+    speakers: ["POP Impact Lab"],
     image: {
       src: "/gallery-brain.svg",
       alt: "Placeholder artwork representing a neuroscience themed event.",
@@ -96,9 +122,7 @@ export const events: Event[] = [
   },
 ];
 
-export const upcomingEvents = events.filter(
-  (event) => event.status === "upcoming",
-);
+export const upcomingEvents = events.filter((event) => event.status === "upcoming");
 export const pastEvents = events.filter((event) => event.status === "past");
 
 export function getEventBySlug(slug: string) {

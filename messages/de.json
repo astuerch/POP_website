@@ -1,0 +1,127 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "events": "Veranstaltungen",
+    "about": "Über uns",
+    "gallery": "Galerie",
+    "contact": "Kontakt",
+    "newsletter": "Newsletter",
+    "switchLanguage": "EN"
+  },
+  "hero": {
+    "eyebrow": "ZÜRICH · WISSENSCHAFTSEVENTS",
+    "headline": "Wissenschaft trifft Gesellschaft — an Orten, die du schon kennst.",
+    "subhead": "Wir bringen Spitzenforschung der ETH Zürich und UZH in Bars, Cafés und öffentliche Räume. Kein Fachjargon. Keine akademische Distanz. Nur echte Fragen und Raum zum Denken.",
+    "ctaPrimary": "Newsletter abonnieren",
+    "ctaSecondary": "Veranstaltungen entdecken"
+  },
+  "howPopWorks": {
+    "eyebrow": "So funktioniert POP",
+    "title": "Wissenschaft im Gespräch — für das echte Leben",
+    "card1Title": "Eine mutige Frage",
+    "card1Body": "Wir wählen ein Thema, das die Zukunft prägt.",
+    "card2Title": "Forscher im Raum",
+    "card2Body": "Junge Wissenschaftler von ETH und UZH.",
+    "card3Title": "Offenes Gespräch",
+    "card3Body": "Kein Panel, kein Podium. Das Wort gehört allen."
+  },
+  "socialProof": {
+    "quote": "Ein Raum voller Neugier, unterschiedlicher Perspektiven und echter Gespräche.",
+    "galleryLink": "Zur vollständigen Galerie →"
+  },
+  "nextEvent": {
+    "eyebrow": "Nächstes Event",
+    "viewAll": "Alle Events ansehen"
+  },
+  "newsletter": {
+    "eyebrow": "Immer auf dem Laufenden",
+    "headline": "Möchtest du dabei sein?",
+    "subhead": "Frühzeitiger Zugang zu Events, mutige Fragen, kein Spam.",
+    "placeholder": "E-Mail-Adresse",
+    "button": "Abonnieren",
+    "success": "Danke — wir sehen uns im Gespräch.",
+    "loading": "Wird gesendet..."
+  },
+  "partners": {
+    "eyebrow": "In Zusammenarbeit mit"
+  },
+  "events": {
+    "eyebrow": "Veranstaltungen",
+    "title": "Unsere Events",
+    "upcoming": "Bevorstehend",
+    "past": "Vergangene Events",
+    "viewEvent": "Event ansehen",
+    "eventDetails": "Eventdetails",
+    "date": "Datum",
+    "location": "Ort",
+    "format": "Format",
+    "about": "Über dieses Event",
+    "hosts": "Gastgeber & Gesprächsstarter"
+  },
+  "about": {
+    "eyebrow": "Über POP",
+    "title": "über POP",
+    "para1": "Wissenschaft prägt unsere Welt.\nDie meisten Menschen sind nicht Teil des Gesprächs.\nDas ändern wir.",
+    "para2": "POP Impact Lab übersetzt komplexe Forschung in öffentlichen Dialog. Wir bringen bahnbrechende Themen in Räume, wo Menschen sich bereits treffen. Kein Fachjargon. Kein intellektuelles Gehabe. Keine akademische Distanz. Nur echte Fragen. Und Raum zum Denken. Wir arbeiten mit jungen Forschern von ETH Zürich und UZH zusammen, die möchten, dass ihre Arbeit über die Wissenschaft hinaus wirkt. Denn Wissen sollte nicht hinter verschlossenen Türen bleiben. Die Öffentlichkeit verdient Zugang zu den Ideen, die ihre Zukunft prägen.",
+    "teamTitle": "Unser Team",
+    "teamSubtitle": "Drei Köpfe. Eine Mission: Wissenschaft für die Gesellschaft öffnen.",
+    "teamMotto": "Drei Frauen, verschiedene Kulturen, eine gemeinsame Weigerung: die Wissenschaft, die unsere Zukunft prägt, außer Reichweite zu lassen.",
+    "readStory": "Unsere Geschichte lesen"
+  },
+  "gallery": {
+    "eyebrow": "Galerie",
+    "title": "Event-Impressionen",
+    "description": "Ein Raum voller Neugier, unterschiedlicher Perspektiven und echter Gespräche. So sehen POP Impact Lab Events aus."
+  },
+  "contact": {
+    "eyebrow": "Kontakt",
+    "title": "Gespräch mit POP beginnen",
+    "description": "Schreib uns für Eventpartnerschaften, Veranstaltungsideen, Kooperationen und Presseanfragen.",
+    "email": "E-Mail",
+    "base": "Standort",
+    "bestFor": "Ideal für",
+    "bestForText": "Eventpartnerschaften, Venue-Ideen, Kooperationen und Presseanfragen.",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "E-Mail",
+    "messagePlaceholder": "Nachricht",
+    "send": "Nachricht senden",
+    "sending": "Wird gesendet..."
+  },
+  "footer": {
+    "tagline": "Wissenschaftsvermittlung aus Zürich — mit mutiger, zugänglicher Stimme und einem gesprächsorientierten Format.",
+    "navigate": "Navigation",
+    "legal": "Rechtliches",
+    "social": "Folge uns",
+    "switchLanguage": "English"
+  },
+  "legal": {
+    "eyebrow": "Rechtliches"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite existiert nicht.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "meta": {
+    "home": {
+      "title": "Startseite",
+      "description": "POP Impact Lab veranstaltet zugängliche Wissenschaftsevents in Zürich — offen, gesprächsorientiert, für alle."
+    },
+    "events": {
+      "title": "Veranstaltungen",
+      "description": "Bevorstehende und vergangene POP Impact Lab Wissenschaftsevents in Zürich."
+    },
+    "about": {
+      "title": "Über uns",
+      "description": "Lerne das Gründungsteam von POP Impact Lab und ihre Mission kennen."
+    },
+    "gallery": {
+      "title": "Galerie",
+      "description": "Fotos von POP Impact Lab Events — ein Raum voller Neugier und echter Gespräche."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Kontaktiere POP Impact Lab für Partnerschaften, Venues und Eventanfragen."
+    }
+  }
+}

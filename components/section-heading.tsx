@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import {cn} from "@/lib/utils";
 
 interface SectionHeadingProps {
   eyebrow?: string;
@@ -21,7 +21,7 @@ export function SectionHeading({
         </p>
       ) : null}
       <div className="space-y-3">
-        <h2 className="text-brand-ink text-3xl font-semibold tracking-tight sm:text-4xl">
+        <h2 className="font-heading text-brand-ink text-4xl leading-none tracking-tight sm:text-5xl">
           {title}
         </h2>
         {description ? (

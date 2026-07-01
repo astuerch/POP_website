@@ -1,0 +1,127 @@
+{
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "about": "About",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "newsletter": "Newsletter",
+    "switchLanguage": "DE"
+  },
+  "hero": {
+    "eyebrow": "ZURICH · SCIENCE EVENTS",
+    "headline": "Science meets society, in the places you already go.",
+    "subhead": "We bring cutting-edge research from ETH Zurich and UZH into bars, cafés and public spaces. No jargon. No academic distance. Just real questions and room to think.",
+    "ctaPrimary": "Join the newsletter",
+    "ctaSecondary": "Explore events"
+  },
+  "howPopWorks": {
+    "eyebrow": "How POP works",
+    "title": "Conversation-first science, built for real life",
+    "card1Title": "A bold question",
+    "card1Body": "We pick a topic shaping the future.",
+    "card2Title": "Researchers in the room",
+    "card2Body": "Young scientists from ETH and UZH.",
+    "card3Title": "Open conversation",
+    "card3Body": "No panel, no podium. The floor is everyone's."
+  },
+  "socialProof": {
+    "quote": "A room full of curiosity, different perspectives and real conversations.",
+    "galleryLink": "See full gallery →"
+  },
+  "nextEvent": {
+    "eyebrow": "Next event",
+    "viewAll": "View all events"
+  },
+  "newsletter": {
+    "eyebrow": "Stay in the loop",
+    "headline": "Want to be in the room?",
+    "subhead": "Early access to events, bold questions, no spam.",
+    "placeholder": "Email address",
+    "button": "Subscribe",
+    "success": "Thanks for stepping into the conversation.",
+    "loading": "Submitting..."
+  },
+  "partners": {
+    "eyebrow": "In collaboration with"
+  },
+  "events": {
+    "eyebrow": "Events",
+    "title": "Our events",
+    "upcoming": "Upcoming",
+    "past": "Past events",
+    "viewEvent": "View event",
+    "eventDetails": "Event details",
+    "date": "Date",
+    "location": "Location",
+    "format": "Format",
+    "about": "About this event",
+    "hosts": "Hosts & conversation starters"
+  },
+  "about": {
+    "eyebrow": "About POP",
+    "title": "about POP",
+    "para1": "Science shapes our world.\nMost people are not part of the conversation.\nWe change that.",
+    "para2": "POP Impact Lab translates complex research into public dialogue. We bring cutting-edge topics into spaces where people already meet. No jargon. No intellectual performance. No academic distance. Just real questions. And room to think. We work with young researchers from ETH Zurich and UZH who want their work to matter beyond academia. Because knowledge should not stay behind closed doors. The public deserves access to the ideas that shape their future.",
+    "teamTitle": "Meet the team",
+    "teamSubtitle": "Three minds. One mission: open science to society.",
+    "teamMotto": "Three women, different cultures, one shared refusal: letting the science that shapes our future stay out of reach.",
+    "readStory": "Read our full story"
+  },
+  "gallery": {
+    "eyebrow": "Gallery",
+    "title": "Event highlights",
+    "description": "A room full of curiosity, different perspectives and real conversations. This is what POP Impact Lab events look like."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Start a conversation with POP",
+    "description": "Reach out for event partnerships, venue ideas, collaborations, and press requests.",
+    "email": "Email",
+    "base": "Base",
+    "bestFor": "Best for",
+    "bestForText": "Event partnerships, venue ideas, collaborations, and press requests.",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Message",
+    "send": "Send message",
+    "sending": "Sending..."
+  },
+  "footer": {
+    "tagline": "Zurich-based science outreach with a bold, approachable voice and a conversation-first format.",
+    "navigate": "Navigate",
+    "legal": "Legal",
+    "social": "Follow us",
+    "switchLanguage": "Deutsch"
+  },
+  "legal": {
+    "eyebrow": "Legal"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist.",
+    "backHome": "Back to home"
+  },
+  "meta": {
+    "home": {
+      "title": "Home",
+      "description": "POP Impact Lab hosts approachable Zurich science events built around open conversation, not lectures."
+    },
+    "events": {
+      "title": "Events",
+      "description": "Browse upcoming and past POP Impact Lab science events in Zürich."
+    },
+    "about": {
+      "title": "About",
+      "description": "Meet the founding team behind POP Impact Lab and their mission to open science to society."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "Photos from POP Impact Lab events — a room full of curiosity and real conversations."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Get in touch with POP Impact Lab for partnerships, venues, and event enquiries."
+    }
+  }
+}
