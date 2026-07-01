@@ -1,14 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
 :root {
-  --background: #fcfaf6;
-  --foreground: #13233f;
+  --background: #f8f5fc;
+  --foreground: #1a0f2e;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Inter", "Segoe UI", sans-serif;
+  --font-heading: "Anton", sans-serif;
+  /* Primary web font is Nunito (Google Fonts). Avenir is listed second so that visitors who
+     have Avenir installed locally (e.g. macOS) also see it — the brand's preferred typeface.
+     Avenir is proprietary and not available on Google Fonts; Nunito is the intended web
+     substitute. Replace Nunito with next/font/local if a licensed Avenir web font is obtained. */
+  --font-sans: "Nunito", "Avenir", "Segoe UI", sans-serif;
   --font-mono: "SFMono-Regular", "SF Mono", monospace;
 }
 
@@ -25,7 +31,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
 
 a {
@@ -34,5 +40,5 @@ a {
 }
 
 ::selection {
-  background: rgba(234, 111, 81, 0.24);
+  background: rgba(182, 161, 210, 0.3);
 }

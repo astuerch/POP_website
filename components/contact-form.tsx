@@ -1,10 +1,12 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import {type FormEvent, useState} from "react";
+import {useTranslations} from "next-intl";
 
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 
 export function ContactForm() {
+  const t = useTranslations("contact");
   const [sent, setSent] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -14,51 +16,42 @@ export function ContactForm() {
 
   return (
     <form
-      className="border-brand-ink/10 shadow-card space-y-4 rounded-[1.75rem] border bg-white p-6"
+      className="shadow-card space-y-4 rounded-[1.75rem] border border-brand-ink/10 bg-white p-6"
       onSubmit={handleSubmit}
     >
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-2">
-          <label className="text-brand-ink text-sm font-medium" htmlFor="name">
-            Name
-          </label>
+        <div>
           <input
             required
             id="name"
-            className="border-brand-ink/15 focus:border-brand-coral h-12 w-full rounded-2xl border px-4 transition outline-none"
-            placeholder="Your name"
+            className="h-12 w-full rounded-2xl border border-brand-ink/15 px-4 text-brand-ink outline-none transition focus:border-brand-lila"
+            placeholder={t("namePlaceholder")}
           />
         </div>
-        <div className="space-y-2">
-          <label className="text-brand-ink text-sm font-medium" htmlFor="email">
-            Email
-          </label>
+        <div>
           <input
             required
             id="email"
             type="email"
-            className="border-brand-ink/15 focus:border-brand-coral h-12 w-full rounded-2xl border px-4 transition outline-none"
-            placeholder="you@example.com"
+            className="h-12 w-full rounded-2xl border border-brand-ink/15 px-4 text-brand-ink outline-none transition focus:border-brand-lila"
+            placeholder={t("emailPlaceholder")}
           />
         </div>
       </div>
-      <div className="space-y-2">
-        <label className="text-brand-ink text-sm font-medium" htmlFor="message">
-          Message
-        </label>
+      <div>
         <textarea
           required
           id="message"
           rows={6}
-          className="border-brand-ink/15 focus:border-brand-coral w-full rounded-[1.5rem] border px-4 py-3 transition outline-none"
-          placeholder="Tell POP why you’re reaching out."
+          className="w-full rounded-[1.5rem] border border-brand-ink/15 px-4 py-3 text-brand-ink outline-none transition focus:border-brand-lila"
+          placeholder={t("messagePlaceholder")}
         />
       </div>
-      <Button type="submit">Send placeholder message</Button>
+      <Button type="submit">{sent ? t("sending") : t("send")}</Button>
       <p className="text-brand-slate text-sm" role="status">
         {sent
-          ? "Thanks — this placeholder form is intentionally not wired yet. Connect a real endpoint in a later phase."
-          : "This is a styled placeholder form for Phase 1. It demonstrates layout and accessibility only."}
+          ? "Thanks — this contact form is staged for the live workflow and will be connected in a later phase."
+          : "Use this form for early enquiries while the live messaging workflow is being connected."}
       </p>
     </form>
   );

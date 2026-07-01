@@ -1,6 +1,6 @@
-import type { ButtonHTMLAttributes } from "react";
+import type {ButtonHTMLAttributes} from "react";
 
-import { cn } from "@/lib/utils";
+import {cn} from "@/lib/utils";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
@@ -13,13 +13,13 @@ export function buttonClasses({
   size?: ButtonSize;
 }) {
   const base =
-    "inline-flex items-center justify-center rounded-full font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-coral focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper";
+    "inline-flex items-center justify-center rounded-full font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-lila focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper";
 
   const variants: Record<ButtonVariant, string> = {
-    primary: "bg-brand-ink text-white hover:bg-slate-900",
-    secondary: "bg-brand-coral text-white hover:bg-[#d85e41]",
+    primary: "bg-brand-lilaDark text-white hover:bg-brand-ink",
+    secondary: "bg-brand-lila text-brand-ink hover:bg-brand-mint",
     ghost:
-      "border border-brand-ink/15 bg-white text-brand-ink hover:border-brand-ink/30 hover:bg-brand-ink/5",
+      "border border-white/20 bg-white/10 text-white hover:border-white/40 hover:bg-white/15",
   };
 
   const sizes: Record<ButtonSize, string> = {
@@ -45,7 +45,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={cn(buttonClasses({ variant, size }), className)}
+      className={cn(buttonClasses({variant, size}), className)}
       type={type}
       {...props}
     />
