@@ -14,10 +14,10 @@ Phase 2 delivers:
 - **"How POP works" — 3 cards** (not 4) with the owner's three circular purple icons
 - **Partners strip** — ETH Zürich, UZH, LSZY, REACH, Vergani logos (greyscale → colour on hover), plus Suncademy and Avantcha as text badges
 - **Dark contrast band** — `background sections.jpg` behind the newsletter CTA section
-- **Real content** — About page copy, team headshots + bios, upcoming event details (September 2026, Vergani Zürich), correct email address
+- **Real content** — About page copy, team headshots + bios, event archive/upcoming placeholders, correct email address
 - **Real legal text** — Privacy & Cookie Policy (nFADP-compliant), Terms & Conditions, Refund Policy, and Imprint from the site owner
 - **Gallery** with real quote copy; placeholder grid ready for the ~50 first-event photos
-- **MailerLite** and **Ticket Tailor** integration stubs kept, ready for live keys
+- **Brevo** newsletter endpoint and **Infomaniak-ready** registration placeholders, ready for live links
 
 Phase 1 is the foundation this phase builds on (App Router scaffold, typed content modules, Framer Motion animations, ESLint config).
 
@@ -95,7 +95,7 @@ Edit the value in both files to keep them in sync.
 ```text
 app/
   [locale]/               Locale-aware pages (home, events, about, gallery, contact, legal/*)
-  api/subscribe/          MailerLite newsletter route handler stub
+  api/subscribe/          Brevo newsletter route handler (stub-safe when env vars are missing)
   layout.tsx              Minimal root layout (html/body rendered in [locale]/layout.tsx)
   globals.css             Google Fonts import + CSS custom properties
 components/               Hero, navbar, footer, how-pop-works, partners-strip, cards, forms, etc.
@@ -123,7 +123,7 @@ public/
     icons/                3 "How POP works" circular icons
     backgrounds/          background sections.jpg — dark contrast band
     team/                 pic ale.png, pic jess.png, pic maria.png
-    events/               event1_pic.png (upcoming), event2_pic.png (past)
+    events/               event1_pic.png (past AI event), event2_pic.png (upcoming Social Media event)
     gallery/event-01/     Drop the ~50 first-event photos here when ready
 ```
 
@@ -151,8 +151,8 @@ All user-facing UI copy lives in `messages/en.json` (English) and `messages/de.j
 | `public/images/team/pic ale.png` | Ale Stürchler team card |
 | `public/images/team/pic jess.png` | Jess Simon team card |
 | `public/images/team/pic maria.png` | Maria Dimitriu team card |
-| `public/images/events/event1_pic.png` | Upcoming event card + detail page |
-| `public/images/events/event2_pic.png` | Past event card + social proof section |
+| `public/images/events/event1_pic.png` | Past event card + detail page (`ai-vs-human-creativity`) |
+| `public/images/events/event2_pic.png` | Upcoming event card + detail page (`social-media-how-it-changes-your-mind`) |
 | `public/images/brand/ETH logo.png` | Partners strip |
 | `public/images/brand/UZH logo.jpg` | Partners strip |
 | `public/images/brand/LSZY logo.png` | Partners strip |
@@ -171,15 +171,19 @@ Copy `.env.example` to `.env.local` for local development:
 cp .env.example .env.local
 ```
 
-### MailerLite newsletter stub
+### Brevo newsletter integration
 
-Environment variables: `MAILERLITE_API_KEY`, `MAILERLITE_GROUP_ID`, `NEXT_PUBLIC_SITE_URL`
+Environment variables: `BREVO_API_KEY`, `BREVO_LIST_ID`, `BREVO_SENDER_EMAIL`, `NEXT_PUBLIC_SITE_URL`
 
-`NewsletterForm` → `POST /api/subscribe` → stub success response. TODO comments in `app/api/subscribe/route.ts` mark where the live MailerLite API call goes.
+`NewsletterForm` → `POST /api/subscribe` on the server. The API key is read only from environment variables (local `.env.local`, production Vercel project settings) and is never exposed to the client.
 
-### Ticket Tailor registration stub
+`BREVO_API_KEY` enables the live Brevo contact call. `BREVO_LIST_ID` is optional and routes subscribers into a specific list.  
+`BREVO_SENDER_EMAIL` is optional for future sender workflows; custom sender domains (for example `hello@popimpactlab.com`) can be added later via Brevo sender authentication (DNS SPF/DKIM).
 
-Registration mode is driven by `registrationType` + `ticketTailorEventId` in `content/events.ts`. `TICKET_TAILOR_ACCOUNT_SLUG` is documented in `.env.example`.
+### Infomaniak-ready registration flow
+
+Registration mode is driven by `registrationType` plus optional `registrationEmbedUrl` / `registrationUrl` in `content/events.ts`.
+If neither URL is set for an upcoming event, the UI shows a "Registration opening soon" placeholder with a newsletter CTA.
 
 ## Gallery — first event photos
 
@@ -204,4 +208,4 @@ Drop the ~50 first-event photos into `public/images/gallery/event-01/`. Then add
 
 - ✅ **Phase 1** — foundation: App Router scaffold, responsive structure, components, Framer Motion, placeholder content, integration stubs
 - ✅ **Phase 2** — content + branding + i18n: real copy, images, lila palette, bilingual EN/DE routing, legal text, partners strip
-- ⏳ **Phase 3** — live integrations: MailerLite API key, Ticket Tailor event IDs, Vercel deployment, first-event gallery photos (~50 images)
+- ⏳ **Phase 3** — finalize live integrations: Brevo list setup, Infomaniak embed/URL paste, Vercel deployment, first-event gallery photos (~50 images)

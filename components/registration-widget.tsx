@@ -12,48 +12,75 @@ export async function RegistrationWidget({event}: {event: Event}) {
     return (
       <div className="shadow-card rounded-[1.75rem] border border-brand-ink/10 bg-white p-6">
         <h2 className="font-heading text-brand-ink text-3xl leading-none tracking-tight">
-          Registration closed
+          {t("registrationClosedTitle")}
         </h2>
         <p className="text-brand-slate mt-3 text-base leading-7">
-          This event now lives in the POP archive. Future recaps, photos, and follow-up resources can be added here.
+          {t("registrationClosedBody")}
         </p>
       </div>
     );
   }
 
+  const hasEmbed = Boolean(event.registrationEmbedUrl);
+  const hasRegistrationUrl = Boolean(event.registrationUrl);
+  const isPaidRegistration = event.registrationType === "infomaniak-paid";
   const actionLabel =
-    event.registrationType === "ticket-tailor-paid" ? "Buy tickets" : "Register / RSVP";
+    isPaidRegistration ? t("registrationBuyTickets") : t("registrationRegisterRsvp");
+
+  if (!hasEmbed && !hasRegistrationUrl) {
+    return (
+      <div className="shadow-card rounded-[1.75rem] border border-brand-ink/10 bg-white p-6">
+        <p className="text-brand-coral text-sm font-semibold tracking-[0.24em] uppercase">
+          {t("registrationEyebrow")}
+        </p>
+        <h2 className="font-heading text-brand-ink mt-2 text-3xl leading-none tracking-tight">
+          {t("registrationOpeningSoonTitle")}
+        </h2>
+        <p className="text-brand-slate mt-3 text-base leading-7">
+          {t("registrationOpeningSoonBody")}
+        </p>
+        <Link
+          className={cn("mt-6", buttonClasses({variant: "secondary", size: "md"}))}
+          href="/#newsletter"
+        >
+          {t("registrationOpeningSoonCta")}
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="shadow-card rounded-[1.75rem] border border-brand-ink/10 bg-white p-6">
       <div className="space-y-4">
         <div>
           <p className="text-brand-coral text-sm font-semibold tracking-[0.24em] uppercase">
-            Registration
+            {t("registrationEyebrow")}
           </p>
           <h2 className="font-heading text-brand-ink mt-2 text-3xl leading-none tracking-tight">
             {event.priceLabel ?? t("eventDetails")}
           </h2>
         </div>
         <p className="text-brand-slate text-base leading-7">
-          POP will share the final registration flow here. For now, this block is ready for Ticket Tailor or an external registration link.
+          {t("registrationLiveBody")}
         </p>
       </div>
 
-      <div className="border-brand-coral/40 bg-brand-paper text-brand-slate mt-6 rounded-[1.5rem] border border-dashed p-5 text-sm leading-7">
-        <p>
-          Placeholder embed target for event ID:
-          <span className="text-brand-ink ml-2 font-semibold">
-            {event.ticketTailorEventId ?? "Add a Ticket Tailor event ID"}
-          </span>
-        </p>
-        <p className="mt-2">Mode: {event.registrationType}</p>
-      </div>
+      {hasEmbed ? (
+        <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-brand-ink/15 bg-brand-paper">
+          {/* Owner note: paste the Infomaniak iframe/embed URL in content/events.ts -> registrationEmbedUrl. */}
+          <iframe
+            title={t("registrationIframeTitle")}
+            src={event.registrationEmbedUrl}
+            className="min-h-[460px] w-full border-0"
+            loading="lazy"
+          />
+        </div>
+      ) : null}
 
-      {event.registrationUrl ? (
+      {hasRegistrationUrl ? (
         <Link
           className={cn("mt-6", buttonClasses({variant: "secondary", size: "md"}))}
-          href={event.registrationUrl}
+          href={event.registrationUrl!}
           target="_blank"
           rel="noreferrer"
         >

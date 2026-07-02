@@ -56,7 +56,17 @@
     "location": "Ort",
     "format": "Format",
     "about": "Über dieses Event",
-    "hosts": "Gastgeber & Gesprächsstarter"
+    "hosts": "Gastgeber & Gesprächsstarter",
+    "registrationEyebrow": "Anmeldung",
+    "registrationClosedTitle": "Anmeldung geschlossen",
+    "registrationClosedBody": "Dieses Event ist jetzt Teil des POP-Archivs. Zusammenfassung und Galeriefotos folgen in Kürze.",
+    "registrationOpeningSoonTitle": "Anmeldung öffnet bald",
+    "registrationOpeningSoonBody": "Wir finalisieren gerade die Infomaniak-Anmeldeseite für dieses Event. Über den Newsletter erfährst du als Erstes, sobald die RSVP live ist.",
+    "registrationOpeningSoonCta": "Newsletter abonnieren und als Erste:r informiert werden",
+    "registrationLiveBody": "Die Anmeldung läuft über die offizielle POP-Eventseite.",
+    "registrationRegisterRsvp": "Anmelden / RSVP",
+    "registrationBuyTickets": "Tickets kaufen",
+    "registrationIframeTitle": "Infomaniak Event-Anmeldung"
   },
   "about": {
     "eyebrow": "Über POP",

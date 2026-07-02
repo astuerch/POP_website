@@ -8,7 +8,7 @@
 ## Where should contact-form submissions go?
 > Pick one and add details:
 - [ ] Send to an email inbox — which address? 
-- [ ] Add subscribers/messages to MailerLite
+- [ ] Add subscribers/messages to Brevo
 - [ ] Save to a Google Sheet
 - [ ] Other: 
 
@@ -33,4 +33,3 @@
 
 
 ## Any other contact details (phone, press contact, etc.)
-

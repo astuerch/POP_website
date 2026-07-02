@@ -3,8 +3,8 @@
 Fill one block per event. Copy the upcoming event first, then each past event.
 
 For **registration type**, pick one:
-- `ticket-tailor-paid` — paid tickets via Ticket Tailor
-- `ticket-tailor-free` — free RSVP via Ticket Tailor
+- `infomaniak-paid` — paid tickets via Infomaniak
+- `infomaniak-free` — free RSVP via Infomaniak
 - `external` — link to another registration page
 - `closed` — past event, no registration
 
@@ -20,7 +20,7 @@ For **registration type**, pick one:
 - **Address / city:** Zurich
 - **Registration type:** (see options above)
 - **Ticket price (if paid):** 
-- **Ticket Tailor event ID or registration URL (if you have it):** 
+- **Infomaniak embed URL or registration URL (if you have it):** 
 - **Cover image filename (upload to `public/images/events/`):** 
 - **Short summary (1–2 sentences) (EN):**
 
