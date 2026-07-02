@@ -87,7 +87,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message:
         "Thanks for your interest. We're finalizing newsletter delivery and will share updates soon.",
-      configured: true,
+      configured: false,
       source: body.source ?? null,
     });
   }
