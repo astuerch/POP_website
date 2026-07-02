@@ -9,34 +9,66 @@ export interface GalleryItem {
 export const galleryItems: GalleryItem[] = [
   {
     id: "gallery-1",
-    title: "The room before the first question",
+    title: "Arrival at Vergani",
     caption:
-      "A wide view of the POP atmosphere: informal, full, and ready for exchange.",
-    src: "/images/hero/crowd_pop.jpg",
-    alt: "Audience gathered at a POP Impact Lab event in Zürich.",
+      "Guests gather for the welcome apero before the talks begin.",
+    src: "/images/gallery/event-01/IMG_3400.JPG",
+    alt: "Guests arriving at POP Impact Lab event 01 in Zurich.",
   },
   {
     id: "gallery-2",
-    title: "Conversation over performance",
+    title: "Opening moments",
     caption:
-      "POP formats are designed so researchers stay in the room and the discussion stays open.",
-    src: "/images/events/event1_pic.png",
-    alt: "People speaking together during a POP Impact Lab event.",
+      "The room settles in as the evening moves from welcome into discussion.",
+    src: "/images/gallery/event-01/IMG_3416.JPG",
+    alt: "Audience seated during POP Impact Lab event 01 in Zurich.",
   },
   {
     id: "gallery-3",
-    title: "Different perspectives, same table",
+    title: "Talks and exchange",
     caption:
-      "The format makes room for lived experience, curiosity and scientific insight at the same time.",
-    src: "/images/events/event2_pic.png",
-    alt: "Participants listening during a POP Impact Lab event.",
+      "Research-driven input and audience perspectives shaped the central conversation.",
+    src: "/images/gallery/event-01/IMG_3443.JPG",
+    alt: "Speaker and audience interaction at POP Impact Lab event 01.",
   },
   {
     id: "gallery-4",
-    title: "A Zürich evening with POP",
+    title: "Community in dialogue",
     caption:
-      "Science enters the spaces people already go — and the room changes with it.",
-    src: "/images/hero/crowd_pop.jpg",
-    alt: "Another view of a POP Impact Lab audience in Zürich.",
+      "Participants, researchers and creatives continued the discussion together.",
+    src: "/images/gallery/event-01/IMG_3472.JPG",
+    alt: "Group conversation during POP Impact Lab event 01.",
+  },
+  {
+    id: "gallery-5",
+    title: "Live painting",
+    caption:
+      "Rhytm translated the evening themes into visual form in real time.",
+    src: "/images/gallery/event-01/IMG_3539.JPG",
+    alt: "Live painting performance during POP Impact Lab event 01.",
+  },
+  {
+    id: "gallery-6",
+    title: "Ideas in motion",
+    caption:
+      "After the talks, art and music kept the themes alive across the space.",
+    src: "/images/gallery/event-01/IMG_3643.JPG",
+    alt: "Event participants during the art and music segment at POP event 01.",
+  },
+  {
+    id: "gallery-7",
+    title: "Night atmosphere",
+    caption:
+      "The venue shifted into an open social format with ongoing exchange.",
+    src: "/images/gallery/event-01/IMG_3658.JPG",
+    alt: "Evening crowd at POP Impact Lab event 01 in Zurich.",
+  },
+  {
+    id: "gallery-8",
+    title: "POP after talks",
+    caption:
+      "Conversations, music and movement continued throughout the evening.",
+    src: "/images/gallery/event-01/IMG_3848.JPG",
+    alt: "Closing moments of POP Impact Lab event 01.",
   },
 ];
