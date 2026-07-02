@@ -65,5 +65,5 @@ Once you've dropped content in and tell me you're ready, I'll:
 1. Set up full bilingual routing (`/en/...` and `/de/...`) with a language switcher.
 2. Apply your brand colors + fonts.
 3. Move your text into translation files and your images into the live components.
-4. Wire up MailerLite (newsletter) + Ticket Tailor (registration) once you've created those accounts.
+4. Wire up Brevo (newsletter) + Infomaniak (registration) once you've created those accounts.
 5. Prep Vercel deployment.

@@ -56,7 +56,17 @@
     "location": "Location",
     "format": "Format",
     "about": "About this event",
-    "hosts": "Hosts & conversation starters"
+    "hosts": "Hosts & conversation starters",
+    "registrationEyebrow": "Registration",
+    "registrationClosedTitle": "Registration closed",
+    "registrationClosedBody": "This event now lives in the POP archive. Recap notes and gallery photos will be added soon.",
+    "registrationOpeningSoonTitle": "Registration opening soon",
+    "registrationOpeningSoonBody": "We're finalizing the Infomaniak registration page for this event. Join the newsletter and we'll share the RSVP link first.",
+    "registrationOpeningSoonCta": "Join the newsletter to be first to know",
+    "registrationLiveBody": "Register through the official POP event page.",
+    "registrationRegisterRsvp": "Register / RSVP",
+    "registrationBuyTickets": "Buy tickets",
+    "registrationIframeTitle": "Infomaniak event registration"
   },
   "about": {
     "eyebrow": "About POP",

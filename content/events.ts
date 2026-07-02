@@ -1,6 +1,6 @@
 export type RegistrationType =
-  | "ticket-tailor-paid"
-  | "ticket-tailor-free"
+  | "infomaniak-paid"
+  | "infomaniak-free"
   | "external"
   | "closed";
 
@@ -18,8 +18,9 @@ export interface Event {
   city: string;
   status: EventStatus;
   registrationType: RegistrationType;
+  // Paste the future Infomaniak embed URL here to switch from placeholder to live registration.
+  registrationEmbedUrl?: string;
   registrationUrl?: string;
-  ticketTailorEventId?: string;
   priceLabel?: string;
   speakers: string[];
   image: {
@@ -30,50 +31,51 @@ export interface Event {
 
 export const events: Event[] = [
   {
-    slug: "next-event-september-2026",
-    title: "Topic to be announced — be the first to know.",
-    summary:
-      "The next POP evening is taking shape now. Join the list to hear the question, the researchers, and the venue details first.",
-    description: [
-      "Our next event lands in September 2026 at Vergani, Löwenplatz, Zürich. The theme will be announced soon, but the format stays the same: a strong public question, researchers in the room, and a conversation that feels open from the first minute.",
-      "Seats will be limited. Subscribe to the newsletter to get first access when the full programme goes live.",
-    ],
-    isoDate: "2026-09-01",
-    dateLabel: "September 2026 · Evening event",
-    location: "Zürich, Switzerland",
-    venue: "Vergani, Löwenplatz, Zürich",
-    city: "Zürich",
-    status: "upcoming",
-    registrationType: "ticket-tailor-free",
-    ticketTailorEventId: "next-event-september-2026",
-    priceLabel: "Limited seats",
-    speakers: ["Maria Dimitriu", "Alessandra Stürchler"],
-    image: {
-      src: "/images/events/event1_pic.png",
-      alt: "Guests gathered at a POP Impact Lab event in Zürich.",
-    },
-  },
-  {
     slug: "social-media-how-it-changes-your-mind",
     title: "Social Media & How it changes your Mind",
     summary:
-      "A past POP conversation exploring how platforms, attention and emotion shape what we believe online.",
+      "Our next POP evening is in planning for September 2026 in Zürich. Join the newsletter to be first to know when RSVP opens.",
     description: [
-      "This edition brought a live audience into a shared conversation about digital habits, attention, and influence. Instead of a panel, POP kept the room open and question-led.",
-      "This event is part of the growing POP archive and will later be expanded with a fuller recap.",
+      "This upcoming POP conversation explores how social platforms influence attention, mood, and decision-making in everyday life.",
+      "Registration is not open yet. We will publish the Infomaniak RSVP link once the event page is live.",
     ],
-    isoDate: "2025-11-12",
-    dateLabel: "Past POP edition",
+    isoDate: "2026-09-01",
+    dateLabel: "September 2026 · Exact day/time TBD",
     location: "Zürich, Switzerland",
-    venue: "POP archive event",
+    venue: "Venue to be confirmed",
     city: "Zürich",
-    status: "past",
-    registrationType: "closed",
-    priceLabel: "Archive entry",
-    speakers: ["Maria Dimitriu", "Jess Simon"],
+    status: "upcoming",
+    registrationType: "infomaniak-free",
+    // Owner: paste the live Infomaniak embed URL in `registrationEmbedUrl` (or use `registrationUrl`) to go live.
+    priceLabel: "Free RSVP · Registration opening soon",
+    speakers: ["Speakers to be announced"],
     image: {
       src: "/images/events/event2_pic.png",
       alt: "Participants listening and speaking during a POP Impact Lab event.",
+    },
+  },
+  {
+    slug: "ai-vs-human-creativity",
+    title: "AI vs. Human Creativity",
+    summary:
+      "POP's first event brought the Zürich community together to debate how artificial intelligence intersects with human creativity.",
+    description: [
+      "Hosted at Vergani, Löwenplatz, this first POP edition opened a public conversation on where machines can support creativity and where human perspective remains essential.",
+      "This page is now part of the POP archive. A fuller recap with event photos and highlights will be added soon.",
+    ],
+    // Placeholder date until owner confirms the exact first-event date.
+    isoDate: "2026-01-01",
+    dateLabel: "Past POP edition · Exact date to be confirmed",
+    location: "Zürich, Switzerland",
+    venue: "Vergani, Löwenplatz, Zürich",
+    city: "Zürich",
+    status: "past",
+    registrationType: "closed",
+    priceLabel: "Archive recap",
+    speakers: ["Speaker lineup to be confirmed"],
+    image: {
+      src: "/images/events/event1_pic.png",
+      alt: "Guests gathered at a POP Impact Lab event in Zürich.",
     },
   },
   {
