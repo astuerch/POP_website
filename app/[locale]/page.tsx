@@ -43,12 +43,19 @@ export default async function HomePage() {
         <AnimatedSection delay={0.05}>
           <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <div className="bg-brand-surface relative min-h-[320px] overflow-hidden rounded-3xl border border-white/10">
-              <Image
-                fill
-                src="/images/events/event2_pic.png"
-                alt="POP Impact Lab guests in conversation."
-                className="object-cover"
-              />
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                preload="metadata"
+                poster="/images/events/event2_pic.png"
+                aria-label="POP Impact Lab event highlights."
+                className="absolute inset-0 h-full w-full object-cover"
+              >
+                <source src="/video/Muse_video_event_1_web.mp4" type="video/mp4" />
+              </video>
             </div>
             <div className="space-y-6">
               <p className="font-serif text-brand-fog text-3xl leading-tight italic sm:text-4xl">
@@ -72,9 +79,7 @@ export default async function HomePage() {
                 {tNext("viewAll")}
               </Link>
             </div>
-            <div className="max-w-4xl">
-              <EventCard event={nextEvent} />
-            </div>
+            <EventCard event={nextEvent} orientation="horizontal" />
           </section>
         </AnimatedSection>
 
@@ -85,9 +90,9 @@ export default async function HomePage() {
               title={tAbout("teamTitle")}
               description={tAbout("teamMotto")}
             />
-            <div className="grid gap-6 lg:grid-cols-3">
+            <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {team.map((member) => (
-                <TeamCard key={member.name} member={member} />
+                <TeamCard key={member.name} member={member} variant="compact" />
               ))}
             </div>
             <Link

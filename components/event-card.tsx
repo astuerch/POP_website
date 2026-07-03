@@ -3,14 +3,38 @@ import {getTranslations} from "next-intl/server";
 
 import {Link} from "@/i18n/navigation";
 import type {Event} from "@/content/events";
+import {cn} from "@/lib/utils";
 
-export async function EventCard({event}: {event: Event}) {
+export async function EventCard({
+  event,
+  orientation = "vertical",
+}: {
+  event: Event;
+  orientation?: "vertical" | "horizontal";
+}) {
   const t = await getTranslations("events");
+  const isHorizontal = orientation === "horizontal";
 
   return (
-    <article className="bg-brand-surface flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 transition-transform duration-200 hover:-translate-y-1">
-      <div className="bg-brand-lila-dark/40 relative aspect-[16/10]">
-        <Image fill className="object-cover" src={event.image.src} alt={event.image.alt} />
+    <article
+      className={cn(
+        "bg-brand-surface flex h-full overflow-hidden rounded-3xl border border-white/10 transition-transform duration-200 hover:-translate-y-1",
+        isHorizontal ? "flex-col lg:flex-row" : "flex-col",
+      )}
+    >
+      <div
+        className={cn(
+          "bg-brand-lila-dark/40 relative aspect-[16/10]",
+          isHorizontal && "lg:aspect-auto lg:w-2/5 lg:shrink-0 lg:self-stretch",
+        )}
+      >
+        <Image
+          fill
+          className="object-cover"
+          src={event.image.src}
+          alt={event.image.alt}
+          sizes={isHorizontal ? "(max-width:1024px) 100vw, 40vw" : "(max-width:1024px) 100vw, 33vw"}
+        />
       </div>
       <div className="flex flex-1 flex-col p-6">
         <div className="space-y-4">

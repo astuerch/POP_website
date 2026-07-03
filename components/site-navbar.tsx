@@ -35,15 +35,22 @@ export function SiteNavbar() {
   return (
     <header className="bg-brand-night/90 sticky top-0 z-50 border-b border-white/10 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3 sm:px-8 sm:py-4 lg:px-12">
-        <Link className="flex items-center" href="/" onClick={handleLinkClick}>
+        <Link
+          className="flex flex-col items-start leading-none"
+          href="/"
+          onClick={handleLinkClick}
+        >
           <Image
             src="/images/brand/pop_logo.svg"
             alt="POP Impact Lab logo"
-            width={240}
-            height={70}
-            className="h-12 w-auto sm:h-14"
+            width={360}
+            height={105}
+            className="h-16 w-auto sm:h-20"
             priority
           />
+          <span className="text-brand-mist mt-1.5 text-[0.6rem] font-semibold tracking-[0.22em] uppercase sm:text-xs">
+            {t("tagline")}
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">

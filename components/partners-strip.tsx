@@ -20,28 +20,22 @@ export function PartnersStrip() {
     <section className="border-y border-white/10 bg-white/[0.03]">
       <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 lg:px-12">
         <Eyebrow className="text-center">{t("eyebrow")}</Eyebrow>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-4">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-6">
           {/* Colored partner logos sit on light chips so they stay legible on the dark theme. */}
           {partners.map((partner) => (
             <div
               key={partner.alt}
-              className="flex h-14 items-center justify-center rounded-xl bg-white/90 px-5"
+              className="flex h-24 items-center justify-center rounded-2xl bg-white px-8"
             >
               <Image
                 src={partner.src}
                 alt={partner.alt}
                 width={partner.width}
                 height={partner.height}
-                className="h-9 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </div>
           ))}
-          <span className="text-brand-ink flex h-14 items-center rounded-xl bg-white/90 px-5 text-sm font-semibold">
-            Suncademy
-          </span>
-          <span className="text-brand-ink flex h-14 items-center rounded-xl bg-white/90 px-5 text-sm font-semibold">
-            Avantcha
-          </span>
         </div>
       </div>
     </section>

@@ -35,16 +35,24 @@ export async function HowPopWorks() {
         <div className="grid gap-6 lg:grid-cols-3">
           {cards.map((card, index) => (
             <AnimatedSection key={card.titleKey} delay={0.05 * (index + 1)}>
-              <article className="bg-brand-surface flex h-full flex-col rounded-3xl border border-white/10 p-6">
-                <div className="bg-brand-lila/90 flex h-16 w-16 items-center justify-center rounded-full">
-                  <Image src={card.icon} alt={card.alt} width={32} height={32} />
+              <article className="bg-brand-surface flex h-full flex-col overflow-hidden rounded-3xl border border-white/10">
+                <div className="flex aspect-[4/3] items-center justify-center bg-white p-8">
+                  <Image
+                    src={card.icon}
+                    alt={card.alt}
+                    width={534}
+                    height={534}
+                    className="h-full w-auto object-contain"
+                  />
                 </div>
-                <h3 className="text-brand-fog mt-6 text-xl font-bold">
-                  {t(card.titleKey)}
-                </h3>
-                <p className="text-brand-mist mt-4 text-base leading-7">
-                  {t(card.bodyKey)}
-                </p>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-brand-fog text-xl font-bold">
+                    {t(card.titleKey)}
+                  </h3>
+                  <p className="text-brand-mist mt-3 text-base leading-7">
+                    {t(card.bodyKey)}
+                  </p>
+                </div>
               </article>
             </AnimatedSection>
           ))}

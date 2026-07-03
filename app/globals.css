@@ -1,25 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0e0817;
-  --foreground: #f3eefa;
+  --background: #0a0a0b;
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Dark brand palette (derived from the POP lilac/ink brand colors). */
-  --color-brand-night: #0e0817; /* page background */
-  --color-brand-surface: #1e1332; /* elevated card surface */
-  --color-brand-ink: #1a0f2e; /* deep ink — dark text on lilac fills */
+  /* High-contrast black / white / lilac palette. Neutral near-black surfaces
+     (no blue tint), pure-white primary text, and lilac reserved as the accent. */
+  --color-brand-night: #0a0a0b; /* page background — true near-black */
+  --color-brand-surface: #161618; /* elevated card surface — neutral dark grey */
+  --color-brand-ink: #0a0a0b; /* deep ink — dark text on lilac fills */
   --color-brand-lila: #b6a1d2; /* primary lilac accent */
-  --color-brand-lila-light: #c9b8e8; /* eyebrows & links on dark */
-  --color-brand-lila-deep: #9f86c8; /* hover state for lilac fills */
-  --color-brand-lila-dark: #3a2d52; /* secondary fills */
-  --color-brand-plum: #4a3766; /* hover state for secondary fills */
-  --color-brand-fog: #f3eefa; /* primary text */
-  --color-brand-mist: #bfb3d6; /* secondary text */
+  --color-brand-lila-light: #d6c8f0; /* eyebrows & links on dark */
+  --color-brand-lila-deep: #a487d0; /* hover state for lilac fills */
+  --color-brand-lila-dark: #26222e; /* secondary fills — near-neutral */
+  --color-brand-plum: #342d40; /* hover state for secondary fills */
+  --color-brand-fog: #ffffff; /* primary text — pure white */
+  --color-brand-mist: #c9c9d2; /* secondary text — light neutral grey */
 
   --font-heading: var(--font-anton), sans-serif;
   /* Primary web font is Nunito (via next/font). Avenir is listed second so that visitors who
