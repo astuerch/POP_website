@@ -53,21 +53,31 @@ export function SiteNavbar() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "text-brand-mist hover:text-brand-fog text-sm font-medium transition",
-                isActivePath(pathname, link.href) &&
-                  "text-brand-lila-light decoration-brand-lila underline decoration-2 underline-offset-8",
-              )}
-              onClick={handleLinkClick}
-            >
-              {t(link.key)}
-            </Link>
+        <nav className="hidden items-center lg:flex" aria-label="Primary">
+          {navLinks.map((link, index) => (
+            <div key={link.href} className="flex items-center">
+              {index > 0 ? (
+                <span className="text-white/20" aria-hidden="true">
+                  |
+                </span>
+              ) : null}
+              <Link
+                href={link.href}
+                onClick={handleLinkClick}
+                className={cn(
+                  "mx-1 rounded-md px-3 py-2 text-sm font-semibold tracking-wide uppercase transition",
+                  isActivePath(pathname, link.href)
+                    ? "bg-brand-lila text-brand-ink"
+                    : "text-brand-fog hover:bg-white/10",
+                )}
+              >
+                {t(link.key)}
+              </Link>
+            </div>
           ))}
+        </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
           <Link
             className={buttonClasses({variant: "primary", size: "sm"})}
             href="/#newsletter"
@@ -82,7 +92,7 @@ export function SiteNavbar() {
           >
             {t("switchLanguage")}
           </button>
-        </nav>
+        </div>
 
         <div className="flex items-center gap-3 lg:hidden">
           <button
