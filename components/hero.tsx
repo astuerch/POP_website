@@ -15,7 +15,7 @@ export async function Hero() {
         priority
         src="/images/hero/crowd_pop.jpg"
         alt="A POP Impact Lab crowd gathered in conversation."
-        className="object-cover"
+        className="object-cover object-[50%_72%]"
       />
       <div className="from-brand-night/90 absolute inset-0 bg-gradient-to-r via-black/60 to-black/25" />
       <div className="to-brand-night/60 absolute inset-0 bg-gradient-to-b from-transparent via-transparent" />

@@ -9,6 +9,8 @@ export interface TeamMember {
     src: string;
     alt: string;
   };
+  /** Tightly-cropped circular portrait used in the compact (circular) layout. */
+  roundImage?: string;
 }
 
 export const team: TeamMember[] = [
@@ -22,6 +24,7 @@ export const team: TeamMember[] = [
       src: "/images/team/pic-maria.png",
       alt: "Maria Dimitriu, Neuroscience PhD candidate, ETH & UZH",
     },
+    roundImage: "/images/team/pic-maria-round.png",
   },
   {
     name: "Jess Simon",
@@ -33,6 +36,7 @@ export const team: TeamMember[] = [
       src: "/images/team/pic-jess.png",
       alt: "Jess Simon, Media & Networks, ex-Forbes",
     },
+    roundImage: "/images/team/pic-jess-round.png",
   },
   {
     name: "Ale Stürchler",
@@ -44,5 +48,6 @@ export const team: TeamMember[] = [
       src: "/images/team/pic-ale.png",
       alt: "Ale Stürchler, PhD in Biotechnology, ETH",
     },
+    roundImage: "/images/team/pic-ale-round.png",
   },
 ];

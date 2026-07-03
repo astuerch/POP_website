@@ -13,13 +13,13 @@ export function TeamCard({
   if (variant === "compact") {
     return (
       <article className="flex flex-col items-center text-center">
-        <div className="relative aspect-square w-56 max-w-full overflow-hidden rounded-full sm:w-64">
+        <div className="relative aspect-square w-48 max-w-full overflow-hidden rounded-full sm:w-56">
           <Image
             fill
             className="object-cover grayscale"
-            src={member.image.src}
+            src={member.roundImage ?? member.image.src}
             alt={member.image.alt}
-            sizes="(max-width:640px) 60vw, 256px"
+            sizes="(max-width:640px) 55vw, 224px"
           />
         </div>
         <h3 className="text-brand-fog mt-6 text-2xl font-bold">{member.name}</h3>

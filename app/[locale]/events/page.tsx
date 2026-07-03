@@ -29,7 +29,7 @@ export default async function EventsPage() {
         <AnimatedSection className="mt-10" delay={0.05}>
           <section className="space-y-6">
             <SectionHeading title={t("upcoming")} />
-            <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2">
               {upcomingEvents.map((event) => (
                 <EventCard key={event.slug} event={event} />
               ))}
@@ -40,7 +40,7 @@ export default async function EventsPage() {
         <AnimatedSection className="mt-14" delay={0.1}>
           <section className="space-y-6">
             <SectionHeading title={t("past")} />
-            <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2">
               {pastEvents.map((event) => (
                 <EventCard key={event.slug} event={event} />
               ))}

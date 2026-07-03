@@ -45,10 +45,10 @@ export function SiteNavbar() {
             alt="POP Impact Lab logo"
             width={360}
             height={105}
-            className="h-16 w-auto sm:h-20"
+            className="h-16 w-auto sm:h-24"
             priority
           />
-          <span className="text-brand-mist mt-1.5 text-[0.6rem] font-semibold tracking-[0.22em] uppercase sm:text-xs">
+          <span className="text-brand-mist mt-1.5 text-[0.55rem] font-semibold tracking-[0.22em] uppercase sm:text-[0.68rem]">
             {t("tagline")}
           </span>
         </Link>

@@ -7,7 +7,6 @@ import {Eyebrow} from "@/components/eyebrow";
 import {Hero} from "@/components/hero";
 import {HowPopWorks} from "@/components/how-pop-works";
 import {NewsletterForm} from "@/components/newsletter-form";
-import {SectionHeading} from "@/components/section-heading";
 import {TeamCard} from "@/components/team-card";
 import {buttonClasses} from "@/components/ui/button";
 import {upcomingEvents} from "@/content/events";
@@ -73,8 +72,8 @@ export default async function HomePage() {
 
         <AnimatedSection delay={0.1}>
           <section className="space-y-8">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <SectionHeading eyebrow={tNext("eyebrow")} title={tNext("title")} />
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <Eyebrow>{tNext("eyebrow")}</Eyebrow>
               <Link className={buttonClasses({variant: "primary", size: "md"})} href="/events">
                 {tNext("viewAll")}
               </Link>
@@ -84,23 +83,29 @@ export default async function HomePage() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.15}>
-          <section className="space-y-8">
-            <SectionHeading
-              eyebrow={tAbout("eyebrow")}
-              title={tAbout("teamTitle")}
-              description={tAbout("teamMotto")}
-            />
-            <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <section className="space-y-10">
+            <div className="space-y-3 text-center">
+              <h2 className="font-heading text-brand-fog text-5xl leading-none tracking-tight uppercase sm:text-6xl">
+                {tAbout("teamName")}
+              </h2>
+              <Eyebrow>{tAbout("teamKicker")}</Eyebrow>
+              <p className="text-brand-mist mx-auto max-w-2xl text-base leading-8 sm:text-lg">
+                {tAbout("teamMotto")}
+              </p>
+            </div>
+            <div className="mx-auto grid max-w-4xl gap-12 sm:grid-cols-2 lg:grid-cols-3">
               {team.map((member) => (
                 <TeamCard key={member.name} member={member} variant="compact" />
               ))}
             </div>
-            <Link
-              className="text-brand-fog decoration-brand-lila text-base font-semibold underline underline-offset-4"
-              href="/about"
-            >
-              {tAbout("readStory")} →
-            </Link>
+            <div className="text-center">
+              <Link
+                className="text-brand-fog decoration-brand-lila text-base font-semibold underline underline-offset-4"
+                href="/about"
+              >
+                {tAbout("readStory")} →
+              </Link>
+            </div>
           </section>
         </AnimatedSection>
 
