@@ -1,11 +1,12 @@
 import Image from "next/image";
 
-import type { TeamMember } from "@/content/team";
+import {Eyebrow} from "@/components/eyebrow";
+import type {TeamMember} from "@/content/team";
 
-export function TeamCard({ member }: { member: TeamMember }) {
+export function TeamCard({member}: {member: TeamMember}) {
   return (
-    <article className="border-brand-ink/10 shadow-card flex h-full flex-col rounded-[1.75rem] border bg-white p-6">
-      <div className="bg-brand-sand relative aspect-[4/5] overflow-hidden rounded-[1.5rem]">
+    <article className="bg-brand-surface flex h-full flex-col rounded-3xl border border-white/10 p-6">
+      <div className="bg-brand-lila-dark/40 relative aspect-[4/5] overflow-hidden rounded-xl">
         <Image
           fill
           className="object-cover"
@@ -15,15 +16,11 @@ export function TeamCard({ member }: { member: TeamMember }) {
       </div>
       <div className="mt-6 space-y-3">
         <div>
-          <h3 className="text-brand-ink text-2xl font-semibold">
-            {member.name}
-          </h3>
-          <p className="text-brand-coral mt-1 text-sm font-medium tracking-[0.24em] uppercase">
-            {member.role}
-          </p>
+          <h3 className="text-brand-fog text-xl font-bold">{member.name}</h3>
+          <Eyebrow className="mt-1 text-xs">{member.role}</Eyebrow>
         </div>
-        <p className="text-brand-slate text-base leading-7">{member.bio}</p>
-        <p className="text-brand-ink text-sm font-medium">{member.focus}</p>
+        <p className="text-brand-mist text-base leading-7">{member.bio}</p>
+        <p className="text-brand-fog text-sm font-medium">{member.focus}</p>
       </div>
     </article>
   );

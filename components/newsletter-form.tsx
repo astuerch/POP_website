@@ -58,7 +58,7 @@ export function NewsletterForm() {
             placeholder={t("placeholder")}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            className="h-12 w-full rounded-full border border-white/15 bg-white px-5 text-brand-ink outline-none transition focus:border-brand-lila"
+            className="text-brand-fog focus:border-brand-lila focus:ring-brand-lila/40 h-12 w-full rounded-full border border-white/20 bg-white/10 px-5 outline-none backdrop-blur transition placeholder:text-white/50 focus:ring-2"
           />
         </div>
         <Button size="md" type="submit" disabled={status === "loading"}>

@@ -1,3 +1,4 @@
+import {Eyebrow} from "@/components/eyebrow";
 import {cn} from "@/lib/utils";
 
 interface SectionHeadingProps {
@@ -15,17 +16,13 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={cn("space-y-4", align === "center" && "text-center")}>
-      {eyebrow ? (
-        <p className="text-brand-coral text-sm font-semibold tracking-[0.2em] uppercase">
-          {eyebrow}
-        </p>
-      ) : null}
+      {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
       <div className="space-y-3">
-        <h2 className="font-heading text-brand-ink text-4xl leading-none tracking-tight sm:text-5xl">
+        <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight sm:text-5xl">
           {title}
         </h2>
         {description ? (
-          <p className="text-brand-slate max-w-3xl text-base leading-8 sm:text-lg">
+          <p className="text-brand-mist max-w-3xl text-base leading-8 sm:text-lg">
             {description}
           </p>
         ) : null}

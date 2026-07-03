@@ -1,20 +1,33 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
 :root {
-  --background: #f8f5fc;
-  --foreground: #1a0f2e;
+  --background: #0e0817;
+  --foreground: #f3eefa;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-heading: "Anton", sans-serif;
-  /* Primary web font is Nunito (Google Fonts). Avenir is listed second so that visitors who
+
+  /* Dark brand palette (derived from the POP lilac/ink brand colors). */
+  --color-brand-night: #0e0817; /* page background */
+  --color-brand-surface: #1e1332; /* elevated card surface */
+  --color-brand-ink: #1a0f2e; /* deep ink — dark text on lilac fills */
+  --color-brand-lila: #b6a1d2; /* primary lilac accent */
+  --color-brand-lila-light: #c9b8e8; /* eyebrows & links on dark */
+  --color-brand-lila-deep: #9f86c8; /* hover state for lilac fills */
+  --color-brand-lila-dark: #3a2d52; /* secondary fills */
+  --color-brand-plum: #4a3766; /* hover state for secondary fills */
+  --color-brand-fog: #f3eefa; /* primary text */
+  --color-brand-mist: #bfb3d6; /* secondary text */
+
+  --font-heading: var(--font-anton), sans-serif;
+  /* Primary web font is Nunito (via next/font). Avenir is listed second so that visitors who
      have Avenir installed locally (e.g. macOS) also see it — the brand's preferred typeface.
      Avenir is proprietary and not available on Google Fonts; Nunito is the intended web
      substitute. Replace Nunito with next/font/local if a licensed Avenir web font is obtained. */
-  --font-sans: "Nunito", "Avenir", "Segoe UI", sans-serif;
+  --font-sans: var(--font-nunito), "Avenir", "Segoe UI", sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
   --font-mono: "SFMono-Regular", "SF Mono", monospace;
 }
 
@@ -40,5 +53,6 @@ a {
 }
 
 ::selection {
-  background: rgba(182, 161, 210, 0.3);
+  background: rgba(182, 161, 210, 0.4);
+  color: #f3eefa;
 }

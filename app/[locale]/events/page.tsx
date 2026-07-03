@@ -20,18 +20,16 @@ export default async function EventsPage() {
   const t = await getTranslations("events");
 
   return (
-    <div className="bg-brand-paper">
+    <div>
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
         <AnimatedSection>
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} />
         </AnimatedSection>
 
         <AnimatedSection className="mt-10" delay={0.05}>
-          <section>
-            <h2 className="font-heading text-brand-ink text-4xl leading-none tracking-tight">
-              {t("upcoming")}
-            </h2>
-            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+          <section className="space-y-6">
+            <SectionHeading title={t("upcoming")} />
+            <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
               {upcomingEvents.map((event) => (
                 <EventCard key={event.slug} event={event} />
               ))}
@@ -40,11 +38,9 @@ export default async function EventsPage() {
         </AnimatedSection>
 
         <AnimatedSection className="mt-14" delay={0.1}>
-          <section>
-            <h2 className="font-heading text-brand-ink text-4xl leading-none tracking-tight">
-              {t("past")}
-            </h2>
-            <div className="mt-6 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+          <section className="space-y-6">
+            <SectionHeading title={t("past")} />
+            <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
               {pastEvents.map((event) => (
                 <EventCard key={event.slug} event={event} />
               ))}

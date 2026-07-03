@@ -31,6 +31,7 @@
   },
   "nextEvent": {
     "eyebrow": "Nächstes Event",
+    "title": "Als Nächstes",
     "viewAll": "Alle Events ansehen"
   },
   "newsletter": {
@@ -81,7 +82,7 @@
   "gallery": {
     "eyebrow": "Galerie",
     "title": "Event-Impressionen",
-    "description": "Ein Raum voller Neugier, unterschiedlicher Perspektiven und echter Gespräche. So sehen POP Impact Lab Events aus."
+    "description": "Fotos von unserem ersten POP Impact Lab Abend im Vergani, Zürich — Talks, Live-Painting und ein Raum voller echter Gespräche."
   },
   "contact": {
     "eyebrow": "Kontakt",
@@ -91,11 +92,16 @@
     "base": "Standort",
     "bestFor": "Ideal für",
     "bestForText": "Eventpartnerschaften, Venue-Ideen, Kooperationen und Presseanfragen.",
+    "nameLabel": "Name",
+    "emailLabel": "E-Mail",
+    "messageLabel": "Nachricht",
     "namePlaceholder": "Name",
     "emailPlaceholder": "E-Mail",
     "messagePlaceholder": "Nachricht",
     "send": "Nachricht senden",
-    "sending": "Wird gesendet..."
+    "sending": "Wird gesendet...",
+    "formStagedNote": "Danke — dieses Kontaktformular ist für den Live-Betrieb vorbereitet und wird in einer späteren Phase angebunden.",
+    "formIdleNote": "Nutze dieses Formular für erste Anfragen, während der Live-Nachrichtenversand noch eingerichtet wird."
   },
   "footer": {
     "tagline": "Wissenschaftsvermittlung aus Zürich — mit mutiger, zugänglicher Stimme und einem gesprächsorientierten Format.",

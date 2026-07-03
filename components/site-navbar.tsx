@@ -33,15 +33,15 @@ export function SiteNavbar() {
   }, [router, pathname, nextLocale]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-brand-ink/10 bg-brand-paper/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 sm:px-8 lg:px-12">
+    <header className="bg-brand-night/90 sticky top-0 z-50 border-b border-white/10 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3 sm:px-8 sm:py-4 lg:px-12">
         <Link className="flex items-center" href="/" onClick={handleLinkClick}>
           <Image
             src="/images/brand/pop_logo.svg"
             alt="POP Impact Lab logo"
-            width={180}
-            height={52}
-            className="h-10 w-auto sm:h-12"
+            width={240}
+            height={70}
+            className="h-12 w-auto sm:h-14"
             priority
           />
         </Link>
@@ -52,8 +52,9 @@ export function SiteNavbar() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-brand-slate hover:text-brand-ink text-sm font-medium transition",
-                isActivePath(pathname, link.href) && "text-brand-ink",
+                "text-brand-mist hover:text-brand-fog text-sm font-medium transition",
+                isActivePath(pathname, link.href) &&
+                  "text-brand-lila-light decoration-brand-lila underline decoration-2 underline-offset-8",
               )}
               onClick={handleLinkClick}
             >
@@ -61,7 +62,7 @@ export function SiteNavbar() {
             </Link>
           ))}
           <Link
-            className={buttonClasses({variant: "secondary", size: "sm"})}
+            className={buttonClasses({variant: "primary", size: "sm"})}
             href="/#newsletter"
             onClick={handleLinkClick}
           >
@@ -69,7 +70,7 @@ export function SiteNavbar() {
           </Link>
           <button
             type="button"
-            className="rounded-full border border-brand-ink/10 px-4 py-2 text-sm font-semibold text-brand-ink transition hover:bg-white"
+            className="text-brand-fog rounded-full border border-white/15 px-4 py-2 text-sm font-semibold transition hover:bg-white/10"
             onClick={handleLocaleSwitch}
           >
             {t("switchLanguage")}
@@ -79,14 +80,14 @@ export function SiteNavbar() {
         <div className="flex items-center gap-3 lg:hidden">
           <button
             type="button"
-            className="rounded-full border border-brand-ink/10 px-4 py-2 text-sm font-semibold text-brand-ink"
+            className="text-brand-fog rounded-full border border-white/15 px-4 py-2 text-sm font-semibold"
             onClick={handleLocaleSwitch}
           >
             {t("switchLanguage")}
           </button>
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-ink/10 text-brand-ink"
+            className="text-brand-fog inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15"
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
             aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -119,7 +120,7 @@ export function SiteNavbar() {
       <div
         id="mobile-menu"
         className={cn(
-          "overflow-hidden border-t border-brand-ink/10 bg-brand-paper transition-[max-height] duration-200 lg:hidden",
+          "bg-brand-night overflow-hidden border-t border-white/10 transition-[max-height] duration-200 lg:hidden",
           isOpen ? "max-h-96" : "max-h-0",
         )}
       >
@@ -129,8 +130,8 @@ export function SiteNavbar() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-brand-slate hover:text-brand-ink rounded-2xl px-4 py-3 text-sm font-medium transition hover:bg-white",
-                isActivePath(pathname, link.href) && "bg-white text-brand-ink",
+                "text-brand-mist hover:text-brand-fog rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-white/5",
+                isActivePath(pathname, link.href) && "text-brand-lila-light bg-white/10",
               )}
               onClick={handleLinkClick}
             >
@@ -138,7 +139,7 @@ export function SiteNavbar() {
             </Link>
           ))}
           <Link
-            className={buttonClasses({variant: "secondary", size: "md"})}
+            className={buttonClasses({variant: "primary", size: "md"})}
             href="/#newsletter"
             onClick={handleLinkClick}
           >

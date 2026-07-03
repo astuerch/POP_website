@@ -31,6 +31,7 @@
   },
   "nextEvent": {
     "eyebrow": "Next event",
+    "title": "Next up",
     "viewAll": "View all events"
   },
   "newsletter": {
@@ -81,7 +82,7 @@
   "gallery": {
     "eyebrow": "Gallery",
     "title": "Event highlights",
-    "description": "A room full of curiosity, different perspectives and real conversations. This is what POP Impact Lab events look like."
+    "description": "Photos from our first POP Impact Lab evening at Vergani, Zürich — talks, live painting and a room full of real conversations."
   },
   "contact": {
     "eyebrow": "Contact",
@@ -91,11 +92,16 @@
     "base": "Base",
     "bestFor": "Best for",
     "bestForText": "Event partnerships, venue ideas, collaborations, and press requests.",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "messageLabel": "Message",
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
     "messagePlaceholder": "Message",
     "send": "Send message",
-    "sending": "Sending..."
+    "sending": "Sending...",
+    "formStagedNote": "Thanks — this contact form is staged for the live workflow and will be connected in a later phase.",
+    "formIdleNote": "Use this form for early enquiries while the live messaging workflow is being connected."
   },
   "footer": {
     "tagline": "Zurich-based science outreach with a bold, approachable voice and a conversation-first format.",

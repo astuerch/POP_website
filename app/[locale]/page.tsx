@@ -3,6 +3,7 @@ import {getTranslations} from "next-intl/server";
 
 import {AnimatedSection} from "@/components/animated-section";
 import {EventCard} from "@/components/event-card";
+import {Eyebrow} from "@/components/eyebrow";
 import {Hero} from "@/components/hero";
 import {HowPopWorks} from "@/components/how-pop-works";
 import {NewsletterForm} from "@/components/newsletter-form";
@@ -41,7 +42,7 @@ export default async function HomePage() {
 
         <AnimatedSection delay={0.05}>
           <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <div className="relative min-h-[320px] overflow-hidden rounded-[2rem] border border-brand-ink/10 bg-brand-sand shadow-card">
+            <div className="bg-brand-surface relative min-h-[320px] overflow-hidden rounded-3xl border border-white/10">
               <Image
                 fill
                 src="/images/events/event2_pic.png"
@@ -50,11 +51,11 @@ export default async function HomePage() {
               />
             </div>
             <div className="space-y-6">
-              <p className="font-serif text-3xl leading-tight italic text-brand-ink sm:text-4xl">
+              <p className="font-serif text-brand-fog text-3xl leading-tight italic sm:text-4xl">
                 “{tSocial("quote")}”
               </p>
               <Link
-                className="text-brand-ink decoration-brand-coral text-base font-semibold underline underline-offset-4"
+                className="text-brand-fog decoration-brand-lila text-base font-semibold underline underline-offset-4"
                 href="/gallery"
               >
                 {tSocial("galleryLink")}
@@ -66,7 +67,7 @@ export default async function HomePage() {
         <AnimatedSection delay={0.1}>
           <section className="space-y-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <SectionHeading eyebrow={tNext("eyebrow")} title={nextEvent.title} />
+              <SectionHeading eyebrow={tNext("eyebrow")} title={tNext("title")} />
               <Link className={buttonClasses({variant: "primary", size: "md"})} href="/events">
                 {tNext("viewAll")}
               </Link>
@@ -90,7 +91,7 @@ export default async function HomePage() {
               ))}
             </div>
             <Link
-              className="text-brand-ink decoration-brand-coral text-base font-semibold underline underline-offset-4"
+              className="text-brand-fog decoration-brand-lila text-base font-semibold underline underline-offset-4"
               href="/about"
             >
               {tAbout("readStory")} →
@@ -101,21 +102,19 @@ export default async function HomePage() {
         <AnimatedSection delay={0.2}>
           <section
             id="newsletter"
-            className="relative isolate overflow-hidden rounded-[2rem] border border-brand-ink/10 bg-brand-dark p-8 text-white shadow-card sm:p-10"
+            className="relative isolate overflow-hidden rounded-3xl border border-white/10 p-8 text-white sm:p-10"
           >
             <Image
               fill
-              src="/images/backgrounds/background sections.jpg"
+              src="/images/backgrounds/background-sections.jpg"
               alt="Decorative background texture"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/65" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/60 to-black/30" />
             <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div className="space-y-4">
-                <p className="text-sm font-semibold tracking-[0.28em] uppercase text-brand-lila">
-                  {tNewsletter("eyebrow")}
-                </p>
-                <h2 className="font-serif text-4xl italic tracking-tight sm:text-5xl">
+                <Eyebrow>{tNewsletter("eyebrow")}</Eyebrow>
+                <h2 className="font-serif text-4xl tracking-tight italic sm:text-5xl">
                   {tNewsletter("headline")}
                 </h2>
                 <p className="text-base leading-8 text-white/80 sm:text-lg">

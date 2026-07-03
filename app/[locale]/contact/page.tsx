@@ -2,6 +2,7 @@ import {getTranslations} from "next-intl/server";
 
 import {AnimatedSection} from "@/components/animated-section";
 import {ContactForm} from "@/components/contact-form";
+import {Eyebrow} from "@/components/eyebrow";
 import {SectionHeading} from "@/components/section-heading";
 import type {AppLocale} from "@/i18n/routing";
 import {getPageMetadata} from "@/lib/metadata";
@@ -20,30 +21,24 @@ export default async function ContactPage() {
   const t = await getTranslations("contact");
 
   return (
-    <div className="bg-brand-paper">
+    <div>
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
         <AnimatedSection>
           <section className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div className="space-y-6">
               <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
-              <div className="shadow-card rounded-[1.75rem] border border-brand-ink/10 bg-white p-6 sm:p-8">
-                <dl className="space-y-4 text-base text-brand-slate">
+              <div className="bg-brand-surface rounded-3xl border border-white/10 p-6 sm:p-8">
+                <dl className="text-brand-mist space-y-4 text-base">
                   <div>
-                    <dt className="text-brand-coral text-sm font-semibold tracking-[0.24em] uppercase">
-                      {t("email")}
-                    </dt>
+                    <Eyebrow as="dt">{t("email")}</Eyebrow>
                     <dd className="mt-2">{siteConfig.email}</dd>
                   </div>
                   <div>
-                    <dt className="text-brand-coral text-sm font-semibold tracking-[0.24em] uppercase">
-                      {t("base")}
-                    </dt>
+                    <Eyebrow as="dt">{t("base")}</Eyebrow>
                     <dd className="mt-2">{siteConfig.location}</dd>
                   </div>
                   <div>
-                    <dt className="text-brand-coral text-sm font-semibold tracking-[0.24em] uppercase">
-                      {t("bestFor")}
-                    </dt>
+                    <Eyebrow as="dt">{t("bestFor")}</Eyebrow>
                     <dd className="mt-2">{t("bestForText")}</dd>
                   </div>
                 </dl>

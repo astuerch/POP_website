@@ -3,6 +3,7 @@ import {getTranslations} from "next-intl/server";
 import {Link} from "@/i18n/navigation";
 import type {Event} from "@/content/events";
 import {buttonClasses} from "@/components/ui/button";
+import {Eyebrow} from "@/components/eyebrow";
 import {cn} from "@/lib/utils";
 
 export async function RegistrationWidget({event}: {event: Event}) {
@@ -10,11 +11,11 @@ export async function RegistrationWidget({event}: {event: Event}) {
 
   if (event.registrationType === "closed") {
     return (
-      <div className="shadow-card rounded-[1.75rem] border border-brand-ink/10 bg-white p-6">
-        <h2 className="font-heading text-brand-ink text-3xl leading-none tracking-tight">
+      <div className="bg-brand-surface rounded-3xl border border-white/10 p-6">
+        <h2 className="text-brand-fog text-2xl font-bold">
           {t("registrationClosedTitle")}
         </h2>
-        <p className="text-brand-slate mt-3 text-base leading-7">
+        <p className="text-brand-mist mt-3 text-base leading-7">
           {t("registrationClosedBody")}
         </p>
       </div>
@@ -29,18 +30,16 @@ export async function RegistrationWidget({event}: {event: Event}) {
 
   if (!hasEmbed && !hasRegistrationUrl) {
     return (
-      <div className="shadow-card rounded-[1.75rem] border border-brand-ink/10 bg-white p-6">
-        <p className="text-brand-coral text-sm font-semibold tracking-[0.24em] uppercase">
-          {t("registrationEyebrow")}
-        </p>
-        <h2 className="font-heading text-brand-ink mt-2 text-3xl leading-none tracking-tight">
+      <div className="bg-brand-surface rounded-3xl border border-white/10 p-6">
+        <Eyebrow>{t("registrationEyebrow")}</Eyebrow>
+        <h2 className="text-brand-fog mt-2 text-2xl font-bold">
           {t("registrationOpeningSoonTitle")}
         </h2>
-        <p className="text-brand-slate mt-3 text-base leading-7">
+        <p className="text-brand-mist mt-3 text-base leading-7">
           {t("registrationOpeningSoonBody")}
         </p>
         <Link
-          className={cn("mt-6", buttonClasses({variant: "secondary", size: "md"}))}
+          className={cn("mt-6", buttonClasses({variant: "primary", size: "md"}))}
           href="/#newsletter"
         >
           {t("registrationOpeningSoonCta")}
@@ -50,23 +49,21 @@ export async function RegistrationWidget({event}: {event: Event}) {
   }
 
   return (
-    <div className="shadow-card rounded-[1.75rem] border border-brand-ink/10 bg-white p-6">
+    <div className="bg-brand-surface rounded-3xl border border-white/10 p-6">
       <div className="space-y-4">
         <div>
-          <p className="text-brand-coral text-sm font-semibold tracking-[0.24em] uppercase">
-            {t("registrationEyebrow")}
-          </p>
-          <h2 className="font-heading text-brand-ink mt-2 text-3xl leading-none tracking-tight">
+          <Eyebrow>{t("registrationEyebrow")}</Eyebrow>
+          <h2 className="text-brand-fog mt-2 text-2xl font-bold">
             {event.priceLabel ?? t("eventDetails")}
           </h2>
         </div>
-        <p className="text-brand-slate text-base leading-7">
+        <p className="text-brand-mist text-base leading-7">
           {t("registrationLiveBody")}
         </p>
       </div>
 
       {hasEmbed ? (
-        <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-brand-ink/15 bg-brand-paper">
+        <div className="mt-6 overflow-hidden rounded-xl border border-white/15 bg-white">
           {/* Owner note: paste the Infomaniak iframe/embed URL in content/events.ts -> registrationEmbedUrl. */}
           <iframe
             title={t("registrationIframeTitle")}
@@ -79,7 +76,7 @@ export async function RegistrationWidget({event}: {event: Event}) {
 
       {hasRegistrationUrl ? (
         <Link
-          className={cn("mt-6", buttonClasses({variant: "secondary", size: "md"}))}
+          className={cn("mt-6", buttonClasses({variant: "primary", size: "md"}))}
           href={event.registrationUrl!}
           target="_blank"
           rel="noreferrer"

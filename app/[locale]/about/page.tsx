@@ -20,23 +20,32 @@ export default async function AboutPage() {
   const t = await getTranslations("about");
 
   return (
-    <div className="bg-brand-paper">
+    <div>
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
         <AnimatedSection>
           <section className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <SectionHeading eyebrow={t("eyebrow")} title={t("title")} />
-            <div className="shadow-card rounded-[1.75rem] border border-brand-ink/10 bg-white p-6 sm:p-8">
-              <div className="space-y-6 text-brand-slate">
-                <div className="space-y-2 text-2xl leading-tight text-brand-ink sm:text-3xl">
+            <div className="bg-brand-surface rounded-3xl border border-white/10 p-6 sm:p-8">
+              <div className="space-y-6">
+                <div className="space-y-3">
                   {t("para1")
                     .split("\n")
-                    .map((line) => (
-                      <p key={line} className="font-heading leading-none tracking-tight">
-                        {line}
-                      </p>
-                    ))}
+                    .map((line, index) =>
+                      index === 0 ? (
+                        <p
+                          key={line}
+                          className="font-heading text-brand-fog text-3xl leading-none tracking-tight sm:text-4xl"
+                        >
+                          {line}
+                        </p>
+                      ) : (
+                        <p key={line} className="text-brand-mist text-lg leading-8">
+                          {line}
+                        </p>
+                      ),
+                    )}
                 </div>
-                <p className="text-base leading-8">{t("para2")}</p>
+                <p className="text-brand-mist text-base leading-8">{t("para2")}</p>
               </div>
             </div>
           </section>
@@ -49,7 +58,7 @@ export default async function AboutPage() {
               title={t("teamTitle")}
               description={t("teamSubtitle")}
             />
-            <p className="max-w-3xl text-base leading-8 text-brand-slate">
+            <p className="text-brand-mist max-w-3xl text-base leading-8">
               {t("teamMotto")}
             </p>
             <div className="grid gap-6 lg:grid-cols-3">

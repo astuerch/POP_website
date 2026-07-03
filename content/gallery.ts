@@ -1,74 +1,330 @@
 export interface GalleryItem {
-  id: string;
-  title: string;
-  caption: string;
   src: string;
   alt: string;
+  width: number;
+  height: number;
 }
 
+// Photos from the first POP Impact Lab event (AI vs. Human Creativity, Vergani Zürich).
+// Optimized web copies live in public/images/gallery/event-01/web/ (originals are kept untouched).
+// Order: presentation slide first, event photos, flyer last.
 export const galleryItems: GalleryItem[] = [
   {
-    id: "gallery-1",
-    title: "Arrival at Vergani",
-    caption:
-      "Guests gather for the welcome apero before the talks begin.",
-    src: "/images/gallery/event-01/IMG_3400.JPG",
-    alt: "Guests arriving at POP Impact Lab event 01 in Zurich.",
+    src: "/images/gallery/event-01/web/presentation-slide.jpg",
+    alt: "Presentation slide from the first POP Impact Lab event.",
+    width: 1600,
+    height: 901,
   },
   {
-    id: "gallery-2",
-    title: "Opening moments",
-    caption:
-      "The room settles in as the evening moves from welcome into discussion.",
-    src: "/images/gallery/event-01/IMG_3416.JPG",
-    alt: "Audience seated during POP Impact Lab event 01 in Zurich.",
+    src: "/images/gallery/event-01/web/IMG_3400.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 1 of 51).",
+    width: 1600,
+    height: 1067,
   },
   {
-    id: "gallery-3",
-    title: "Talks and exchange",
-    caption:
-      "Research-driven input and audience perspectives shaped the central conversation.",
-    src: "/images/gallery/event-01/IMG_3443.JPG",
-    alt: "Speaker and audience interaction at POP Impact Lab event 01.",
+    src: "/images/gallery/event-01/web/IMG_3409.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 2 of 51).",
+    width: 1600,
+    height: 1067,
   },
   {
-    id: "gallery-4",
-    title: "Community in dialogue",
-    caption:
-      "Participants, researchers and creatives continued the discussion together.",
-    src: "/images/gallery/event-01/IMG_3472.JPG",
-    alt: "Group conversation during POP Impact Lab event 01.",
+    src: "/images/gallery/event-01/web/IMG_3416.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 3 of 51).",
+    width: 1600,
+    height: 1067,
   },
   {
-    id: "gallery-5",
-    title: "Live painting",
-    caption:
-      "Rhytm translated the evening themes into visual form in real time.",
-    src: "/images/gallery/event-01/IMG_3539.JPG",
-    alt: "Live painting performance during POP Impact Lab event 01.",
+    src: "/images/gallery/event-01/web/IMG_3429.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 4 of 51).",
+    width: 1600,
+    height: 1067,
   },
   {
-    id: "gallery-6",
-    title: "Ideas in motion",
-    caption:
-      "After the talks, art and music kept the themes alive across the space.",
-    src: "/images/gallery/event-01/IMG_3643.JPG",
-    alt: "Event participants during the art and music segment at POP event 01.",
+    src: "/images/gallery/event-01/web/IMG_3443.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 5 of 51).",
+    width: 1600,
+    height: 1067,
   },
   {
-    id: "gallery-7",
-    title: "Night atmosphere",
-    caption:
-      "The venue shifted into an open social format with ongoing exchange.",
-    src: "/images/gallery/event-01/IMG_3658.JPG",
-    alt: "Evening crowd at POP Impact Lab event 01 in Zurich.",
+    src: "/images/gallery/event-01/web/IMG_3455.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 6 of 51).",
+    width: 1600,
+    height: 1067,
   },
   {
-    id: "gallery-8",
-    title: "POP after talks",
-    caption:
-      "Conversations, music and movement continued throughout the evening.",
-    src: "/images/gallery/event-01/IMG_3848.JPG",
-    alt: "Closing moments of POP Impact Lab event 01.",
+    src: "/images/gallery/event-01/web/IMG_3466.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 7 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3472.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 8 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3484.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 9 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3515.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 10 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3517.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 11 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3525.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 12 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3534.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 13 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3539.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 14 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3643.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 15 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3648.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 16 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3652.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 17 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3658.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 18 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3696.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 19 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3700.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 20 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3778.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 21 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3822.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 22 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3832.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 23 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3846.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 24 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/IMG_3848.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 25 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00002.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 26 of 51).",
+    width: 901,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00004.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 27 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00005.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 28 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00007.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 29 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00008.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 30 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00012.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 31 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00015.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 32 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00015i.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 33 of 51).",
+    width: 1600,
+    height: 901,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00018.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 34 of 51).",
+    width: 1537,
+    height: 1023,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00019.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 35 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00019i.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 36 of 51).",
+    width: 1600,
+    height: 901,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00021.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 37 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00021i.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 38 of 51).",
+    width: 1600,
+    height: 901,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00022.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 39 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00026.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 40 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00026i.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 41 of 51).",
+    width: 1600,
+    height: 901,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00029.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 42 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00029i.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 43 of 51).",
+    width: 1600,
+    height: 901,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00040.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 44 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00041.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 45 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00045.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 46 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00046.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 47 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00048.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 48 of 51).",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00049.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 49 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00050.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 50 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/image00057.jpg",
+    alt: "Guests in conversation at the first POP Impact Lab event in Zürich (photo 51 of 51).",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/images/gallery/event-01/web/flyer_personal_invitations.jpg",
+    alt: "Flyer with a personal invitation to the first POP Impact Lab event.",
+    width: 1131,
+    height: 1600,
   },
 ];

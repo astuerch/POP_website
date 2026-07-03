@@ -13,13 +13,17 @@ export function buttonClasses({
   size?: ButtonSize;
 }) {
   const base =
-    "inline-flex items-center justify-center rounded-full font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-lila focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper";
+    "inline-flex items-center justify-center rounded-full font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-lila focus-visible:ring-offset-2 focus-visible:ring-offset-brand-night";
 
   const variants: Record<ButtonVariant, string> = {
-    primary: "bg-brand-lilaDark text-white hover:bg-brand-ink",
-    secondary: "bg-brand-lila text-brand-ink hover:bg-brand-mint",
+    // Light lilac fill with dark text; hover shifts to a deeper, more saturated lilac.
+    primary: "bg-brand-lila text-brand-ink hover:bg-brand-lila-deep",
+    // Dark lilac surface; hover saturates rather than washing out.
+    secondary:
+      "border border-white/10 bg-brand-lila-dark text-brand-fog hover:bg-brand-plum",
+    // Outline for photographic/dark backgrounds; hover deepens the fill.
     ghost:
-      "border border-white/20 bg-white/10 text-white hover:border-white/40 hover:bg-white/15",
+      "border border-white/25 bg-white/5 text-white hover:border-white/60 hover:bg-black/40",
   };
 
   const sizes: Record<ButtonSize, string> = {
