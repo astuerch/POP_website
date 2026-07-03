@@ -51,7 +51,7 @@ export default async function AboutPage() {
           </section>
         </AnimatedSection>
 
-        <AnimatedSection className="mt-14" delay={0.05}>
+        <AnimatedSection className="mt-14" delay={0.05} amount={0.05}>
           <section className="space-y-8">
             <SectionHeading
               eyebrow={t("eyebrow")}

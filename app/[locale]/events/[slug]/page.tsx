@@ -47,7 +47,7 @@ export default async function EventDetailPage({
     <div>
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
         <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
-          <AnimatedSection>
+          <AnimatedSection amount={0.05}>
             <article className="space-y-8">
               <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
                 <Image fill className="object-cover" src={event.image.src} alt={event.image.alt} priority />

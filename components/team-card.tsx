@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import {Eyebrow} from "@/components/eyebrow";
 import type {TeamMember} from "@/content/team";
+import {Link} from "@/i18n/navigation";
 
 export function TeamCard({
   member,
@@ -12,11 +13,11 @@ export function TeamCard({
 }) {
   if (variant === "compact") {
     return (
-      <article className="flex flex-col items-center text-center">
-        <div className="relative aspect-square w-48 max-w-full overflow-hidden rounded-full sm:w-56">
+      <Link href="/about" className="group flex flex-col items-center text-center">
+        <div className="group-hover:ring-brand-lila/60 relative aspect-square w-48 max-w-full overflow-hidden rounded-full ring-2 ring-transparent transition duration-300 sm:w-56">
           <Image
             fill
-            className="object-cover grayscale"
+            className="object-cover grayscale transition duration-300 group-hover:grayscale-0"
             src={member.roundImage ?? member.image.src}
             alt={member.image.alt}
             sizes="(max-width:640px) 55vw, 224px"
@@ -27,7 +28,7 @@ export function TeamCard({
         {member.org ? (
           <p className="text-brand-mist text-base leading-6">{member.org}</p>
         ) : null}
-      </article>
+      </Link>
     );
   }
 

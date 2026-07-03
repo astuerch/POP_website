@@ -11,10 +11,19 @@
   },
   "hero": {
     "eyebrow": "ZÜRICH · WISSENSCHAFTSEVENTS",
-    "headline": "Wissenschaft trifft Gesellschaft — an Orten, die du schon kennst.",
+    "headlineStart": "An Orten, die du schon kennst, trifft Wissenschaft auf",
+    "headlineAccent": "Gesellschaft.",
     "subhead": "Wir bringen Spitzenforschung der ETH Zürich und UZH in Bars, Cafés und öffentliche Räume. Kein Fachjargon. Keine akademische Distanz. Nur echte Fragen und Raum zum Denken.",
     "ctaPrimary": "Newsletter abonnieren",
     "ctaSecondary": "Veranstaltungen entdecken"
+  },
+  "marquee": {
+    "items": "SCIENCE × APÉRO × ZÜRICH × POP IMPACT LAB"
+  },
+  "countdown": {
+    "days": "Tage",
+    "hours": "Stunden",
+    "minutes": "Minuten"
   },
   "howPopWorks": {
     "eyebrow": "So funktioniert POP",
@@ -86,7 +95,11 @@
   "gallery": {
     "eyebrow": "Galerie",
     "title": "Event-Impressionen",
-    "description": "Fotos von unserem ersten POP Impact Lab Abend im Vergani, Zürich — Talks, Live-Painting und ein Raum voller echter Gespräche."
+    "description": "Fotos von unserem ersten POP Impact Lab Abend im Vergani, Zürich — Talks, Live-Painting und ein Raum voller echter Gespräche.",
+    "lightboxClose": "Schließen",
+    "lightboxPrev": "Vorheriges Bild",
+    "lightboxNext": "Nächstes Bild",
+    "morePhotos": "+{count} weitere"
   },
   "contact": {
     "eyebrow": "Kontakt",
@@ -108,6 +121,7 @@
     "formIdleNote": "Nutze dieses Formular für erste Anfragen, während der Live-Nachrichtenversand noch eingerichtet wird."
   },
   "footer": {
+    "finale": "Bis zum nächsten Mal.",
     "tagline": "Wissenschaftsvermittlung aus Zürich — mit mutiger, zugänglicher Stimme und einem gesprächsorientierten Format.",
     "navigate": "Navigation",
     "legal": "Rechtliches",

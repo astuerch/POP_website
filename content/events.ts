@@ -12,6 +12,12 @@ export interface Event {
   summary: string;
   description: string[];
   isoDate: string;
+  /**
+   * Machine-readable start moment (ISO 8601 with Europe/Zurich offset),
+   * used by the homepage/hero countdown. Optional — omit while the exact
+   * start time is still TBD if no countdown should be shown.
+   */
+  startsAt?: string;
   dateLabel: string;
   location: string;
   venue: string;
@@ -41,6 +47,8 @@ export const events: Event[] = [
       "Registration details will be published once the event setup is finalized.",
     ],
     isoDate: "2026-09-01",
+    // Provisional 19:00 start on the provisional date (CEST, UTC+2) — update once confirmed.
+    startsAt: "2026-09-01T19:00:00+02:00",
     dateLabel: "September 2026 (TBD)",
     location: "Zürich, Switzerland",
     venue: "Venue to be confirmed",

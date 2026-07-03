@@ -18,7 +18,7 @@ export async function EventCard({
   return (
     <article
       className={cn(
-        "bg-brand-surface flex h-full overflow-hidden rounded-3xl border border-white/10 transition-transform duration-200 hover:-translate-y-1",
+        "bg-brand-surface hover:border-brand-lila/50 flex h-full overflow-hidden rounded-3xl border border-white/10 transition duration-200 hover:-translate-y-1",
         isHorizontal ? "flex-col lg:flex-row" : "flex-col",
       )}
     >
@@ -56,7 +56,7 @@ export async function EventCard({
             {event.priceLabel ?? t("eventDetails")}
           </span>
           <Link
-            className="text-brand-fog decoration-brand-lila text-sm font-semibold underline underline-offset-4"
+            className="text-brand-fog link-slide text-sm font-semibold"
             href={`/events/${event.slug}`}
           >
             {t("viewEvent")}

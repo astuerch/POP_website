@@ -13,11 +13,13 @@ export function buttonClasses({
   size?: ButtonSize;
 }) {
   const base =
-    "inline-flex items-center justify-center rounded-full font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-lila focus-visible:ring-offset-2 focus-visible:ring-offset-brand-night";
+    "inline-flex items-center justify-center rounded-full font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-lila focus-visible:ring-offset-2 focus-visible:ring-offset-brand-night";
 
   const variants: Record<ButtonVariant, string> = {
-    // Light lilac fill with dark text; hover shifts to a deeper, more saturated lilac.
-    primary: "bg-brand-lila text-brand-ink hover:bg-brand-lila-deep",
+    // Light lilac fill with dark text; hover deepens the lilac, lifts the
+    // button slightly (motion-safe only) and adds a soft lilac glow.
+    primary:
+      "bg-brand-lila text-brand-ink hover:bg-brand-lila-deep motion-safe:hover:scale-[1.03] hover:shadow-[0_0_32px_-8px_rgba(182,161,210,0.6)]",
     // Dark lilac surface; hover saturates rather than washing out.
     secondary:
       "border border-white/10 bg-brand-lila-dark text-brand-fog hover:bg-brand-plum",

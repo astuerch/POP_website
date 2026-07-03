@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import {useLocale, useTranslations} from "next-intl";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 import {Link, usePathname, useRouter} from "@/i18n/navigation";
 import {navLinks} from "@/lib/site";
@@ -20,8 +19,19 @@ export function SiteNavbar() {
   const locale = useLocale();
   const t = useTranslations("nav");
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const nextLocale = locale === "en" ? "de" : "en";
+  const tagline = t("tagline");
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 24);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, {passive: true});
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   function handleLinkClick() {
     setIsOpen(false);
@@ -34,23 +44,53 @@ export function SiteNavbar() {
 
   return (
     <header className="bg-brand-night/90 sticky top-0 z-50 border-b border-white/10 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3 sm:px-8 sm:py-4 lg:px-12">
+      <div
+        className={cn(
+          "mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 transition-all duration-300 sm:px-8 lg:px-12",
+          scrolled ? "py-2" : "py-3 sm:py-4",
+        )}
+      >
+        {/* Text lockup: "pop" (Fraunces italic, lilac) + "impact lab" (Nunito
+            bold, white) on a shared baseline, with the tagline letterspaced
+            via char-level justify-between so it always spans exactly the
+            width of the wordmark above. Shrinks after 24px of scroll. */}
         <Link
-          className="flex flex-col items-start leading-none"
+          className="flex flex-col items-start"
           href="/"
           onClick={handleLinkClick}
         >
-          <Image
-            src="/images/brand/pop_logo_cropped.png"
-            alt="POP Impact Lab logo"
-            width={494}
-            height={231}
-            className="h-20 w-auto sm:h-28"
-            priority
-          />
-          <span className="text-brand-mist mt-2 text-[0.6rem] font-semibold tracking-[0.24em] uppercase sm:text-xs">
-            {t("tagline")}
+          <span className="flex items-baseline gap-2">
+            <span
+              className={cn(
+                "font-serif text-brand-lila leading-none lowercase italic transition-all duration-300",
+                scrolled ? "text-2xl" : "text-4xl sm:text-5xl",
+              )}
+            >
+              pop
+            </span>
+            <span
+              className={cn(
+                "text-brand-fog leading-none font-bold transition-all duration-300",
+                scrolled ? "text-sm" : "text-base sm:text-xl",
+              )}
+            >
+              impact lab
+            </span>
           </span>
+          <span
+            aria-hidden="true"
+            className={cn(
+              "text-brand-mist flex w-full justify-between overflow-hidden text-[0.55rem] leading-none font-semibold uppercase transition-all duration-300 sm:text-[0.62rem]",
+              scrolled ? "mt-0 max-h-0 opacity-0" : "mt-1.5 max-h-4 opacity-100",
+            )}
+          >
+            {tagline.split("").map((char, index) => (
+              <span key={`${char}-${index}`} className="whitespace-pre">
+                {char}
+              </span>
+            ))}
+          </span>
+          <span className="sr-only">{tagline}</span>
         </Link>
 
         <nav className="hidden items-center lg:flex" aria-label="Primary">

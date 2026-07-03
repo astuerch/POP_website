@@ -5,6 +5,7 @@ import {useLocale, useTranslations} from "next-intl";
 import {Link, usePathname, useRouter} from "@/i18n/navigation";
 import {legalLinks, navLinks, siteConfig} from "@/lib/site";
 import {Eyebrow} from "@/components/eyebrow";
+import {Glow} from "@/components/glow";
 import {PartnersStrip} from "@/components/partners-strip";
 
 export function SiteFooter() {
@@ -16,8 +17,21 @@ export function SiteFooter() {
 
   const nextLocale = locale === "en" ? "de" : "en";
 
+  // Poster finale line: everything before the last word in white, the last
+  // word (with its period) in lilac.
+  const finale = tFooter("finale");
+  const finaleWords = finale.split(" ");
+  const finaleLast = finaleWords.pop();
+  const finaleStart = finaleWords.join(" ");
+
   return (
     <footer className="bg-brand-ink/40 border-t border-white/10">
+      <div className="relative overflow-hidden border-b border-white/10 px-6 py-16 text-center sm:py-20">
+        <Glow className="top-1/2 left-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2" />
+        <p className="font-heading text-brand-fog relative text-5xl leading-none tracking-tight uppercase sm:text-7xl">
+          {finaleStart} <span className="text-brand-lila">{finaleLast}</span>
+        </p>
+      </div>
       <PartnersStrip />
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 sm:px-8 lg:grid-cols-[1.1fr_0.9fr_0.9fr] lg:px-12">
         <div className="space-y-4">
@@ -32,7 +46,7 @@ export function SiteFooter() {
           </p>
           <button
             type="button"
-            className="text-brand-fog decoration-brand-lila text-sm font-semibold underline underline-offset-4"
+            className="text-brand-fog link-slide text-sm font-semibold"
             onClick={() => router.replace(pathname, {locale: nextLocale})}
           >
             {tFooter("switchLanguage")}

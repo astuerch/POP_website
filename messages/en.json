@@ -11,10 +11,19 @@
   },
   "hero": {
     "eyebrow": "ZURICH · SCIENCE EVENTS",
-    "headline": "Science meets society, in the places you already go.",
+    "headlineStart": "In the places you already go, science meets",
+    "headlineAccent": "society.",
     "subhead": "We bring cutting-edge research from ETH Zurich and UZH into bars, cafés and public spaces. No jargon. No academic distance. Just real questions and room to think.",
     "ctaPrimary": "Join the newsletter",
     "ctaSecondary": "Explore events"
+  },
+  "marquee": {
+    "items": "SCIENCE × APÉRO × ZÜRICH × POP IMPACT LAB"
+  },
+  "countdown": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes"
   },
   "howPopWorks": {
     "eyebrow": "How POP works",
@@ -86,7 +95,11 @@
   "gallery": {
     "eyebrow": "Gallery",
     "title": "Event highlights",
-    "description": "Photos from our first POP Impact Lab evening at Vergani, Zürich — talks, live painting and a room full of real conversations."
+    "description": "Photos from our first POP Impact Lab evening at Vergani, Zürich — talks, live painting and a room full of real conversations.",
+    "lightboxClose": "Close",
+    "lightboxPrev": "Previous image",
+    "lightboxNext": "Next image",
+    "morePhotos": "+{count} more"
   },
   "contact": {
     "eyebrow": "Contact",
@@ -108,6 +121,7 @@
     "formIdleNote": "Use this form for early enquiries while the live messaging workflow is being connected."
   },
   "footer": {
+    "finale": "See you at the next one.",
     "tagline": "Zurich-based science outreach with a bold, approachable voice and a conversation-first format.",
     "navigate": "Navigate",
     "legal": "Legal",

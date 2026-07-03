@@ -26,7 +26,7 @@ export default async function EventsPage() {
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} />
         </AnimatedSection>
 
-        <AnimatedSection className="mt-10" delay={0.05}>
+        <AnimatedSection className="mt-10" delay={0.05} amount={0.05}>
           <section className="space-y-6">
             <SectionHeading title={t("upcoming")} />
             <div className="grid gap-6 sm:grid-cols-2">
@@ -37,7 +37,7 @@ export default async function EventsPage() {
           </section>
         </AnimatedSection>
 
-        <AnimatedSection className="mt-14" delay={0.1}>
+        <AnimatedSection className="mt-14" delay={0.1} amount={0.05}>
           <section className="space-y-6">
             <SectionHeading title={t("past")} />
             <div className="grid gap-6 sm:grid-cols-2">

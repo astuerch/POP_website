@@ -57,3 +57,72 @@ a {
   background: rgba(182, 161, 210, 0.4);
   color: #f3eefa;
 }
+
+/* Poster-style outline text — lilac stroke, transparent fill.
+   Thinner stroke on small screens so letterforms stay legible. */
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--color-brand-lila);
+  color: transparent;
+}
+
+@media (min-width: 640px) {
+  .text-outline {
+    -webkit-text-stroke-width: 2px;
+  }
+}
+
+/* Animated link underline — lilac bar slides in from the left on hover/focus. */
+.link-slide {
+  position: relative;
+}
+
+.link-slide::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 2px;
+  width: 100%;
+  background: var(--color-brand-lila);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+.link-slide:hover::after,
+.link-slide:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-slide::after {
+    transition: none;
+  }
+}
+
+/* Full-bleed marquee strip. The track holds two identical halves, so
+   translateX(-50%) loops seamlessly. Pauses on hover, static under
+   prefers-reduced-motion. */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 36s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}

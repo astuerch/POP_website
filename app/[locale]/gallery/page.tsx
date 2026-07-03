@@ -26,9 +26,19 @@ export default async function GalleryPage() {
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
         </AnimatedSection>
 
-        <AnimatedSection className="mt-10" delay={0.05}>
-          <GalleryGrid items={galleryItems} />
-        </AnimatedSection>
+        {/* The grid animates per image (inside GalleryGrid) — wrapping the
+            whole multi-viewport-tall grid in AnimatedSection would keep it
+            invisible because the viewport threshold is never reached. */}
+        <div className="mt-10">
+          <GalleryGrid
+            items={galleryItems}
+            labels={{
+              close: t("lightboxClose"),
+              prev: t("lightboxPrev"),
+              next: t("lightboxNext"),
+            }}
+          />
+        </div>
       </div>
     </div>
   );
