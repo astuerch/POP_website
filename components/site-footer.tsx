@@ -3,7 +3,7 @@
 import {useLocale, useTranslations} from "next-intl";
 
 import {Link, usePathname, useRouter} from "@/i18n/navigation";
-import {legalLinks, navLinks, siteConfig, socialLinks} from "@/lib/site";
+import {legalLinks, navLinks, siteConfig} from "@/lib/site";
 import {Eyebrow} from "@/components/eyebrow";
 import {PartnersStrip} from "@/components/partners-strip";
 
@@ -59,23 +59,6 @@ export function SiteFooter() {
               {legalLinks.map((link) => (
                 <li key={link.href}>
                   <Link className="hover:text-brand-fog transition" href={link.href}>
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <Eyebrow as="h3">{tFooter("social")}</Eyebrow>
-            <ul className="text-brand-mist mt-4 space-y-3 text-sm">
-              {socialLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    className="hover:text-brand-fog transition"
-                    href={link.href}
-                    target={link.href.startsWith("http") || link.href.startsWith("mailto:") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                  >
                     {link.label}
                   </Link>
                 </li>

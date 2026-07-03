@@ -40,8 +40,12 @@ export default async function HomePage() {
         <HowPopWorks />
 
         <AnimatedSection delay={0.05}>
-          <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <div className="bg-brand-surface relative min-h-[320px] overflow-hidden rounded-3xl border border-white/10">
+          <section className="space-y-8">
+            <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl">
+              {tSocial("title")}
+            </h2>
+            <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+              <div className="bg-brand-surface relative min-h-[320px] overflow-hidden rounded-3xl border border-white/10">
               <video
                 autoPlay
                 muted
@@ -67,13 +71,16 @@ export default async function HomePage() {
                 {tSocial("galleryLink")}
               </Link>
             </div>
+            </div>
           </section>
         </AnimatedSection>
 
         <AnimatedSection delay={0.1}>
           <section className="space-y-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <Eyebrow>{tNext("eyebrow")}</Eyebrow>
+              <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl">
+                {tNext("eyebrow")}
+              </h2>
               <Link className={buttonClasses({variant: "primary", size: "md"})} href="/events">
                 {tNext("viewAll")}
               </Link>
@@ -112,7 +119,7 @@ export default async function HomePage() {
         <AnimatedSection delay={0.2}>
           <section
             id="newsletter"
-            className="relative isolate overflow-hidden rounded-3xl border border-white/10 p-8 text-white sm:p-10"
+            className="border-brand-lila/40 relative isolate overflow-hidden rounded-3xl border-2 p-8 text-white shadow-[0_0_70px_-20px_rgba(182,161,210,0.55)] ring-1 ring-white/10 sm:p-10"
           >
             <Image
               fill
@@ -120,7 +127,7 @@ export default async function HomePage() {
               alt="Decorative background texture"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/60 to-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/20" />
             <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div className="space-y-4">
                 <Eyebrow>{tNewsletter("eyebrow")}</Eyebrow>

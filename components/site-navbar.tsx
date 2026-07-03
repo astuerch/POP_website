@@ -41,14 +41,14 @@ export function SiteNavbar() {
           onClick={handleLinkClick}
         >
           <Image
-            src="/images/brand/pop_logo.svg"
+            src="/images/brand/pop_logo_cropped.png"
             alt="POP Impact Lab logo"
-            width={360}
-            height={105}
-            className="h-16 w-auto sm:h-24"
+            width={494}
+            height={231}
+            className="h-20 w-auto sm:h-28"
             priority
           />
-          <span className="text-brand-mist mt-1.5 text-[0.55rem] font-semibold tracking-[0.22em] uppercase sm:text-[0.68rem]">
+          <span className="text-brand-mist mt-2 text-[0.6rem] font-semibold tracking-[0.24em] uppercase sm:text-xs">
             {t("tagline")}
           </span>
         </Link>

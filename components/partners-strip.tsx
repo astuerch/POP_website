@@ -20,18 +20,23 @@ export function PartnersStrip() {
         <h2 className="text-brand-fog text-center text-2xl font-semibold tracking-[0.4em] uppercase sm:text-3xl">
           {t("eyebrow")}
         </h2>
-        {/* White-on-black logos: mix-blend-screen drops their black backgrounds
-            so they read as clean white marks directly on the dark section. */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-10 sm:mt-16 lg:justify-between lg:gap-x-8">
+        {/* White-on-black logos: mix-blend-screen drops their black backgrounds.
+            Each sits in an equal cell and is capped in both height and width so
+            no single wordmark (e.g. ETH) dominates the row. */}
+        <div className="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-12 sm:mt-16 sm:grid-cols-3 lg:grid-cols-5">
           {partners.map((partner) => (
-            <Image
+            <div
               key={partner.alt}
-              src={partner.src}
-              alt={partner.alt}
-              width={partner.width}
-              height={partner.height}
-              className="h-9 w-auto object-contain opacity-90 mix-blend-screen sm:h-11"
-            />
+              className="flex h-12 items-center justify-center"
+            >
+              <Image
+                src={partner.src}
+                alt={partner.alt}
+                width={partner.width}
+                height={partner.height}
+                className="max-h-9 w-auto max-w-[80%] object-contain opacity-90 mix-blend-screen"
+              />
+            </div>
           ))}
         </div>
       </div>
