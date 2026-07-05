@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {useLocale, useTranslations} from "next-intl";
 import {useCallback, useEffect, useState} from "react";
 
@@ -50,47 +51,30 @@ export function SiteNavbar() {
           scrolled ? "py-2" : "py-3 sm:py-4",
         )}
       >
-        {/* Text lockup: "pop" (Fraunces italic, lilac) + "impact lab" (Nunito
-            bold, white) on a shared baseline, with the tagline letterspaced
-            via char-level justify-between so it always spans exactly the
-            width of the wordmark above. Shrinks after 24px of scroll. */}
+        {/* Brand lockup: the official POP SVG logo from `/public/images/brand/
+            pop_logo.svg`. Height shrinks after 24px of scroll; width scales
+            automatically via the SVG's intrinsic aspect ratio. `priority` so
+            it lands in the LCP paint window. Screen readers still hear the
+            brand + tagline via the hidden text below. */}
         <Link
           className="flex flex-col items-start"
           href="/"
           onClick={handleLinkClick}
         >
-          <span className="flex items-baseline gap-2">
-            <span
-              className={cn(
-                "font-serif text-brand-lila leading-none lowercase italic transition-all duration-300",
-                scrolled ? "text-2xl" : "text-4xl sm:text-5xl",
-              )}
-            >
-              pop
-            </span>
-            <span
-              className={cn(
-                "text-brand-fog leading-none font-bold transition-all duration-300",
-                scrolled ? "text-sm" : "text-base sm:text-xl",
-              )}
-            >
-              impact lab
-            </span>
-          </span>
-          <span
-            aria-hidden="true"
+          <Image
+            src="/images/brand/pop_logo.svg"
+            alt="POP Impact Lab"
+            width={600}
+            height={300}
+            priority
             className={cn(
-              "text-brand-mist flex w-full justify-between overflow-hidden text-[0.55rem] leading-none font-semibold uppercase transition-all duration-300 sm:text-[0.62rem]",
-              scrolled ? "mt-0 max-h-0 opacity-0" : "mt-1.5 max-h-4 opacity-100",
+              "w-auto transition-all duration-300",
+              scrolled ? "h-8" : "h-10 sm:h-12",
             )}
-          >
-            {tagline.split("").map((char, index) => (
-              <span key={`${char}-${index}`} className="whitespace-pre">
-                {char}
-              </span>
-            ))}
+          />
+          <span className="sr-only">
+            POP Impact Lab — {tagline}
           </span>
-          <span className="sr-only">{tagline}</span>
         </Link>
 
         <nav className="hidden items-center lg:flex" aria-label="Primary">
