@@ -43,7 +43,8 @@
   "nextEvent": {
     "eyebrow": "Next event",
     "title": "Next up",
-    "viewAll": "View all events"
+    "viewAll": "View all events",
+    "saveTheDate": "Save the date · details coming soon"
   },
   "newsletter": {
     "eyebrow": "Stay in the loop",

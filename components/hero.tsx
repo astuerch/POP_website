@@ -32,7 +32,7 @@ export async function Hero() {
     </>
   );
 
-  const chip = nextEvent?.startsAt ? (
+  const chip = nextEvent ? (
     <Link
       href={`/events/${nextEvent.slug}`}
       className="group inline-flex max-w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-full border border-white/15 bg-white/5 px-5 py-3 backdrop-blur transition hover:border-white/30 hover:bg-white/10"
@@ -42,18 +42,22 @@ export async function Hero() {
         ·
       </span>
       <span className="hidden text-sm text-white/70 sm:inline">{nextEvent.venue}</span>
-      <span className="text-white/40" aria-hidden="true">
-        ·
-      </span>
-      <Countdown
-        startsAt={nextEvent.startsAt}
-        size="sm"
-        labels={{
-          days: tCountdown("days"),
-          hours: tCountdown("hours"),
-          minutes: tCountdown("minutes"),
-        }}
-      />
+      {nextEvent.startsAt && !nextEvent.isTentative ? (
+        <>
+          <span className="text-white/40" aria-hidden="true">
+            ·
+          </span>
+          <Countdown
+            startsAt={nextEvent.startsAt}
+            size="sm"
+            labels={{
+              days: tCountdown("days"),
+              hours: tCountdown("hours"),
+              minutes: tCountdown("minutes"),
+            }}
+          />
+        </>
+      ) : null}
       <span
         aria-hidden="true"
         className="text-brand-lila inline-block transition-transform duration-300 group-hover:translate-x-1"

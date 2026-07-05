@@ -5,6 +5,7 @@ import {notFound} from "next/navigation";
 
 import {AnimatedSection} from "@/components/animated-section";
 import {Eyebrow} from "@/components/eyebrow";
+import {EventSchema} from "@/components/json-ld";
 import {RegistrationWidget} from "@/components/registration-widget";
 import {events, getEventBySlug} from "@/content/events";
 
@@ -27,6 +28,23 @@ export async function generateMetadata({
   return {
     title: event.title,
     description: event.summary,
+    openGraph: {
+      title: event.title,
+      description: event.summary,
+      type: "article",
+      images: [
+        {
+          url: event.image.src,
+          alt: event.image.alt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: event.title,
+      description: event.summary,
+      images: [event.image.src],
+    },
   };
 }
 
@@ -45,6 +63,7 @@ export default async function EventDetailPage({
 
   return (
     <div>
+      <EventSchema event={event} />
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
         <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
           <AnimatedSection amount={0.05}>

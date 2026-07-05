@@ -3,7 +3,10 @@ import {NextIntlClientProvider} from "next-intl";
 import {setRequestLocale} from "next-intl/server";
 import {Anton, Fraunces, Nunito} from "next/font/google";
 import {notFound} from "next/navigation";
+import {Analytics} from "@vercel/analytics/next";
+import {SpeedInsights} from "@vercel/speed-insights/next";
 
+import {OrganizationSchema} from "@/components/json-ld";
 import {SiteFooter} from "@/components/site-footer";
 import {SiteNavbar} from "@/components/site-navbar";
 import {locales, routing, type AppLocale} from "@/i18n/routing";
@@ -30,6 +33,9 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
+// OG + Twitter images are provided by `app/[locale]/opengraph-image.tsx` —
+// Next auto-registers both `og:image` and `twitter:image` meta tags from that
+// file, so we don't declare `images` here.
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -92,11 +98,16 @@ export default async function LocaleLayout({
               "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
           }}
         />
+        <OrganizationSchema />
         <NextIntlClientProvider>
           <SiteNavbar />
           <main className="flex-1">{children}</main>
           <SiteFooter />
         </NextIntlClientProvider>
+        {/* Vercel Analytics: page views + core web vitals. Zero-config in the
+            Hobby / Pro plans — enable in Vercel dashboard once deployed. */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -87,7 +87,7 @@ export default async function HomePage() {
                 {tNext("eyebrow")}
               </h2>
               <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:gap-10">
-                {nextEvent?.startsAt ? (
+                {nextEvent?.startsAt && !nextEvent.isTentative ? (
                   <Countdown
                     startsAt={nextEvent.startsAt}
                     labels={{
@@ -96,6 +96,14 @@ export default async function HomePage() {
                       minutes: tCountdown("minutes"),
                     }}
                   />
+                ) : nextEvent?.isTentative ? (
+                  <div className="border-brand-lila/40 bg-brand-lila/10 text-brand-lila-light inline-flex items-center gap-2 self-start rounded-full border px-4 py-2 text-sm font-semibold">
+                    <span
+                      aria-hidden="true"
+                      className="bg-brand-lila inline-block h-1.5 w-1.5 animate-pulse rounded-full"
+                    />
+                    {tNext("saveTheDate")}
+                  </div>
                 ) : null}
                 <Link className={buttonClasses({variant: "primary", size: "md"})} href="/events">
                   {tNext("viewAll")}

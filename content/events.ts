@@ -18,6 +18,13 @@ export interface Event {
    * start time is still TBD if no countdown should be shown.
    */
   startsAt?: string;
+  /**
+   * When true the date is provisional and no countdown should be shown to
+   * visitors — the UI falls back to a "Save the date" placeholder chip and
+   * hides the DD:HH:MM widget. Flip to false once the venue + start time
+   * are locked in.
+   */
+  isTentative?: boolean;
   dateLabel: string;
   location: string;
   venue: string;
@@ -49,6 +56,7 @@ export const events: Event[] = [
     isoDate: "2026-09-01",
     // Provisional 19:00 start on the provisional date (CEST, UTC+2) — update once confirmed.
     startsAt: "2026-09-01T19:00:00+02:00",
+    isTentative: true,
     dateLabel: "September 2026 (TBD)",
     location: "Zürich, Switzerland",
     venue: "Venue to be confirmed",
