@@ -10,7 +10,9 @@ export function NewsletterForm() {
   const t = useTranslations("newsletter");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState(t("subhead"));
+  // Start with an empty status line so the subhead above the form isn't
+  // duplicated here; only populate on loading / success / error.
+  const [message, setMessage] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -65,12 +67,14 @@ export function NewsletterForm() {
           {status === "loading" ? t("loading") : t("button")}
         </Button>
       </div>
-      <p
-        className={cn("text-sm", status === "error" ? "text-red-300" : "text-white/75")}
-        role="status"
-      >
-        {message}
-      </p>
+      {message ? (
+        <p
+          className={cn("text-sm", status === "error" ? "text-red-300" : "text-white/75")}
+          role="status"
+        >
+          {message}
+        </p>
+      ) : null}
     </form>
   );
 }

@@ -51,8 +51,8 @@ export default async function HomePage() {
             <h2 className="font-heading text-brand-fog text-5xl leading-none tracking-tight uppercase sm:text-6xl">
               {tSocial("title")}
             </h2>
-            <div className="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
-              <div className="bg-brand-surface relative min-h-[420px] overflow-hidden rounded-3xl border border-white/10 sm:min-h-[480px] lg:min-h-[520px]">
+            <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
+              <div className="bg-brand-surface relative h-[380px] overflow-hidden rounded-3xl border border-white/10">
               <video
                 autoPlay
                 muted

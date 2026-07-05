@@ -33,7 +33,11 @@ export function SiteFooter() {
         </p>
       </div>
       <PartnersStrip />
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 sm:px-8 lg:grid-cols-[1.1fr_0.9fr_0.9fr] lg:px-12">
+      {/* Footer layout: left column carries the wordmark, tagline, contact
+          line and language switch (roomy). Right column groups Navigate + Legal
+          side by side, close together, and is vertically centered relative to
+          the taller left column via `lg:items-center`. */}
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 sm:px-8 lg:grid-cols-[1.7fr_1fr] lg:items-center lg:px-12">
         <div className="space-y-4">
           <h2 className="font-heading text-brand-fog text-4xl leading-none">
             POP Impact Lab
@@ -53,20 +57,20 @@ export function SiteFooter() {
           </button>
         </div>
 
-        <div>
-          <Eyebrow as="h3">{tFooter("navigate")}</Eyebrow>
-          <ul className="text-brand-mist mt-4 space-y-3 text-sm">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link className="hover:text-brand-fog transition" href={link.href}>
-                  {tNav(link.key)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="grid grid-cols-2 gap-6 sm:gap-8">
+          <div>
+            <Eyebrow as="h3">{tFooter("navigate")}</Eyebrow>
+            <ul className="text-brand-mist mt-4 space-y-3 text-sm">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link className="hover:text-brand-fog transition" href={link.href}>
+                    {tNav(link.key)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
           <div>
             <Eyebrow as="h3">{tFooter("legal")}</Eyebrow>
             <ul className="text-brand-mist mt-4 space-y-3 text-sm">

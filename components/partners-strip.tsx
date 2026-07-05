@@ -29,7 +29,7 @@ export function PartnersStrip() {
           {partners.map((partner) => (
             <div
               key={partner.alt}
-              className="flex h-24 items-center justify-center sm:h-28"
+              className="flex h-48 items-center justify-center sm:h-56"
             >
               <Image
                 src={partner.src}
