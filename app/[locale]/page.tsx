@@ -161,7 +161,7 @@ export default async function HomePage() {
               alt="Decorative background texture"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/25 to-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/50 to-black/25" />
             <Glow className="-top-20 -left-20 h-[400px] w-[400px]" />
             <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div className="space-y-4">

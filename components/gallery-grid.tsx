@@ -5,6 +5,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {motion, useReducedMotion} from "framer-motion";
 
 import type {GalleryItem} from "@/content/gallery";
+import {cn} from "@/lib/utils";
 
 export interface GalleryLightboxLabels {
   close: string;
@@ -16,19 +17,26 @@ export interface GalleryLightboxLabels {
 function Reveal({
   children,
   className,
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const prefersReducedMotion = useReducedMotion();
 
   if (prefersReducedMotion) {
-    return <div className={className}>{children}</div>;
+    return (
+      <div className={className} style={style}>
+        {children}
+      </div>
+    );
   }
 
   return (
     <motion.div
       className={className}
+      style={style}
       initial={{opacity: 0, y: 8}}
       whileInView={{opacity: 1, y: 0}}
       viewport={{once: true, amount: 0.1}}
@@ -40,17 +48,47 @@ function Reveal({
 }
 
 /**
- * Gallery with a full-width feature tile (first item — the presentation
- * slide), a CSS-columns masonry for the rest, and a fullscreen lightbox
- * with keyboard navigation (arrow keys, Escape), a counter, scroll lock
- * and basic focus management.
+ * Aspect-ratio helper used to hand each masonry tile a column + row span so
+ * the grid looks curated instead of uniform. Very wide panoramas take two
+ * columns, tall portraits take two rows, and the odd feature stretches two
+ * columns × two rows. Everything else fills a single 1×1 cell.
+ */
+function spanClasses(aspect: number, index: number): string {
+  // Every 11th regular photo becomes a "spotlight" that spans a full 2×2 block
+  // — creates strong rhythm breaks in the flow.
+  const isSpotlight = index > 0 && index % 11 === 0;
+  if (isSpotlight) {
+    return "col-span-2 row-span-2";
+  }
+  if (aspect >= 1.7) {
+    return "col-span-2 row-span-1";
+  }
+  if (aspect <= 0.75) {
+    return "col-span-1 row-span-2";
+  }
+  if (aspect >= 1.25) {
+    return "col-span-2 row-span-1";
+  }
+  return "col-span-1 row-span-1";
+}
+
+/**
+ * Editorial masonry gallery. The first item is rendered full-width as a
+ * feature tile; the rest sit inside a CSS Grid with `grid-auto-flow: dense`
+ * so wider and taller tiles are auto-packed together — no uniform 3-column
+ * schematic look. Clicking any tile opens a fullscreen lightbox with
+ * keyboard nav (arrows + Escape), a counter, body scroll lock and focus
+ * management.
  */
 export function GalleryGrid({
   items,
   labels,
+  featureFirst = true,
 }: {
   items: GalleryItem[];
   labels: GalleryLightboxLabels;
+  /** When true the first item is rendered as a full-width feature tile. */
+  featureFirst?: boolean;
 }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -105,16 +143,17 @@ export function GalleryGrid({
     };
   }, [isOpen, close, step]);
 
-  const [feature, ...rest] = items;
+  const feature = featureFirst ? items[0] : undefined;
+  const gridItems = featureFirst ? items.slice(1) : items;
   const activeItem = activeIndex === null ? null : items[activeIndex];
 
   return (
     <div>
-      {feature ? (
+      {featureFirst && feature ? (
         <Reveal className="mb-4">
           <button
             type="button"
-            className="focus-visible:ring-brand-lila block w-full cursor-zoom-in overflow-hidden rounded-xl focus-visible:ring-2 focus-visible:outline-none"
+            className="focus-visible:ring-brand-lila block w-full cursor-zoom-in overflow-hidden rounded-2xl focus-visible:ring-2 focus-visible:outline-none"
             onClick={(event) => open(0, event.currentTarget)}
           >
             <Image
@@ -123,32 +162,43 @@ export function GalleryGrid({
               width={feature.width}
               height={feature.height}
               sizes="(max-width:1280px) 100vw, 1216px"
-              className="h-auto w-full rounded-xl"
+              className="h-auto w-full rounded-2xl"
               priority
             />
           </button>
         </Reveal>
       ) : null}
 
-      <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-        {rest.map((item, index) => (
-          <Reveal key={item.src} className="mb-4 break-inside-avoid">
-            <button
-              type="button"
-              className="focus-visible:ring-brand-lila block w-full cursor-zoom-in overflow-hidden rounded-xl focus-visible:ring-2 focus-visible:outline-none"
-              onClick={(event) => open(index + 1, event.currentTarget)}
+      {/* Editorial masonry: 4 cols on desktop, dense auto-flow so wide/tall
+          spans repack into gaps. Row basis is small enough that each tile
+          picks up 1-2 rows worth of height from `spanClasses`. */}
+      <div className="grid grid-flow-dense auto-rows-[130px] grid-cols-2 gap-3 sm:auto-rows-[160px] sm:grid-cols-3 lg:auto-rows-[190px] lg:grid-cols-4">
+        {gridItems.map((item, index) => {
+          const globalIndex = featureFirst ? index + 1 : index;
+          const aspect = item.width / item.height;
+          const span = spanClasses(aspect, index);
+
+          return (
+            <Reveal
+              key={item.src}
+              className={cn("relative overflow-hidden rounded-2xl", span)}
             >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                width={item.width}
-                height={item.height}
-                sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-                className="h-auto w-full rounded-xl transition duration-300 hover:opacity-90"
-              />
-            </button>
-          </Reveal>
-        ))}
+              <button
+                type="button"
+                className="focus-visible:ring-brand-lila group block h-full w-full cursor-zoom-in overflow-hidden rounded-2xl focus-visible:ring-2 focus-visible:outline-none"
+                onClick={(event) => open(globalIndex, event.currentTarget)}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                />
+              </button>
+            </Reveal>
+          );
+        })}
       </div>
 
       {activeItem && activeIndex !== null ? (

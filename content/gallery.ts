@@ -5,6 +5,22 @@ export interface GalleryItem {
   height: number;
 }
 
+/**
+ * A single POP Impact Lab edition's photo collection. The gallery page
+ * renders one section per event with a sticky tab-bar for jumping between
+ * them, so adding a second edition is just a matter of appending a new
+ * object to `galleryEvents` below.
+ */
+export interface GalleryEventCollection {
+  /** URL-safe slug — used as the anchor id for the sticky tab-bar. */
+  id: string;
+  title: string;
+  dateLabel: string;
+  venue?: string;
+  description?: string;
+  items: GalleryItem[];
+}
+
 // Photos from the first POP Impact Lab event (AI vs. Human Creativity, Vergani Zürich).
 // Optimized web copies live in public/images/gallery/event-01/web/ (originals are kept untouched).
 // Order (manually curated by the owner via file renames):
@@ -320,4 +336,31 @@ export const galleryItems: GalleryItem[] = [
     width: 1131,
     height: 1600,
   },
+];
+
+/**
+ * Multi-event structure driving the gallery page. Add future editions here
+ * by pushing a new `GalleryEventCollection` object. The gallery page reads
+ * this list, renders one section per event, and generates the sticky tab-bar
+ * automatically. The homepage teaser continues to read `galleryItems` (the
+ * flattened list below), which stays in sync as new events are appended.
+ */
+export const galleryEvents: GalleryEventCollection[] = [
+  {
+    id: "ai-vs-human-creativity",
+    title: "AI vs Human Creativity",
+    dateLabel: "April 2026",
+    venue: "Vergani, Zürich",
+    description:
+      "Our first edition — art, live painting, generative AI, and open conversation.",
+    items: galleryItems,
+  },
+  // {
+  //   id: "next-edition-slug",
+  //   title: "Next event title",
+  //   dateLabel: "September 2026",
+  //   venue: "Venue, Zürich",
+  //   description: "…",
+  //   items: [...],
+  // },
 ];

@@ -36,7 +36,7 @@
     "card3Body": "No panel, no podium. The floor is everyone's."
   },
   "socialProof": {
-    "quote": "A room full of <lilac>curiosity</lilac>, different <lilac>perspectives</lilac> <nb>and real <lilac>conversations</lilac>.</nb>",
+    "quote": "A room full of <lilac>curiosity</lilac>, <nb>different <lilac>perspectives</lilac></nb> <nb>and real <lilac>conversations</lilac>.</nb>",
     "galleryLink": "See full gallery →",
     "title": "The first edition"
   },
@@ -47,10 +47,9 @@
     "saveTheDate": "Save the date · details coming soon"
   },
   "newsletter": {
-    "eyebrow": "Stay in the loop",
+    "eyebrow": "Newsletter · Stay in the loop",
     "headline": "Want to be in the room?",
     "subhead": "Early access to events, bold questions, no spam.\nJust food for thought.",
-    "joinList": "→ Join the POP Impact Lab list.",
     "placeholder": "Email address",
     "button": "Subscribe",
     "success": "Thanks for stepping into the conversation.",

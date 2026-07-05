@@ -39,7 +39,10 @@ export async function HowPopWorks() {
           {cards.map((card, index) => (
             <AnimatedSection key={card.titleKey} delay={0.05 * (index + 1)}>
               <article className="group bg-brand-surface hover:border-brand-lila/60 relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-24px_rgba(182,161,210,0.45)]">
-                <div className="from-brand-lila/25 via-brand-lila/10 relative flex aspect-[16/12] items-center justify-center overflow-hidden bg-gradient-to-b to-transparent p-8">
+                {/* Icon panel uses a fixed height (not aspect ratio) so the
+                    badge stays the same relative size whether cards are 3-up
+                    horizontal or stacked vertically on narrow viewports. */}
+                <div className="from-brand-lila/25 via-brand-lila/10 relative flex h-64 items-center justify-center overflow-hidden bg-gradient-to-b to-transparent p-8 sm:h-72">
                   <span
                     aria-hidden="true"
                     className="font-heading text-outline absolute -top-5 -left-2 text-8xl leading-none opacity-60 select-none"
@@ -49,7 +52,7 @@ export async function HowPopWorks() {
                   {/* Icons were designed on light backgrounds (baked white
                       circles), so they sit inside a white circular badge on
                       the dark panel. */}
-                  <div className="grid h-40 w-40 place-items-center overflow-hidden rounded-full bg-white/95 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)] transition duration-500 group-hover:scale-105 sm:h-48 sm:w-48">
+                  <div className="grid h-36 w-36 place-items-center overflow-hidden rounded-full bg-white/95 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)] transition duration-500 group-hover:scale-105 sm:h-44 sm:w-44">
                     <Image
                       src={card.icon}
                       alt={card.alt}
@@ -59,12 +62,12 @@ export async function HowPopWorks() {
                     />
                   </div>
                 </div>
-                <div className="flex flex-1 flex-col p-8 sm:p-9">
-                  <h3 className="text-brand-fog text-2xl font-bold sm:text-3xl">
+                <div className="flex flex-1 flex-col p-7 sm:p-8">
+                  <h3 className="text-brand-fog text-xl font-bold whitespace-nowrap sm:text-2xl">
                     {t(card.titleKey)}
                   </h3>
                   <div className="bg-brand-lila mt-4 h-0.5 w-12 rounded-full transition-all duration-300 group-hover:w-24" />
-                  <p className="text-brand-mist mt-5 text-lg leading-8 sm:text-xl sm:leading-9">
+                  <p className="text-brand-mist mt-5 text-base leading-7 sm:text-lg sm:leading-8">
                     {t(card.bodyKey)}
                   </p>
                 </div>

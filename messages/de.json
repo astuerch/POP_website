@@ -36,7 +36,7 @@
     "card3Body": "Kein Panel, kein Podium. Das Wort gehört allen."
   },
   "socialProof": {
-    "quote": "Ein Raum voller <lilac>Neugier</lilac>, unterschiedlicher <lilac>Perspektiven</lilac> <nb>und echter <lilac>Gespräche</lilac>.</nb>",
+    "quote": "Ein Raum voller <lilac>Neugier</lilac>, <nb>unterschiedlicher <lilac>Perspektiven</lilac></nb> <nb>und echter <lilac>Gespräche</lilac>.</nb>",
     "galleryLink": "Zur vollständigen Galerie →",
     "title": "Die erste Ausgabe"
   },
@@ -47,10 +47,9 @@
     "saveTheDate": "Datum vormerken · Details folgen bald"
   },
   "newsletter": {
-    "eyebrow": "Immer auf dem Laufenden",
+    "eyebrow": "Newsletter · Immer auf dem Laufenden",
     "headline": "Möchtest du dabei sein?",
     "subhead": "Frühzeitiger Zugang zu Events, mutige Fragen, kein Spam.\nNur Denkanstöße.",
-    "joinList": "→ Trag dich in die POP Impact Lab Liste ein.",
     "placeholder": "E-Mail-Adresse",
     "button": "Abonnieren",
     "success": "Danke — wir sehen uns im Gespräch.",
