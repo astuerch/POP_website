@@ -31,7 +31,10 @@ export async function HowPopWorks() {
   return (
     <AnimatedSection>
       <section className="space-y-12">
-        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} />
+        {/* Section title: the old subtitle ("Conversation-first science…") is
+            dropped; "How POP works" is promoted to the main heading so it
+            matches the style of the other section titles on the homepage. */}
+        <SectionHeading title={t("eyebrow")} />
         <div className="grid gap-8 lg:grid-cols-3">
           {cards.map((card, index) => (
             <AnimatedSection key={card.titleKey} delay={0.05 * (index + 1)}>
@@ -56,12 +59,12 @@ export async function HowPopWorks() {
                     />
                   </div>
                 </div>
-                <div className="flex flex-1 flex-col p-7">
-                  <h3 className="text-brand-fog text-xl font-bold">
+                <div className="flex flex-1 flex-col p-8 sm:p-9">
+                  <h3 className="text-brand-fog text-2xl font-bold sm:text-3xl">
                     {t(card.titleKey)}
                   </h3>
-                  <div className="bg-brand-lila mt-3 h-0.5 w-10 rounded-full transition-all duration-300 group-hover:w-20" />
-                  <p className="text-brand-mist mt-4 text-base leading-7">
+                  <div className="bg-brand-lila mt-4 h-0.5 w-12 rounded-full transition-all duration-300 group-hover:w-24" />
+                  <p className="text-brand-mist mt-5 text-lg leading-8 sm:text-xl sm:leading-9">
                     {t(card.bodyKey)}
                   </p>
                 </div>

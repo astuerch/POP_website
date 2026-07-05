@@ -68,21 +68,26 @@ export default async function HomePage() {
               </video>
             </div>
             <div className="space-y-6">
-              <p className="font-serif text-brand-fog text-3xl leading-tight italic sm:text-4xl">
+              <p className="font-serif text-brand-fog text-3xl leading-tight text-pretty italic sm:text-4xl">
                 “
                 {tSocial.rich("quote", {
                   lilac: (chunks) => (
                     <span className="text-brand-lila">{chunks}</span>
                   ),
+                  nb: (chunks) => (
+                    <span className="whitespace-nowrap">{chunks}</span>
+                  ),
                 })}
                 ”
               </p>
+            </div>
+            </div>
+            <GalleryTeaser />
+            <div className="pt-2">
               <Link className="text-brand-fog link-slide text-base font-semibold" href="/gallery">
                 {tSocial("galleryLink")}
               </Link>
             </div>
-            </div>
-            <GalleryTeaser />
           </section>
         </AnimatedSection>
 
@@ -156,7 +161,7 @@ export default async function HomePage() {
               alt="Decorative background texture"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/25 to-black/10" />
             <Glow className="-top-20 -left-20 h-[400px] w-[400px]" />
             <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div className="space-y-4">
@@ -164,7 +169,7 @@ export default async function HomePage() {
                 <h2 className="font-serif text-4xl tracking-tight italic sm:text-5xl">
                   {tNewsletter("headline")}
                 </h2>
-                <p className="text-base leading-8 text-white/80 sm:text-lg">
+                <p className="text-base leading-8 whitespace-pre-line text-white/80 sm:text-lg">
                   {tNewsletter("subhead")}
                 </p>
               </div>

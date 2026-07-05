@@ -47,6 +47,9 @@ export function NewsletterForm() {
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
+      <p className="text-brand-lila-light text-sm font-semibold sm:text-base">
+        {t("joinList")}
+      </p>
       <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
         <div>
           <label className="sr-only" htmlFor="newsletter-email">
