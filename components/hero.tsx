@@ -1,19 +1,14 @@
 import Image from "next/image";
 import {getTranslations} from "next-intl/server";
 
-import {Countdown} from "@/components/countdown";
 import {Glow} from "@/components/glow";
 import {HeroIntro} from "@/components/hero-intro";
 import {buttonClasses} from "@/components/ui/button";
-import {upcomingEvents} from "@/content/events";
 import {Link} from "@/i18n/navigation";
 import {cn} from "@/lib/utils";
 
 export async function Hero() {
   const t = await getTranslations("hero");
-  const tCountdown = await getTranslations("countdown");
-
-  const nextEvent = upcomingEvents[0];
 
   const ctas = (
     <>
@@ -31,41 +26,6 @@ export async function Hero() {
       </Link>
     </>
   );
-
-  const chip = nextEvent ? (
-    <Link
-      href={`/events/${nextEvent.slug}`}
-      className="group inline-flex max-w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-full border border-white/15 bg-white/5 px-5 py-3 backdrop-blur transition hover:border-white/30 hover:bg-white/10"
-    >
-      <span className="text-brand-fog text-sm font-semibold">{nextEvent.dateLabel}</span>
-      <span className="hidden text-white/40 sm:inline" aria-hidden="true">
-        ·
-      </span>
-      <span className="hidden text-sm text-white/70 sm:inline">{nextEvent.venue}</span>
-      {nextEvent.startsAt && !nextEvent.isTentative ? (
-        <>
-          <span className="text-white/40" aria-hidden="true">
-            ·
-          </span>
-          <Countdown
-            startsAt={nextEvent.startsAt}
-            size="sm"
-            labels={{
-              days: tCountdown("days"),
-              hours: tCountdown("hours"),
-              minutes: tCountdown("minutes"),
-            }}
-          />
-        </>
-      ) : null}
-      <span
-        aria-hidden="true"
-        className="text-brand-lila inline-block transition-transform duration-300 group-hover:translate-x-1"
-      >
-        →
-      </span>
-    </Link>
-  ) : undefined;
 
   return (
     <section className="bg-brand-night relative isolate overflow-hidden border-b border-white/10 text-white">
@@ -86,7 +46,6 @@ export async function Hero() {
           headlineAccent={t("headlineAccent")}
           subhead={t("subhead")}
           ctas={ctas}
-          chip={chip}
         />
       </div>
     </section>

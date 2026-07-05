@@ -1,22 +1,27 @@
 import Image from "next/image";
-import {getTranslations} from "next-intl/server";
 
+import type {GalleryItem} from "@/content/gallery";
 import {galleryItems} from "@/content/gallery";
 import {Link} from "@/i18n/navigation";
 
-/**
- * Home-page gallery strip: four square photo thumbs plus a "+n more" tile
- * linking to the full gallery. Skips the first gallery item (presentation
- * slide) so the teaser shows actual event photos.
- */
-export async function GalleryTeaser() {
-  const t = await getTranslations("gallery");
+// Manually curated preview: the five hero shots the owner wants to
+// showcase on the homepage teaser. Filenames match the numeric ordering in
+// `public/images/gallery/event-01/web/`.
+const TEASER_FILES = ["6.jpg", "19.jpg", "20.jpg", "25.jpg", "49.png"] as const;
 
-  const thumbs = galleryItems.slice(1, 5);
-  const remaining = galleryItems.length - thumbs.length;
+/**
+ * Home-page gallery strip: five hand-picked photos in a single row on desktop
+ * (masonry-style aspect-square tiles), 2-up on mobile. The section already
+ * has a "See full gallery →" link above it, so no in-grid CTA tile is needed
+ * here.
+ */
+export function GalleryTeaser() {
+  const thumbs: GalleryItem[] = TEASER_FILES.map((file) =>
+    galleryItems.find((item) => item.src.endsWith(`/${file}`)),
+  ).filter((item): item is GalleryItem => item !== undefined);
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-5 sm:gap-4">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 sm:gap-4">
       {thumbs.map((item) => (
         <Link
           key={item.src}
@@ -27,25 +32,11 @@ export async function GalleryTeaser() {
             src={item.src}
             alt={item.alt}
             fill
-            sizes="(max-width:640px) 50vw, 20vw"
+            sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 20vw"
             className="object-cover transition duration-500 group-hover:scale-105"
           />
         </Link>
       ))}
-      <Link
-        href="/gallery"
-        className="bg-brand-surface hover:border-brand-lila/50 group col-span-2 flex aspect-square items-center justify-center rounded-xl border border-white/10 transition duration-300 sm:col-span-1"
-      >
-        <span className="font-heading text-brand-fog text-2xl uppercase">
-          {t("morePhotos", {count: remaining})}{" "}
-          <span
-            aria-hidden="true"
-            className="text-brand-lila inline-block transition-transform duration-300 group-hover:translate-x-1"
-          >
-            →
-          </span>
-        </span>
-      </Link>
     </div>
   );
 }

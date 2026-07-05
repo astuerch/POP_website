@@ -52,10 +52,10 @@ export function SiteNavbar() {
         )}
       >
         {/* Brand lockup: the official POP SVG logo from `/public/images/brand/
-            pop_logo.svg`. Height shrinks after 24px of scroll; width scales
-            automatically via the SVG's intrinsic aspect ratio. `priority` so
-            it lands in the LCP paint window. Screen readers still hear the
-            brand + tagline via the hidden text below. */}
+            pop_logo.svg` (viewBox 600×300, so width auto-scales at 2:1). Sits
+            above a letterspaced uppercase tagline that fades out on scroll to
+            keep the shrunk state compact. `priority` so the logo lands in the
+            LCP paint window. */}
         <Link
           className="flex flex-col items-start"
           href="/"
@@ -69,9 +69,18 @@ export function SiteNavbar() {
             priority
             className={cn(
               "w-auto transition-all duration-300",
-              scrolled ? "h-8" : "h-10 sm:h-12",
+              scrolled ? "h-11 sm:h-12" : "h-16 sm:h-20",
             )}
           />
+          <span
+            aria-hidden="true"
+            className={cn(
+              "text-brand-mist mt-1 overflow-hidden text-[0.6rem] leading-none font-semibold tracking-[0.25em] uppercase transition-all duration-300 sm:text-[0.7rem]",
+              scrolled ? "mt-0 max-h-0 opacity-0" : "max-h-4 opacity-100",
+            )}
+          >
+            {tagline}
+          </span>
           <span className="sr-only">
             POP Impact Lab — {tagline}
           </span>
