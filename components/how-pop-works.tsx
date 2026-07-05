@@ -36,7 +36,7 @@ export async function HowPopWorks() {
           {cards.map((card, index) => (
             <AnimatedSection key={card.titleKey} delay={0.05 * (index + 1)}>
               <article className="group bg-brand-surface hover:border-brand-lila/60 relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-24px_rgba(182,161,210,0.45)]">
-                <div className="from-brand-lila/25 via-brand-lila/10 relative flex aspect-[16/11] items-center justify-center overflow-hidden bg-gradient-to-b to-transparent p-8">
+                <div className="from-brand-lila/25 via-brand-lila/10 relative flex aspect-[16/12] items-center justify-center overflow-hidden bg-gradient-to-b to-transparent p-8">
                   <span
                     aria-hidden="true"
                     className="font-heading text-outline absolute -top-5 -left-2 text-8xl leading-none opacity-60 select-none"
@@ -46,7 +46,7 @@ export async function HowPopWorks() {
                   {/* Icons were designed on light backgrounds (baked white
                       circles), so they sit inside a white circular badge on
                       the dark panel. */}
-                  <div className="grid h-28 w-28 place-items-center overflow-hidden rounded-full bg-white/95 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)] transition duration-500 group-hover:scale-105 sm:h-32 sm:w-32">
+                  <div className="grid h-40 w-40 place-items-center overflow-hidden rounded-full bg-white/95 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)] transition duration-500 group-hover:scale-105 sm:h-48 sm:w-48">
                     <Image
                       src={card.icon}
                       alt={card.alt}

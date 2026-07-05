@@ -51,8 +51,8 @@ export default async function HomePage() {
             <h2 className="font-heading text-brand-fog text-5xl leading-none tracking-tight uppercase sm:text-6xl">
               {tSocial("title")}
             </h2>
-            <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-              <div className="bg-brand-surface relative min-h-[320px] overflow-hidden rounded-3xl border border-white/10">
+            <div className="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
+              <div className="bg-brand-surface relative min-h-[420px] overflow-hidden rounded-3xl border border-white/10 sm:min-h-[480px] lg:min-h-[520px]">
               <video
                 autoPlay
                 muted
@@ -69,7 +69,13 @@ export default async function HomePage() {
             </div>
             <div className="space-y-6">
               <p className="font-serif text-brand-fog text-3xl leading-tight italic sm:text-4xl">
-                “{tSocial("quote")}”
+                “
+                {tSocial.rich("quote", {
+                  lilac: (chunks) => (
+                    <span className="text-brand-lila">{chunks}</span>
+                  ),
+                })}
+                ”
               </p>
               <Link className="text-brand-fog link-slide text-base font-semibold" href="/gallery">
                 {tSocial("galleryLink")}

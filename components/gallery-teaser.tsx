@@ -7,7 +7,7 @@ import {Link} from "@/i18n/navigation";
 // Manually curated preview: the five hero shots the owner wants to
 // showcase on the homepage teaser. Filenames match the numeric ordering in
 // `public/images/gallery/event-01/web/`.
-const TEASER_FILES = ["6.jpg", "19.jpg", "20.jpg", "25.jpg", "49.png"] as const;
+const TEASER_FILES = ["6.jpg", "19.jpg", "20.jpg", "18.jpg", "49.png"] as const;
 
 /**
  * Home-page gallery strip: five hand-picked photos in a single row on desktop

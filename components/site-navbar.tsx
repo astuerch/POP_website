@@ -52,10 +52,11 @@ export function SiteNavbar() {
         )}
       >
         {/* Brand lockup: the official POP SVG logo from `/public/images/brand/
-            pop_logo.svg` (viewBox 600×300, so width auto-scales at 2:1). Sits
-            above a letterspaced uppercase tagline that fades out on scroll to
-            keep the shrunk state compact. `priority` so the logo lands in the
-            LCP paint window. */}
+            pop_logo.svg` (viewBox 600×300, so width auto-scales at 2:1). The
+            tagline underneath is split character by character with
+            `justify-between`, so it always spans exactly the same width as
+            the logo above it — regardless of viewport. Neither element
+            shrinks on scroll; only the surrounding padding compacts. */}
         <Link
           className="flex flex-col items-start"
           href="/"
@@ -67,19 +68,17 @@ export function SiteNavbar() {
             width={600}
             height={300}
             priority
-            className={cn(
-              "w-auto transition-all duration-300",
-              scrolled ? "h-11 sm:h-12" : "h-16 sm:h-20",
-            )}
+            className="h-16 w-auto sm:h-20"
           />
           <span
             aria-hidden="true"
-            className={cn(
-              "text-brand-mist mt-1 overflow-hidden text-[0.6rem] leading-none font-semibold tracking-[0.25em] uppercase transition-all duration-300 sm:text-[0.7rem]",
-              scrolled ? "mt-0 max-h-0 opacity-0" : "max-h-4 opacity-100",
-            )}
+            className="text-brand-mist mt-1.5 flex w-full justify-between overflow-hidden text-[0.5rem] leading-none font-semibold uppercase sm:text-[0.6rem]"
           >
-            {tagline}
+            {tagline.split("").map((char, index) => (
+              <span key={`${char}-${index}`} className="whitespace-pre">
+                {char}
+              </span>
+            ))}
           </span>
           <span className="sr-only">
             POP Impact Lab — {tagline}
