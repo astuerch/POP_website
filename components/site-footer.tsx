@@ -17,6 +17,19 @@ export function SiteFooter() {
 
   const nextLocale = locale === "en" ? "de" : "en";
 
+  // Which top-level page are we on? `usePathname()` strips the locale, so a
+  // URL like /en/events/foo comes in here as /events/foo. Legal pages and
+  // deeper routes bucket into their first segment.
+  const topSegment = (() => {
+    if (pathname === "/" || pathname === "") return "home";
+    const parts = pathname.replace(/^\//, "").split("/");
+    return parts[0] ?? "home";
+  })();
+
+  // Section visibility per page — as agreed with the owner.
+  const showFinale = ["home", "events", "gallery"].includes(topSegment);
+  const showPartners = ["home", "events", "contact"].includes(topSegment);
+
   // Poster finale line: everything before the last word in white, the last
   // word (with its period) in lilac.
   const finale = tFooter("finale");
@@ -26,13 +39,15 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-brand-ink/40 border-t border-white/10">
-      <div className="relative overflow-hidden border-b border-white/10 px-6 py-16 text-center sm:py-20">
-        <Glow className="top-1/2 left-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2" />
-        <p className="font-heading text-brand-fog relative text-5xl leading-none tracking-tight uppercase sm:text-7xl">
-          {finaleStart} <span className="text-brand-lila">{finaleLast}</span>
-        </p>
-      </div>
-      <PartnersStrip />
+      {showFinale ? (
+        <div className="relative overflow-hidden border-b border-white/10 px-6 py-16 text-center sm:py-20">
+          <Glow className="top-1/2 left-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2" />
+          <p className="font-heading text-brand-fog relative text-5xl leading-none tracking-tight uppercase sm:text-7xl">
+            {finaleStart} <span className="text-brand-lila">{finaleLast}</span>
+          </p>
+        </div>
+      ) : null}
+      {showPartners ? <PartnersStrip /> : null}
       {/* Footer layout: left column carries the wordmark, tagline, contact
           line and language switch (roomy). Right column groups Navigate + Legal
           side by side, close together, and is vertically centered relative to
