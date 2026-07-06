@@ -2,6 +2,7 @@ import {getTranslations} from "next-intl/server";
 
 import {AnimatedSection} from "@/components/animated-section";
 import {EventCard} from "@/components/event-card";
+import {Eyebrow} from "@/components/eyebrow";
 import {SectionHeading} from "@/components/section-heading";
 import {pastEvents, upcomingEvents} from "@/content/events";
 import type {AppLocale} from "@/i18n/routing";
@@ -22,7 +23,11 @@ export default async function EventsPage() {
   return (
     <div>
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
-        <AnimatedSection delay={0.05} amount={0.05}>
+        <AnimatedSection>
+          <Eyebrow>{t("eyebrow")}</Eyebrow>
+        </AnimatedSection>
+
+        <AnimatedSection className="mt-8" delay={0.05} amount={0.05}>
           <section className="space-y-6">
             <SectionHeading title={t("upcoming")} />
             <div className="grid gap-6 sm:grid-cols-2">

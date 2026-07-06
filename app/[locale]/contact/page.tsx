@@ -31,7 +31,38 @@ export default async function ContactPage() {
                 <dl className="text-brand-mist space-y-4 text-base">
                   <div>
                     <Eyebrow as="dt">{t("email")}</Eyebrow>
-                    <dd className="mt-2">{siteConfig.email}</dd>
+                    <dd className="mt-2">
+                      <a
+                        className="hover:text-brand-fog transition"
+                        href={`mailto:${siteConfig.email}`}
+                      >
+                        {siteConfig.email}
+                      </a>
+                    </dd>
+                  </div>
+                  <div>
+                    <Eyebrow as="dt">{t("phone")}</Eyebrow>
+                    <dd className="mt-2">
+                      <a
+                        className="hover:text-brand-fog transition"
+                        href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`}
+                      >
+                        {siteConfig.phone}
+                      </a>
+                    </dd>
+                  </div>
+                  <div>
+                    <Eyebrow as="dt">{t("instagram")}</Eyebrow>
+                    <dd className="mt-2">
+                      <a
+                        className="hover:text-brand-fog transition"
+                        href={siteConfig.instagram}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        @pop_impactlab
+                      </a>
+                    </dd>
                   </div>
                   <div>
                     <Eyebrow as="dt">{t("base")}</Eyebrow>

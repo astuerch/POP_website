@@ -119,7 +119,9 @@
     "send": "Send message",
     "sending": "Sending...",
     "formStagedNote": "Thanks — this contact form is staged for the live workflow and will be connected in a later phase.",
-    "formIdleNote": "Use this form for early enquiries while the live messaging workflow is being connected."
+    "formIdleNote": "Use this form for early enquiries while the live messaging workflow is being connected.",
+    "phone": "Phone",
+    "instagram": "Instagram"
   },
   "footer": {
     "finale": "See you at the next one.",

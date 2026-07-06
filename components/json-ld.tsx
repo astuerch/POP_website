@@ -32,6 +32,7 @@ export function OrganizationSchema() {
     url: siteUrl,
     logo: `${siteUrl}/images/brand/pop_logo.svg`,
     email: siteConfig.email,
+    telephone: siteConfig.phone,
     description: siteConfig.description,
     address: {
       "@type": "PostalAddress",

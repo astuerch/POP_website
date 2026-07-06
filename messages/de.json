@@ -119,7 +119,9 @@
     "send": "Nachricht senden",
     "sending": "Wird gesendet...",
     "formStagedNote": "Danke — dieses Kontaktformular ist für den Live-Betrieb vorbereitet und wird in einer späteren Phase angebunden.",
-    "formIdleNote": "Nutze dieses Formular für erste Anfragen, während der Live-Nachrichtenversand noch eingerichtet wird."
+    "formIdleNote": "Nutze dieses Formular für erste Anfragen, während der Live-Nachrichtenversand noch eingerichtet wird.",
+    "phone": "Telefon",
+    "instagram": "Instagram"
   },
   "footer": {
     "finale": "Bis zum nächsten Mal.",

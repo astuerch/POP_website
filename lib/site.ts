@@ -8,6 +8,8 @@ export const siteConfig = {
     "POP Impact Lab is a Zurich-based science outreach initiative creating approachable, conversation-led events where science feels accessible to everybody.",
   mission: "Science meets society, in the places you already go.",
   email: "popimpactlab@gmail.com",
+  phone: "+41 78 923 18 14",
+  instagram: "https://www.instagram.com/pop_impactlab/",
   location: "Zurich, Switzerland",
 };
 
