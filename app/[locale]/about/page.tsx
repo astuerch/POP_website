@@ -3,6 +3,8 @@ import {getTranslations} from "next-intl/server";
 
 import {AnimatedSection} from "@/components/animated-section";
 import {Eyebrow} from "@/components/eyebrow";
+import {Parallax} from "@/components/parallax";
+import {Stagger, StaggerItem} from "@/components/stagger";
 import {TeamCard} from "@/components/team-card";
 import {team} from "@/content/team";
 import type {AppLocale} from "@/i18n/routing";
@@ -55,13 +57,15 @@ export default async function AboutPage() {
               </p>
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-white/10 md:aspect-auto md:h-full md:min-h-[540px]">
-              <Image
-                fill
-                src="/images/hero/crowd_pop.jpg"
-                alt="Guests in conversation at a POP Impact Lab event in Zürich."
-                sizes="(max-width:768px) 100vw, 50vw"
-                className="object-cover object-[50%_70%]"
-              />
+              <Parallax className="absolute inset-0 scale-110" distance={30}>
+                <Image
+                  fill
+                  src="/images/hero/crowd_pop.jpg"
+                  alt="Guests in conversation at a POP Impact Lab event in Zürich."
+                  sizes="(max-width:768px) 100vw, 50vw"
+                  className="object-cover object-[50%_70%]"
+                />
+              </Parallax>
               <div className="from-brand-night/50 absolute inset-0 bg-gradient-to-t to-transparent" />
             </div>
           </section>
@@ -69,10 +73,10 @@ export default async function AboutPage() {
 
         {/* Team: circular portraits, evocative titles, full bios and social
             links — matching the visual language of the rest of the site. */}
-        <AnimatedSection className="mt-24 sm:mt-32" delay={0.05} amount={0.05}>
-          <section className="space-y-16">
+        <AnimatedSection className="mt-16 sm:mt-28" delay={0.05} amount={0.05} variant="fade">
+          <section className="space-y-14 sm:space-y-16">
             <div className="space-y-3 text-center">
-              <h2 className="font-heading text-brand-fog text-5xl leading-none tracking-tight uppercase sm:text-6xl">
+              <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
                 {t("teamName")}
               </h2>
               <Eyebrow>{t("teamKicker")}</Eyebrow>
@@ -80,11 +84,17 @@ export default async function AboutPage() {
                 {t("teamMotto")}
               </p>
             </div>
-            <div className="grid gap-16 md:grid-cols-3 md:gap-10">
+            <Stagger
+              className="grid gap-14 md:grid-cols-3 md:gap-10"
+              amount={0.1}
+              stagger={0.12}
+            >
               {team.map((member) => (
-                <TeamCard key={member.name} member={member} variant="detailed" />
+                <StaggerItem key={member.name}>
+                  <TeamCard member={member} variant="detailed" />
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </section>
         </AnimatedSection>
       </div>

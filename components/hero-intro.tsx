@@ -36,7 +36,7 @@ const wordVariants = {
 };
 
 const headlineClasses =
-  "font-heading max-w-5xl text-6xl leading-[0.95] tracking-tight uppercase sm:text-7xl lg:text-8xl";
+  "font-heading max-w-5xl text-5xl leading-[0.95] tracking-tight uppercase sm:text-6xl lg:text-8xl";
 
 /**
  * Client-side hero entrance: eyebrow → headline (word by word) → subhead →

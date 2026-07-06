@@ -11,6 +11,7 @@ import {Hero} from "@/components/hero";
 import {HowPopWorks} from "@/components/how-pop-works";
 import {Marquee} from "@/components/marquee";
 import {NewsletterForm} from "@/components/newsletter-form";
+import {Stagger, StaggerItem} from "@/components/stagger";
 import {TeamCard} from "@/components/team-card";
 import {buttonClasses} from "@/components/ui/button";
 import {upcomingEvents} from "@/content/events";
@@ -43,12 +44,12 @@ export default async function HomePage() {
 
       <Marquee />
 
-      <div className="mx-auto max-w-7xl space-y-24 px-6 py-20 sm:space-y-32 sm:px-8 lg:px-12 lg:py-28">
+      <div className="mx-auto max-w-7xl space-y-16 px-6 py-14 sm:space-y-28 sm:px-8 sm:py-20 lg:space-y-32 lg:px-12 lg:py-28">
         <HowPopWorks />
 
-        <AnimatedSection delay={0.05}>
+        <AnimatedSection delay={0.05} variant="left">
           <section className="space-y-8">
-            <h2 className="font-heading text-brand-fog text-5xl leading-none tracking-tight uppercase sm:text-6xl">
+            <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
               {tSocial("title")}
             </h2>
             <div className="grid gap-8 md:grid-cols-[1fr_1fr] md:items-center">
@@ -86,10 +87,10 @@ export default async function HomePage() {
           </section>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.1}>
+        <AnimatedSection delay={0.1} variant="right">
           <section className="space-y-8">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <h2 className="font-heading text-brand-fog text-5xl leading-none tracking-tight uppercase sm:text-6xl">
+              <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
                 {tNext("eyebrow")}
               </h2>
               <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:gap-10">
@@ -120,11 +121,11 @@ export default async function HomePage() {
           </section>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.15}>
+        <AnimatedSection delay={0.15} variant="scale">
           <section className="relative space-y-10">
-            <Glow className="top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2" />
+            <Glow className="top-1/2 left-1/2 hidden h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 sm:block" />
             <div className="relative space-y-3 text-center">
-              <h2 className="font-heading text-brand-fog text-5xl leading-none tracking-tight uppercase sm:text-6xl">
+              <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
                 {tAbout("teamName")}
               </h2>
               <Eyebrow>{tAbout("teamKicker")}</Eyebrow>
@@ -132,11 +133,17 @@ export default async function HomePage() {
                 {tAbout("teamMotto")}
               </p>
             </div>
-            <div className="relative mx-auto grid max-w-4xl gap-12 sm:grid-cols-2 md:grid-cols-3">
+            <Stagger
+              className="relative mx-auto grid max-w-4xl gap-12 sm:grid-cols-2 md:grid-cols-3"
+              amount={0.15}
+              stagger={0.12}
+            >
               {team.map((member) => (
-                <TeamCard key={member.name} member={member} variant="compact" />
+                <StaggerItem key={member.name}>
+                  <TeamCard member={member} variant="compact" />
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
             <div className="relative text-center">
               <Link className="text-brand-fog link-slide text-base font-semibold" href="/about">
                 {tAbout("readStory")} →
@@ -157,7 +164,7 @@ export default async function HomePage() {
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/50 to-black/25" />
-            <Glow className="-top-20 -left-20 h-[400px] w-[400px]" />
+            <Glow className="-top-20 -left-20 hidden h-[400px] w-[400px] sm:block" />
             <div className="relative grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-center">
               <div className="space-y-4">
                 <Eyebrow>{tNewsletter("eyebrow")}</Eyebrow>

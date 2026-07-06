@@ -7,6 +7,7 @@ import {AnimatedSection} from "@/components/animated-section";
 import {Eyebrow} from "@/components/eyebrow";
 import {EventSchema} from "@/components/json-ld";
 import {RegistrationWidget} from "@/components/registration-widget";
+import {Stagger, StaggerItem} from "@/components/stagger";
 import {events, getEventBySlug} from "@/content/events";
 
 export async function generateStaticParams() {
@@ -80,7 +81,7 @@ export default async function EventDetailPage({
 
               <div className="space-y-5">
                 <Eyebrow>{event.dateLabel}</Eyebrow>
-                <h1 className="font-heading text-brand-fog text-5xl leading-none tracking-tight sm:text-6xl">
+                <h1 className="font-heading text-brand-fog text-4xl leading-none tracking-tight sm:text-5xl lg:text-6xl">
                   {event.title}
                 </h1>
                 <p className="text-brand-lila-light text-base font-medium">
@@ -163,9 +164,9 @@ export default async function EventDetailPage({
                     {event.lineup.map((group) => (
                       <div key={group.title} className="space-y-5">
                         <Eyebrow>{group.title}</Eyebrow>
-                        <div className="grid gap-6 sm:grid-cols-2">
+                        <Stagger className="grid gap-6 sm:grid-cols-2" amount={0.15}>
                           {group.people.map((person) => (
-                            <article
+                            <StaggerItem
                               key={person.name}
                               className="bg-brand-surface flex flex-col overflow-hidden rounded-3xl border border-white/10"
                             >
@@ -191,9 +192,9 @@ export default async function EventDetailPage({
                                   {person.bio}
                                 </p>
                               </div>
-                            </article>
+                            </StaggerItem>
                           ))}
-                        </div>
+                        </Stagger>
                       </div>
                     ))}
                   </div>
