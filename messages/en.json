@@ -7,7 +7,8 @@
     "contact": "Contact",
     "newsletter": "Newsletter",
     "switchLanguage": "DE",
-    "tagline": "Where science meets society"
+    "tagline": "Where science meets society",
+    "menu": "Menu"
   },
   "hero": {
     "eyebrow": "ZURICH · SCIENCE EVENTS",
@@ -86,7 +87,7 @@
     "eyebrow": "About POP",
     "title": "about POP",
     "para1": "Science shapes our world.\nMost people are not part of the conversation.\nWe change that.",
-    "para2": "POP Impact Lab translates complex research into public dialogue. We bring cutting-edge topics into spaces where people already meet. No jargon. No intellectual performance. No academic distance. Just real questions. And room to think. We work with young researchers from ETH Zurich and UZH who want their work to matter beyond academia. Because knowledge should not stay behind closed doors. The public deserves access to the ideas that shape their future.",
+    "para2": "POP Impact Lab translates complex research into public dialogue. We bring cutting-edge topics into spaces where people already meet.\n\nNo jargon. No intellectual performance. No academic distance. Just real questions. And room to think.\n\nWe work with young researchers from ETH Zurich and UZH who want their work to matter beyond academia. Because knowledge should not stay behind closed doors. The public deserves access to the ideas that shape their future.",
     "teamTitle": "Meet the team",
     "teamSubtitle": "Three minds. One mission: open science to society.",
     "teamMotto": "Three women, different cultures, one shared refusal: letting the science that shapes our future stay out of reach.",
@@ -122,7 +123,12 @@
     "formStagedNote": "Thanks — this contact form is staged for the live workflow and will be connected in a later phase.",
     "formIdleNote": "Use this form for early enquiries while the live messaging workflow is being connected.",
     "phone": "Phone",
-    "instagram": "Instagram"
+    "instagram": "Instagram",
+    "firstNameLabel": "First name",
+    "lastNameLabel": "Last name",
+    "firstNamePlaceholder": "First name",
+    "lastNamePlaceholder": "Last name",
+    "subscribeLabel": "Yes, subscribe me to the newsletter."
   },
   "footer": {
     "finale": "See you at the next one.",

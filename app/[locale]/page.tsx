@@ -11,7 +11,6 @@ import {Hero} from "@/components/hero";
 import {HowPopWorks} from "@/components/how-pop-works";
 import {Marquee} from "@/components/marquee";
 import {NewsletterForm} from "@/components/newsletter-form";
-import {RiseText} from "@/components/rise-text";
 import {Stagger, StaggerItem} from "@/components/stagger";
 import {TeamCard} from "@/components/team-card";
 import {buttonClasses} from "@/components/ui/button";
@@ -49,12 +48,28 @@ export default async function HomePage() {
       <div className="mx-auto max-w-7xl space-y-16 px-6 py-14 sm:space-y-28 sm:px-8 sm:py-20 lg:space-y-32 lg:px-12 lg:py-28">
         <HowPopWorks />
 
-        <AnimatedSection delay={0.05} variant="fade">
-          <section className="space-y-8">
-            <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
-              <RiseText>{tSocial("title")}</RiseText>
+        <AnimatedSection delay={0.05} variant="left">
+          <section className="relative space-y-8">
+            {/* Ambient POP network texture behind the first-edition + gallery
+                teaser block, faded into the page at every edge. */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 overflow-hidden"
+            >
+              <Image
+                fill
+                alt=""
+                src="/images/backgrounds/background-sections.jpg"
+                sizes="100vw"
+                className="object-cover opacity-60 brightness-[1.5] saturate-150"
+              />
+              <div className="from-brand-night absolute inset-0 bg-gradient-to-b via-transparent to-brand-night" />
+              <div className="from-brand-night to-brand-night absolute inset-0 bg-gradient-to-r via-transparent" />
+            </div>
+            <h2 className="font-heading text-brand-fog relative text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
+              {tSocial("title")}
             </h2>
-            <div className="grid gap-8 md:grid-cols-[1fr_1fr] md:items-center">
+            <div className="relative grid gap-8 md:grid-cols-[1fr_1fr] md:items-center">
               <div className="bg-brand-surface relative aspect-video overflow-hidden rounded-3xl border border-white/10 md:aspect-auto md:h-[380px]">
               <video
                 autoPlay
@@ -85,15 +100,17 @@ export default async function HomePage() {
               </p>
             </div>
             </div>
-            <GalleryTeaser />
+            <div className="relative">
+              <GalleryTeaser />
+            </div>
           </section>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.1} variant="fade">
+        <AnimatedSection delay={0.1} variant="right">
           <section className="space-y-8">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
-                <RiseText>{tNext("eyebrow")}</RiseText>
+                {tNext("eyebrow")}
               </h2>
               <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:gap-10">
                 {nextEvent?.startsAt && !nextEvent.isTentative ? (
@@ -123,12 +140,12 @@ export default async function HomePage() {
           </section>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.15} variant="fade">
+        <AnimatedSection delay={0.15} variant="scale">
           <section className="relative space-y-10">
             <Glow className="top-1/2 left-1/2 hidden h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 sm:block" />
             <div className="relative space-y-3 text-center">
               <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
-                <RiseText>{tAbout("teamName")}</RiseText>
+                {tAbout("teamName")}
               </h2>
               <Eyebrow>{tAbout("teamKicker")}</Eyebrow>
               <p className="text-brand-mist mx-auto max-w-2xl text-base leading-8 sm:text-lg">
@@ -162,10 +179,10 @@ export default async function HomePage() {
             <Image
               fill
               src="/images/backgrounds/background-sections.jpg"
-              alt="Decorative background texture"
-              className="object-cover"
+              alt="Decorative network background texture"
+              className="object-cover brightness-[1.6] saturate-150"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/50 to-black/25" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/55 via-black/30 to-black/10" />
             <Glow className="-top-20 -left-20 hidden h-[400px] w-[400px] sm:block" />
             <div className="relative grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-center">
               <div className="space-y-4">

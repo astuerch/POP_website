@@ -45,7 +45,7 @@ export default async function GalleryPage() {
           />
         </div>
 
-        <div className="mt-6 space-y-24 sm:space-y-32">
+        <div className="mt-16 space-y-24 sm:mt-24 sm:space-y-32">
           {galleryEvents.map((event, index) => (
             <section
               key={event.id}

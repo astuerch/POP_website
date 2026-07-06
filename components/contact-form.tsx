@@ -19,33 +19,44 @@ export function ContactForm() {
 
   return (
     <form
-      className="bg-brand-surface space-y-4 rounded-3xl border border-white/10 p-6"
+      className="bg-brand-surface space-y-4 rounded-3xl border border-white/10 p-6 sm:p-8"
       onSubmit={handleSubmit}
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label className="text-brand-mist block text-sm font-medium" htmlFor="name">
-            {t("nameLabel")}
+          <label className="text-brand-mist block text-sm font-medium" htmlFor="firstName">
+            {t("firstNameLabel")}
           </label>
           <input
             required
-            id="name"
+            id="firstName"
             className={inputClasses}
-            placeholder={t("namePlaceholder")}
+            placeholder={t("firstNamePlaceholder")}
           />
         </div>
         <div className="space-y-2">
-          <label className="text-brand-mist block text-sm font-medium" htmlFor="email">
-            {t("emailLabel")}
+          <label className="text-brand-mist block text-sm font-medium" htmlFor="lastName">
+            {t("lastNameLabel")}
           </label>
           <input
             required
-            id="email"
-            type="email"
+            id="lastName"
             className={inputClasses}
-            placeholder={t("emailPlaceholder")}
+            placeholder={t("lastNamePlaceholder")}
           />
         </div>
+      </div>
+      <div className="space-y-2">
+        <label className="text-brand-mist block text-sm font-medium" htmlFor="email">
+          {t("emailLabel")}
+        </label>
+        <input
+          required
+          id="email"
+          type="email"
+          className={inputClasses}
+          placeholder={t("emailPlaceholder")}
+        />
       </div>
       <div className="space-y-2">
         <label className="text-brand-mist block text-sm font-medium" htmlFor="message">
@@ -59,10 +70,19 @@ export function ContactForm() {
           placeholder={t("messagePlaceholder")}
         />
       </div>
+      <label className="text-brand-mist flex items-center gap-3 text-sm">
+        <input
+          type="checkbox"
+          className="accent-brand-lila h-4 w-4 rounded border-white/20 bg-white/5"
+        />
+        {t("subscribeLabel")}
+      </label>
       <Button type="submit">{sent ? t("sending") : t("send")}</Button>
-      <p className="text-brand-mist text-sm" role="status">
-        {sent ? t("formStagedNote") : t("formIdleNote")}
-      </p>
+      {sent ? (
+        <p className="text-brand-mist text-sm" role="status">
+          {t("formStagedNote")}
+        </p>
+      ) : null}
     </form>
   );
 }

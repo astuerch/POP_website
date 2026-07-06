@@ -53,153 +53,157 @@ export function SiteNavbar() {
   }, [router, pathname, nextLocale]);
 
   return (
-    <header className="bg-brand-night/90 sticky top-0 z-50 border-b border-white/10 backdrop-blur">
-      <div
-        className={cn(
-          "mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 transition-all duration-300 sm:px-8 lg:px-12",
-          scrolled ? "py-2" : "py-3 sm:py-4",
-        )}
-      >
-        {/* Brand lockup: the official POP SVG logo from `/public/images/brand/
-            pop_logo.svg` (viewBox 600×300, so width auto-scales at 2:1). The
-            tagline underneath is split character by character with
-            `justify-between`, so it always spans exactly the same width as
-            the logo above it — regardless of viewport. Neither element
-            shrinks on scroll; only the surrounding padding compacts. */}
-        <Link
-          className="flex flex-col items-start"
-          href="/"
-          onClick={handleLinkClick}
+    <>
+      <header className="bg-brand-night/90 sticky top-0 z-50 border-b border-white/10 backdrop-blur">
+        <div
+          className={cn(
+            "mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 transition-all duration-300 sm:px-8 lg:px-12",
+            scrolled ? "py-2" : "py-3 sm:py-4",
+          )}
         >
-          <Image
-            src="/images/brand/pop_logo.svg"
-            alt="POP Impact Lab"
-            width={600}
-            height={300}
-            priority
-            className="h-16 w-auto sm:h-20"
-          />
-          <span
-            aria-hidden="true"
-            className="text-brand-mist -mt-0.5 flex w-full justify-between overflow-hidden text-[0.5rem] leading-none font-semibold uppercase sm:text-[0.6rem]"
-          >
-            {tagline.split("").map((char, index) => (
-              <span key={`${char}-${index}`} className="whitespace-pre">
-                {char}
-              </span>
-            ))}
-          </span>
-          <span className="sr-only">
-            POP Impact Lab — {tagline}
-          </span>
-        </Link>
-
-        <nav className="hidden items-center lg:flex" aria-label="Primary">
-          {navLinks.map((link, index) => (
-            <div key={link.href} className="flex items-center">
-              {index > 0 ? (
-                <span className="text-white/20" aria-hidden="true">
-                  |
+          <Link className="flex flex-col items-start" href="/" onClick={handleLinkClick}>
+            <Image
+              src="/images/brand/pop_logo.svg"
+              alt="POP Impact Lab"
+              width={600}
+              height={300}
+              priority
+              className="h-16 w-auto sm:h-20"
+            />
+            <span
+              aria-hidden="true"
+              className="text-brand-mist -mt-0.5 flex w-full justify-between overflow-hidden text-[0.5rem] leading-none font-semibold uppercase sm:text-[0.6rem]"
+            >
+              {tagline.split("").map((char, index) => (
+                <span key={`${char}-${index}`} className="whitespace-pre">
+                  {char}
                 </span>
-              ) : null}
-              <Link
-                href={link.href}
-                onClick={handleLinkClick}
-                className={cn(
-                  "mx-1 rounded-md px-3 py-2 text-sm font-semibold tracking-wide uppercase transition",
-                  isActivePath(pathname, link.href)
-                    ? "bg-brand-lila text-brand-ink"
-                    : "text-brand-fog hover:bg-white/10",
-                )}
-              >
-                {t(link.key)}
-              </Link>
-            </div>
-          ))}
-        </nav>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          <Link
-            className={buttonClasses({variant: "primary", size: "sm"})}
-            href="/#newsletter"
-            onClick={handleLinkClick}
-          >
-            {t("newsletter")}
+              ))}
+            </span>
+            <span className="sr-only">POP Impact Lab — {tagline}</span>
           </Link>
-          <button
-            type="button"
-            className="text-brand-fog rounded-full border border-white/15 px-4 py-2 text-sm font-semibold transition hover:bg-white/10"
-            onClick={handleLocaleSwitch}
-          >
-            {t("switchLanguage")}
-          </button>
-        </div>
 
-        <div className="flex items-center gap-3 lg:hidden">
-          <button
-            type="button"
-            className="text-brand-fog rounded-full border border-white/15 px-4 py-2 text-sm font-semibold"
-            onClick={handleLocaleSwitch}
-          >
-            {t("switchLanguage")}
-          </button>
-          <button
-            type="button"
-            className="text-brand-fog inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15"
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            onClick={() => setIsOpen((open) => !open)}
-          >
-            <div className="space-y-1.5">
-              <span
-                className={cn(
-                  "block h-0.5 w-5 bg-current transition",
-                  isOpen && "translate-y-2 rotate-45",
-                )}
-              />
-              <span
-                className={cn(
-                  "block h-0.5 w-5 bg-current transition",
-                  isOpen && "opacity-0",
-                )}
-              />
-              <span
-                className={cn(
-                  "block h-0.5 w-5 bg-current transition",
-                  isOpen && "-translate-y-2 -rotate-45",
-                )}
-              />
-            </div>
-          </button>
-        </div>
-      </div>
+          <nav className="hidden items-center lg:flex" aria-label="Primary">
+            {navLinks.map((link, index) => (
+              <div key={link.href} className="flex items-center">
+                {index > 0 ? (
+                  <span className="text-white/20" aria-hidden="true">
+                    |
+                  </span>
+                ) : null}
+                <Link
+                  href={link.href}
+                  onClick={handleLinkClick}
+                  className={cn(
+                    "mx-1 rounded-md px-3 py-2 text-sm font-semibold tracking-wide uppercase transition",
+                    isActivePath(pathname, link.href)
+                      ? "bg-brand-lila text-brand-ink"
+                      : "text-brand-fog hover:bg-white/10",
+                  )}
+                >
+                  {t(link.key)}
+                </Link>
+              </div>
+            ))}
+          </nav>
 
-      {/* Full-screen mobile menu overlay. Sits below the sticky header (z-40 <
-          header z-50) so the animated burger/X stays visible to close it.
-          Large uppercase links cascade in; body scroll is locked while open. */}
+          <div className="hidden items-center gap-3 lg:flex">
+            <Link
+              className={buttonClasses({variant: "primary", size: "sm"})}
+              href="/#newsletter"
+              onClick={handleLinkClick}
+            >
+              {t("newsletter")}
+            </Link>
+            <button
+              type="button"
+              className="text-brand-fog rounded-full border border-white/15 px-4 py-2 text-sm font-semibold transition hover:bg-white/10"
+              onClick={handleLocaleSwitch}
+            >
+              {t("switchLanguage")}
+            </button>
+          </div>
+
+          <div className="flex items-center gap-3 lg:hidden">
+            <button
+              type="button"
+              className="text-brand-fog rounded-full border border-white/15 px-4 py-2 text-sm font-semibold"
+              onClick={handleLocaleSwitch}
+            >
+              {t("switchLanguage")}
+            </button>
+            <button
+              type="button"
+              className="text-brand-fog inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              onClick={() => setIsOpen((open) => !open)}
+            >
+              <div className="space-y-1.5">
+                <span className={cn("block h-0.5 w-5 bg-current transition", isOpen && "translate-y-2 rotate-45")} />
+                <span className={cn("block h-0.5 w-5 bg-current transition", isOpen && "opacity-0")} />
+                <span className={cn("block h-0.5 w-5 bg-current transition", isOpen && "-translate-y-2 -rotate-45")} />
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Full-screen mobile menu overlay — rendered as a sibling of the header
+          (not a child) so its `fixed` positioning is viewport-relative. Nesting
+          it inside the backdrop-blurred header would trap it in the header box.
+          Solid background + its own close button + body scroll lock. */}
       <div
         id="mobile-menu"
         className={cn(
-          "bg-brand-night/98 fixed inset-0 z-40 flex flex-col backdrop-blur-xl transition-all duration-300 lg:hidden",
-          isOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0",
+          "fixed inset-0 z-[60] lg:hidden",
+          isOpen ? "pointer-events-auto" : "pointer-events-none",
         )}
       >
-        <div className="flex-1 overflow-y-auto px-6 pt-28 pb-12 sm:px-8">
-          <nav className="flex flex-col" aria-label="Mobile primary">
-            {navLinks.map((link, index) => (
+        {/* Backdrop scrim — tap to close. */}
+        <button
+          type="button"
+          aria-label="Close menu"
+          tabIndex={isOpen ? 0 : -1}
+          onClick={() => setIsOpen(false)}
+          className={cn(
+            "absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300",
+            isOpen ? "opacity-100" : "opacity-0",
+          )}
+        />
+
+        {/* Sliding panel on the right. */}
+        <div
+          className={cn(
+            "bg-brand-night absolute top-0 right-0 flex h-full w-80 max-w-[85%] flex-col border-l border-white/10 shadow-2xl transition-transform duration-300 ease-out",
+            isOpen ? "translate-x-0" : "translate-x-full",
+          )}
+        >
+          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+            <span className="text-brand-mist text-xs font-semibold tracking-[0.25em] uppercase">
+              {t("menu")}
+            </span>
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setIsOpen(false)}
+              className="text-brand-fog inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 transition hover:bg-white/10"
+            >
+              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
+
+          <nav className="flex flex-col px-6 py-4" aria-label="Mobile primary">
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={handleLinkClick}
-                style={{
-                  transitionDelay: isOpen ? `${80 + index * 55}ms` : "0ms",
-                }}
                 className={cn(
-                  "font-heading border-b border-white/10 py-4 text-4xl leading-none tracking-tight uppercase transition-all duration-300 sm:text-5xl",
-                  isOpen ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
+                  "font-heading border-b border-white/10 py-4 text-2xl leading-none tracking-tight uppercase transition",
                   isActivePath(pathname, link.href)
                     ? "text-brand-lila"
                     : "text-brand-fog hover:text-brand-lila-light",
@@ -208,27 +212,19 @@ export function SiteNavbar() {
                 {t(link.key)}
               </Link>
             ))}
-          </nav>
-          <div
-            style={{transitionDelay: isOpen ? `${80 + navLinks.length * 55}ms` : "0ms"}}
-            className={cn(
-              "mt-10 transition-all duration-300",
-              isOpen ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
-            )}
-          >
             <Link
-              className={cn(
-                buttonClasses({variant: "primary", size: "lg"}),
-                "w-full justify-center",
-              )}
               href="/#newsletter"
               onClick={handleLinkClick}
+              className={cn(
+                buttonClasses({variant: "primary", size: "md"}),
+                "mt-8 w-full justify-center",
+              )}
             >
               {t("newsletter")}
             </Link>
-          </div>
+          </nav>
         </div>
       </div>
-    </header>
+    </>
   );
 }

@@ -7,7 +7,8 @@
     "contact": "Kontakt",
     "newsletter": "Newsletter",
     "switchLanguage": "EN",
-    "tagline": "Wo Wissenschaft auf Gesellschaft trifft"
+    "tagline": "Wo Wissenschaft auf Gesellschaft trifft",
+    "menu": "Menü"
   },
   "hero": {
     "eyebrow": "ZÜRICH · WISSENSCHAFTSEVENTS",
@@ -86,7 +87,7 @@
     "eyebrow": "Über POP",
     "title": "über POP",
     "para1": "Wissenschaft prägt unsere Welt.\nDie meisten Menschen sind nicht Teil des Gesprächs.\nDas ändern wir.",
-    "para2": "POP Impact Lab übersetzt komplexe Forschung in öffentlichen Dialog. Wir bringen bahnbrechende Themen in Räume, wo Menschen sich bereits treffen. Kein Fachjargon. Kein intellektuelles Gehabe. Keine akademische Distanz. Nur echte Fragen. Und Raum zum Denken. Wir arbeiten mit jungen Forschern von ETH Zürich und UZH zusammen, die möchten, dass ihre Arbeit über die Wissenschaft hinaus wirkt. Denn Wissen sollte nicht hinter verschlossenen Türen bleiben. Die Öffentlichkeit verdient Zugang zu den Ideen, die ihre Zukunft prägen.",
+    "para2": "POP Impact Lab übersetzt komplexe Forschung in öffentlichen Dialog. Wir bringen bahnbrechende Themen in Räume, wo Menschen sich bereits treffen.\n\nKein Fachjargon. Kein intellektuelles Gehabe. Keine akademische Distanz. Nur echte Fragen. Und Raum zum Denken.\n\nWir arbeiten mit jungen Forschern von ETH Zürich und UZH zusammen, die möchten, dass ihre Arbeit über die Wissenschaft hinaus wirkt. Denn Wissen sollte nicht hinter verschlossenen Türen bleiben. Die Öffentlichkeit verdient Zugang zu den Ideen, die ihre Zukunft prägen.",
     "teamTitle": "Unser Team",
     "teamSubtitle": "Drei Köpfe. Eine Mission: Wissenschaft für die Gesellschaft öffnen.",
     "teamMotto": "Drei Frauen, verschiedene Kulturen, eine gemeinsame Weigerung: die Wissenschaft, die unsere Zukunft prägt, außer Reichweite zu lassen.",
@@ -122,7 +123,12 @@
     "formStagedNote": "Danke — dieses Kontaktformular ist für den Live-Betrieb vorbereitet und wird in einer späteren Phase angebunden.",
     "formIdleNote": "Nutze dieses Formular für erste Anfragen, während der Live-Nachrichtenversand noch eingerichtet wird.",
     "phone": "Telefon",
-    "instagram": "Instagram"
+    "instagram": "Instagram",
+    "firstNameLabel": "Vorname",
+    "lastNameLabel": "Nachname",
+    "firstNamePlaceholder": "Vorname",
+    "lastNamePlaceholder": "Nachname",
+    "subscribeLabel": "Ja, ich möchte den Newsletter abonnieren."
   },
   "footer": {
     "finale": "Bis zum nächsten Mal.",

@@ -52,9 +52,13 @@ export default async function AboutPage() {
                 ))}
               </div>
               <div className="bg-brand-lila h-0.5 w-16 rounded-full" />
-              <p className="text-brand-mist max-w-xl text-lg leading-8">
-                {t("para2")}
-              </p>
+              <div className="text-brand-mist max-w-xl space-y-4 text-lg leading-8">
+                {t("para2")
+                  .split("\n\n")
+                  .map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+              </div>
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-white/10 md:aspect-auto md:h-full md:min-h-[540px]">
               <Parallax className="absolute inset-0 scale-110" distance={30}>
