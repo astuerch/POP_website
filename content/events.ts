@@ -96,7 +96,7 @@ export const events: Event[] = [
       "Mihai Barascu (DJ set)",
     ],
     image: {
-      src: "/images/gallery/event-01/IMG_3658.JPG",
+      src: "/images/events/event1_pic.png",
       alt: "Guests gathered at a POP Impact Lab event in Zürich.",
     },
   },

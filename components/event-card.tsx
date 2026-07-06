@@ -19,13 +19,13 @@ export async function EventCard({
     <article
       className={cn(
         "bg-brand-surface hover:border-brand-lila/50 flex h-full overflow-hidden rounded-3xl border border-white/10 transition duration-200 hover:-translate-y-1",
-        isHorizontal ? "flex-col lg:min-h-[360px] lg:flex-row" : "flex-col",
+        isHorizontal ? "flex-col md:min-h-[360px] md:flex-row" : "flex-col",
       )}
     >
       <div
         className={cn(
           "bg-brand-lila-dark/40 relative aspect-[16/10]",
-          isHorizontal && "lg:aspect-auto lg:w-[42%] lg:shrink-0 lg:self-stretch",
+          isHorizontal && "md:aspect-auto md:w-[42%] md:shrink-0 md:self-stretch",
         )}
       >
         <Image

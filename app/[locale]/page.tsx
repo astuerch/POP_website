@@ -51,7 +51,7 @@ export default async function HomePage() {
             <h2 className="font-heading text-brand-fog text-5xl leading-none tracking-tight uppercase sm:text-6xl">
               {tSocial("title")}
             </h2>
-            <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
+            <div className="grid gap-8 md:grid-cols-[1fr_1fr] md:items-center">
               <div className="bg-brand-surface relative h-[380px] overflow-hidden rounded-3xl border border-white/10">
               <video
                 autoPlay
@@ -83,17 +83,12 @@ export default async function HomePage() {
             </div>
             </div>
             <GalleryTeaser />
-            <div className="pt-2">
-              <Link className="text-brand-fog link-slide text-base font-semibold" href="/gallery">
-                {tSocial("galleryLink")}
-              </Link>
-            </div>
           </section>
         </AnimatedSection>
 
         <AnimatedSection delay={0.1}>
           <section className="space-y-8">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <h2 className="font-heading text-brand-fog text-5xl leading-none tracking-tight uppercase sm:text-6xl">
                 {tNext("eyebrow")}
               </h2>
@@ -137,7 +132,7 @@ export default async function HomePage() {
                 {tAbout("teamMotto")}
               </p>
             </div>
-            <div className="relative mx-auto grid max-w-4xl gap-12 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="relative mx-auto grid max-w-4xl gap-12 sm:grid-cols-2 md:grid-cols-3">
               {team.map((member) => (
                 <TeamCard key={member.name} member={member} variant="compact" />
               ))}
@@ -163,7 +158,7 @@ export default async function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/50 to-black/25" />
             <Glow className="-top-20 -left-20 h-[400px] w-[400px]" />
-            <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div className="relative grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-center">
               <div className="space-y-4">
                 <Eyebrow>{tNewsletter("eyebrow")}</Eyebrow>
                 <h2 className="font-serif text-4xl tracking-tight italic sm:text-5xl">

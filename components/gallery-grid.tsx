@@ -68,6 +68,7 @@ export function GalleryGrid({
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const open = useCallback((index: number, trigger: HTMLElement) => {
     triggerRef.current = trigger;
@@ -118,6 +119,55 @@ export function GalleryGrid({
     };
   }, [isOpen, close, step]);
 
+  // Row-ordered masonry: give each grid cell a row span proportional to the
+  // photo's rendered height. Tiles are placed left-to-right in source order,
+  // so reading flows by row (not down columns) and nothing is cropped.
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) {
+      return;
+    }
+
+    const ROW = 8; // grid-auto-rows track height (px)
+    const GAP = 12; // must match the grid gap (gap-3 = 0.75rem)
+
+    // Enable the fine row grid only once JS is running. Before this, the grid
+    // falls back to a normal aligned grid (no overlap, no crop).
+    grid.style.gridAutoRows = `${ROW}px`;
+
+    const layout = () => {
+      const tiles = grid.querySelectorAll<HTMLElement>("[data-tile]");
+      tiles.forEach((tile) => {
+        const content = (tile.firstElementChild as HTMLElement | null) ?? tile;
+        const height = content.getBoundingClientRect().height;
+        if (!height) {
+          return;
+        }
+        const span = Math.max(1, Math.round((height + GAP) / (ROW + GAP)));
+        tile.style.gridRowEnd = `span ${span}`;
+      });
+    };
+
+    layout();
+
+    const resizeObserver = new ResizeObserver(layout);
+    resizeObserver.observe(grid);
+
+    const images = Array.from(grid.querySelectorAll("img"));
+    images.forEach((img) => {
+      if (!img.complete) {
+        img.addEventListener("load", layout);
+      }
+    });
+    window.addEventListener("resize", layout);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", layout);
+      images.forEach((img) => img.removeEventListener("load", layout));
+    };
+  }, [items]);
+
   const feature = featureFirst ? items[0] : undefined;
   const gridItems = featureFirst ? items.slice(1) : items;
   const activeItem = activeIndex === null ? null : items[activeIndex];
@@ -144,19 +194,19 @@ export function GalleryGrid({
         </Reveal>
       ) : null}
 
-      {/* True CSS-columns masonry: 2 cols on mobile, up to 5 on wide
-          desktops. Photos flow down each column at their natural aspect
-          ratio, so portraits sit next to landscapes without cropping or
-          empty gaps. */}
-      <div className="columns-2 gap-3 sm:columns-3 lg:columns-4 xl:columns-5">
+      {/* Row-ordered masonry: a CSS grid with fine-grained auto-rows. Each
+          tile spans as many rows as its natural height needs, so photos keep
+          their aspect ratio (no cropping) while reading order flows by row,
+          left to right — 2 cols on mobile up to 5 on wide desktops. */}
+      <div
+        ref={gridRef}
+        className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      >
         {gridItems.map((item, index) => {
           const globalIndex = featureFirst ? index + 1 : index;
 
           return (
-            <Reveal
-              key={item.src}
-              className="mb-3 break-inside-avoid"
-            >
+            <div key={item.src} data-tile>
               <button
                 type="button"
                 className="focus-visible:ring-brand-lila group block w-full cursor-zoom-in overflow-hidden rounded-xl focus-visible:ring-2 focus-visible:outline-none"
@@ -171,7 +221,7 @@ export function GalleryGrid({
                   className="h-auto w-full rounded-xl transition duration-500 group-hover:scale-105"
                 />
               </button>
-            </Reveal>
+            </div>
           );
         })}
       </div>
