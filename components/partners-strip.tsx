@@ -25,11 +25,11 @@ export function PartnersStrip() {
         {/* Original square-format logos: mix-blend-screen drops the (black) PNG
             backgrounds so the wordmarks read white on the dark surface. Cell
             is a fixed square so all five logos render at identical visual size. */}
-        <div className="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-12 sm:mt-16 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-3 items-center gap-x-4 gap-y-4 sm:mt-16 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-5">
           {partners.map((partner) => (
             <div
               key={partner.alt}
-              className="flex h-48 items-center justify-center sm:h-56"
+              className="flex h-24 items-center justify-center sm:h-56"
             >
               <Image
                 src={partner.src}

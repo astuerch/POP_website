@@ -3,6 +3,7 @@ import {getTranslations} from "next-intl/server";
 
 import {Link} from "@/i18n/navigation";
 import type {Event} from "@/content/events";
+import {Reveal} from "@/components/reveal";
 import {cn} from "@/lib/utils";
 
 export async function EventCard({
@@ -47,13 +48,15 @@ export async function EventCard({
             />
           </>
         ) : (
-          <Image
-            fill
-            className="object-cover object-[center_58%]"
-            src={event.image.src}
-            alt={event.image.alt}
-            sizes={isHorizontal ? "(max-width:1024px) 100vw, 40vw" : "(max-width:1024px) 100vw, 33vw"}
-          />
+          <Reveal className="absolute inset-0">
+            <Image
+              fill
+              className="object-cover object-[center_58%]"
+              src={event.image.src}
+              alt={event.image.alt}
+              sizes={isHorizontal ? "(max-width:1024px) 100vw, 40vw" : "(max-width:1024px) 100vw, 33vw"}
+            />
+          </Reveal>
         )}
       </div>
       <div className="flex flex-1 flex-col p-6">

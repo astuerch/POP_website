@@ -46,10 +46,15 @@ export function AnimatedSection({
   return (
     <motion.div
       className={className}
-      initial={{opacity: 0, ...OFFSETS[variant]}}
-      whileInView={{opacity: 1, x: 0, y: 0, scale: 1}}
+      initial={{opacity: 0, filter: "blur(12px)", ...OFFSETS[variant]}}
+      whileInView={{opacity: 1, filter: "blur(0px)", x: 0, y: 0, scale: 1}}
       viewport={{once: true, amount}}
-      transition={{duration: 0.55, ease: [0.22, 1, 0.36, 1], delay}}
+      transition={{
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+        delay,
+        opacity: {duration: 0.5, delay},
+      }}
     >
       {children}
     </motion.div>

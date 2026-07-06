@@ -107,9 +107,8 @@ export const events: Event[] = [
     // Owner: paste the live registration embed URL in `registrationEmbedUrl` (or use `registrationUrl`) to go live.
     priceLabel: "Free RSVP · Registration opening soon",
     speakers: ["Speaker lineup to be announced"],
-    imageFit: "contain",
     image: {
-      src: "/images/events/event2_pic.png",
+      src: "/images/events/event2_pic.jpg",
       alt: "Artwork of a head opening into a colourful brain with hands placing social media logos.",
     },
   },

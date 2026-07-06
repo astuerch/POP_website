@@ -42,7 +42,7 @@ export async function HowPopWorks() {
                 {/* Icon panel uses a fixed height (not aspect ratio) so the
                     badge stays the same relative size whether cards are 3-up
                     horizontal or stacked vertically on narrow viewports. */}
-                <div className="from-brand-lila/25 via-brand-lila/10 relative flex h-56 items-center justify-center overflow-hidden bg-gradient-to-b to-transparent p-8 sm:h-64 lg:h-72">
+                <div className="from-brand-lila/25 via-brand-lila/10 relative flex h-64 items-center justify-center overflow-hidden bg-gradient-to-b to-transparent p-8 lg:h-72">
                   <span
                     aria-hidden="true"
                     className="font-heading text-outline absolute -top-5 -left-2 text-8xl leading-none opacity-60 select-none"
@@ -52,7 +52,7 @@ export async function HowPopWorks() {
                   {/* Icons were designed on light backgrounds (baked white
                       circles), so they sit inside a white circular badge on
                       the dark panel. */}
-                  <div className="grid h-32 w-32 place-items-center overflow-hidden rounded-full bg-white/95 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)] transition duration-500 group-hover:scale-105 sm:h-40 sm:w-40 lg:h-44 lg:w-44">
+                  <div className="grid h-44 w-44 place-items-center overflow-hidden rounded-full bg-white/95 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)] transition duration-500 group-hover:scale-105 sm:h-40 sm:w-40 lg:h-44 lg:w-44">
                     <Image
                       src={card.icon}
                       alt={card.alt}

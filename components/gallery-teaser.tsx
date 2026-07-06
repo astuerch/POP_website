@@ -4,6 +4,7 @@ import {getTranslations} from "next-intl/server";
 import type {GalleryItem} from "@/content/gallery";
 import {galleryItems} from "@/content/gallery";
 import {Link} from "@/i18n/navigation";
+import {Reveal} from "@/components/reveal";
 
 // Manually curated preview: four hero shots for the homepage teaser. The
 // fifth cell in the row is a "see full gallery" call-to-action tile.
@@ -23,28 +24,28 @@ export async function GalleryTeaser() {
 
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
-      {thumbs.map((item) => (
+      {thumbs.map((item, index) => (
         <Link
           key={item.src}
           href="/gallery"
           className="group relative block aspect-square overflow-hidden rounded-xl border border-white/10"
         >
-          <Image
-            src={item.src}
-            alt={item.alt}
-            fill
-            sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 20vw"
-            className="object-cover transition duration-500 group-hover:scale-105"
-          />
+          <Reveal className="absolute inset-0" delay={index * 0.08}>
+            <Image
+              src={item.src}
+              alt={item.alt}
+              fill
+              sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 20vw"
+              className="object-cover transition duration-500 group-hover:scale-105"
+            />
+          </Reveal>
         </Link>
       ))}
       <Link
         href="/gallery"
-        className="group border-brand-lila/40 bg-brand-lila/10 hover:bg-brand-lila/20 flex aspect-square flex-col items-center justify-center gap-2 rounded-xl border p-4 text-center transition"
+        className="text-brand-fog link-slide col-span-2 mt-1 flex items-center justify-center text-base font-semibold sm:col-span-1 sm:mt-0"
       >
-        <span className="text-brand-fog text-sm leading-snug font-semibold sm:text-base">
-          {t("galleryLink")}
-        </span>
+        {t("galleryLink")}
       </Link>
     </div>
   );

@@ -34,6 +34,15 @@ export function SiteNavbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll while the full-screen mobile menu is open.
+  useEffect(() => {
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = isOpen ? "hidden" : previous;
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [isOpen]);
+
   function handleLinkClick() {
     setIsOpen(false);
   }
@@ -72,7 +81,7 @@ export function SiteNavbar() {
           />
           <span
             aria-hidden="true"
-            className="text-brand-mist mt-1.5 flex w-full justify-between overflow-hidden text-[0.5rem] leading-none font-semibold uppercase sm:text-[0.6rem]"
+            className="text-brand-mist -mt-0.5 flex w-full justify-between overflow-hidden text-[0.5rem] leading-none font-semibold uppercase sm:text-[0.6rem]"
           >
             {tagline.split("").map((char, index) => (
               <span key={`${char}-${index}`} className="whitespace-pre">
@@ -166,35 +175,59 @@ export function SiteNavbar() {
         </div>
       </div>
 
+      {/* Full-screen mobile menu overlay. Sits below the sticky header (z-40 <
+          header z-50) so the animated burger/X stays visible to close it.
+          Large uppercase links cascade in; body scroll is locked while open. */}
       <div
         id="mobile-menu"
         className={cn(
-          "bg-brand-night overflow-hidden border-t border-white/10 transition-[max-height] duration-200 lg:hidden",
-          isOpen ? "max-h-96" : "max-h-0",
+          "bg-brand-night/98 fixed inset-0 z-40 flex flex-col backdrop-blur-xl transition-all duration-300 lg:hidden",
+          isOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0",
         )}
       >
-        <nav className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-4 sm:px-8" aria-label="Mobile primary">
-          {navLinks.map((link) => (
+        <div className="flex-1 overflow-y-auto px-6 pt-28 pb-12 sm:px-8">
+          <nav className="flex flex-col" aria-label="Mobile primary">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={handleLinkClick}
+                style={{
+                  transitionDelay: isOpen ? `${80 + index * 55}ms` : "0ms",
+                }}
+                className={cn(
+                  "font-heading border-b border-white/10 py-4 text-4xl leading-none tracking-tight uppercase transition-all duration-300 sm:text-5xl",
+                  isOpen ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
+                  isActivePath(pathname, link.href)
+                    ? "text-brand-lila"
+                    : "text-brand-fog hover:text-brand-lila-light",
+                )}
+              >
+                {t(link.key)}
+              </Link>
+            ))}
+          </nav>
+          <div
+            style={{transitionDelay: isOpen ? `${80 + navLinks.length * 55}ms` : "0ms"}}
+            className={cn(
+              "mt-10 transition-all duration-300",
+              isOpen ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
+            )}
+          >
             <Link
-              key={link.href}
-              href={link.href}
               className={cn(
-                "text-brand-mist hover:text-brand-fog rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-white/5",
-                isActivePath(pathname, link.href) && "text-brand-lila-light bg-white/10",
+                buttonClasses({variant: "primary", size: "lg"}),
+                "w-full justify-center",
               )}
+              href="/#newsletter"
               onClick={handleLinkClick}
             >
-              {t(link.key)}
+              {t("newsletter")}
             </Link>
-          ))}
-          <Link
-            className={buttonClasses({variant: "primary", size: "md"})}
-            href="/#newsletter"
-            onClick={handleLinkClick}
-          >
-            {t("newsletter")}
-          </Link>
-        </nav>
+          </div>
+        </div>
       </div>
     </header>
   );

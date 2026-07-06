@@ -7,6 +7,7 @@ import {AnimatedSection} from "@/components/animated-section";
 import {Eyebrow} from "@/components/eyebrow";
 import {EventSchema} from "@/components/json-ld";
 import {RegistrationWidget} from "@/components/registration-widget";
+import {Reveal} from "@/components/reveal";
 import {Stagger, StaggerItem} from "@/components/stagger";
 import {events, getEventBySlug} from "@/content/events";
 
@@ -90,13 +91,15 @@ export default async function EventDetailPage({
                     />
                   </>
                 ) : (
-                  <Image
-                    fill
-                    className="object-cover"
-                    src={event.heroImage?.src ?? event.image.src}
-                    alt={event.heroImage?.alt ?? event.image.alt}
-                    priority
-                  />
+                  <Reveal className="absolute inset-0">
+                    <Image
+                      fill
+                      className="object-cover"
+                      src={event.heroImage?.src ?? event.image.src}
+                      alt={event.heroImage?.alt ?? event.image.alt}
+                      priority
+                    />
+                  </Reveal>
                 )}
               </div>
 
