@@ -79,7 +79,8 @@
     "registrationLiveBody": "Register through the official POP event page.",
     "registrationRegisterRsvp": "Register / RSVP",
     "registrationBuyTickets": "Buy tickets",
-    "registrationIframeTitle": "Infomaniak event registration"
+    "registrationIframeTitle": "Infomaniak event registration",
+    "schedule": "Event flow"
   },
   "about": {
     "eyebrow": "About POP",

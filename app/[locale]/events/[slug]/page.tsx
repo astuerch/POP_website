@@ -69,7 +69,13 @@ export default async function EventDetailPage({
           <AnimatedSection amount={0.05}>
             <article className="space-y-8">
               <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
-                <Image fill className="object-cover" src={event.image.src} alt={event.image.alt} priority />
+                <Image
+                  fill
+                  className="object-cover"
+                  src={event.heroImage?.src ?? event.image.src}
+                  alt={event.heroImage?.alt ?? event.image.alt}
+                  priority
+                />
               </div>
 
               <div className="space-y-5">
@@ -104,6 +110,11 @@ export default async function EventDetailPage({
                 <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight">
                   {t("about")}
                 </h2>
+                {event.aboutHeading ? (
+                  <p className="font-serif text-brand-fog mt-5 text-2xl leading-snug italic sm:text-3xl">
+                    {event.aboutHeading}
+                  </p>
+                ) : null}
                 <div className="text-brand-mist mt-4 space-y-4 text-base leading-8">
                   {event.description.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
@@ -111,15 +122,88 @@ export default async function EventDetailPage({
                 </div>
               </section>
 
+              {event.schedule ? (
+                <section>
+                  <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight">
+                    {t("schedule")}
+                  </h2>
+                  <ol className="mt-6 space-y-6">
+                    {event.schedule.map((item) => (
+                      <li
+                        key={item.title}
+                        className="border-brand-lila/30 border-l-2 pl-5"
+                      >
+                        <div className="flex flex-wrap items-baseline gap-x-3">
+                          <span className="text-brand-lila-light text-sm font-semibold tracking-wide uppercase">
+                            {item.time}
+                          </span>
+                          <span className="text-brand-fog text-lg font-bold">
+                            {item.title}
+                          </span>
+                        </div>
+                        {item.details ? (
+                          <ul className="text-brand-mist mt-2 space-y-1 text-base leading-7">
+                            {item.details.map((detail) => (
+                              <li key={detail}>{detail}</li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              ) : null}
+
               <section>
                 <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight">
                   {t("hosts")}
                 </h2>
-                <ul className="text-brand-mist marker:text-brand-lila mt-4 list-disc space-y-3 pl-5 text-base leading-8">
-                  {event.speakers.map((speaker) => (
-                    <li key={speaker}>{speaker}</li>
-                  ))}
-                </ul>
+                {event.lineup ? (
+                  <div className="mt-6 space-y-10">
+                    {event.lineup.map((group) => (
+                      <div key={group.title} className="space-y-5">
+                        <Eyebrow>{group.title}</Eyebrow>
+                        <div className="grid gap-6 sm:grid-cols-2">
+                          {group.people.map((person) => (
+                            <article
+                              key={person.name}
+                              className="bg-brand-surface flex flex-col overflow-hidden rounded-3xl border border-white/10"
+                            >
+                              <div className="bg-brand-lila-dark/40 relative aspect-square">
+                                <Image
+                                  fill
+                                  className="object-cover"
+                                  src={person.image}
+                                  alt={person.name}
+                                  sizes="(max-width:640px) 100vw, 40vw"
+                                />
+                              </div>
+                              <div className="flex flex-1 flex-col p-6">
+                                <h3 className="text-brand-fog text-xl font-bold">
+                                  {person.name}
+                                </h3>
+                                <p className="text-brand-lila-light mt-1 text-sm font-semibold">
+                                  {person.talkTitle
+                                    ? `“${person.talkTitle}”`
+                                    : person.role}
+                                </p>
+                                <p className="text-brand-mist mt-3 text-sm leading-7">
+                                  {person.bio}
+                                </p>
+                              </div>
+                            </article>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <ul className="text-brand-mist marker:text-brand-lila mt-4 list-disc space-y-3 pl-5 text-base leading-8">
+                    {event.speakers.map((speaker) => (
+                      <li key={speaker}>{speaker}</li>
+                    ))}
+                  </ul>
+                )}
               </section>
             </article>
           </AnimatedSection>
