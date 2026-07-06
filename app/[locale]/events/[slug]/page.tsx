@@ -70,13 +70,34 @@ export default async function EventDetailPage({
           <AnimatedSection amount={0.05}>
             <article className="space-y-8">
               <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
-                <Image
-                  fill
-                  className="object-cover"
-                  src={event.heroImage?.src ?? event.image.src}
-                  alt={event.heroImage?.alt ?? event.image.alt}
-                  priority
-                />
+                {!event.heroImage && event.imageFit === "contain" ? (
+                  <>
+                    <Image
+                      fill
+                      aria-hidden
+                      className="scale-110 object-cover opacity-40 blur-2xl"
+                      src={event.image.src}
+                      alt=""
+                      sizes="(max-width:1280px) 100vw, 800px"
+                    />
+                    <Image
+                      fill
+                      className="object-contain"
+                      src={event.image.src}
+                      alt={event.image.alt}
+                      sizes="(max-width:1280px) 100vw, 800px"
+                      priority
+                    />
+                  </>
+                ) : (
+                  <Image
+                    fill
+                    className="object-cover"
+                    src={event.heroImage?.src ?? event.image.src}
+                    alt={event.heroImage?.alt ?? event.image.alt}
+                    priority
+                  />
+                )}
               </div>
 
               <div className="space-y-5">

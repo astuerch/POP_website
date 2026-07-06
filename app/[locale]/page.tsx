@@ -12,6 +12,7 @@ import {HowPopWorks} from "@/components/how-pop-works";
 import {Marquee} from "@/components/marquee";
 import {NewsletterForm} from "@/components/newsletter-form";
 import {Stagger, StaggerItem} from "@/components/stagger";
+import {StatementBand} from "@/components/statement-band";
 import {TeamCard} from "@/components/team-card";
 import {buttonClasses} from "@/components/ui/button";
 import {upcomingEvents} from "@/content/events";
@@ -37,6 +38,7 @@ export default async function HomePage() {
   const tNewsletter = await getTranslations("newsletter");
   const tAbout = await getTranslations("about");
   const tCountdown = await getTranslations("countdown");
+  const tBand = await getTranslations("band");
 
   return (
     <div>
@@ -120,7 +122,11 @@ export default async function HomePage() {
             <EventCard event={nextEvent} orientation="horizontal" />
           </section>
         </AnimatedSection>
+      </div>
 
+      <StatementBand quote={tBand("quote")} kicker={tBand("kicker")} />
+
+      <div className="mx-auto max-w-7xl space-y-16 px-6 py-14 sm:space-y-28 sm:px-8 sm:py-20 lg:space-y-32 lg:px-12 lg:py-28">
         <AnimatedSection delay={0.15} variant="scale">
           <section className="relative space-y-10">
             <Glow className="top-1/2 left-1/2 hidden h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 sm:block" />

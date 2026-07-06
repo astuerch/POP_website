@@ -74,12 +74,12 @@
     "registrationClosedTitle": "Anmeldung geschlossen",
     "registrationClosedBody": "Dieses Event ist jetzt Teil des POP-Archivs. Zusammenfassung und Galeriefotos folgen in Kürze.",
     "registrationOpeningSoonTitle": "Anmeldung öffnet bald",
-    "registrationOpeningSoonBody": "Wir finalisieren gerade die Infomaniak-Anmeldeseite für dieses Event. Über den Newsletter erfährst du als Erstes, sobald die RSVP live ist.",
+    "registrationOpeningSoonBody": "Wir finalisieren gerade die Details zu diesem Event. Melde dich für den Newsletter an – wir teilen den RSVP-Link zuerst.",
     "registrationOpeningSoonCta": "Newsletter abonnieren und als Erste:r informiert werden",
     "registrationLiveBody": "Die Anmeldung läuft über die offizielle POP-Eventseite.",
     "registrationRegisterRsvp": "Anmelden / RSVP",
     "registrationBuyTickets": "Tickets kaufen",
-    "registrationIframeTitle": "Infomaniak Event-Anmeldung",
+    "registrationIframeTitle": "Event-Anmeldung",
     "schedule": "Programm"
   },
   "about": {
@@ -161,5 +161,9 @@
       "title": "Kontakt",
       "description": "Kontaktiere POP Impact Lab für Partnerschaften, Venues und Eventanfragen."
     }
+  },
+  "band": {
+    "kicker": "Warum POP",
+    "quote": "Wir holen die Wissenschaft aus dem Hörsaal – dorthin, wo du ohnehin gerne bist."
   }
 }

@@ -64,7 +64,7 @@ export async function RegistrationWidget({event}: {event: Event}) {
 
       {hasEmbed ? (
         <div className="mt-6 overflow-hidden rounded-xl border border-white/15 bg-white">
-          {/* Owner note: paste the Infomaniak iframe/embed URL in content/events.ts -> registrationEmbedUrl. */}
+          {/* Owner note: paste the registration iframe/embed URL in content/events.ts -> registrationEmbedUrl. */}
           <iframe
             title={t("registrationIframeTitle")}
             src={event.registrationEmbedUrl}

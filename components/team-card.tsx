@@ -67,9 +67,9 @@ export function TeamCard({
           {displayName}
         </h3>
         {member.title ? (
-          <p className="text-brand-fog mt-4 text-lg font-bold">{member.title}</p>
+          <p className="text-brand-fog mt-4 text-base font-bold">{member.title}</p>
         ) : null}
-        <p className="text-brand-mist mt-4 max-w-sm text-base leading-7">
+        <p className="text-brand-mist mx-auto mt-4 max-w-xs text-sm leading-6">
           {member.longBio ?? member.bio}
         </p>
         {member.linkedin || member.instagram ? (

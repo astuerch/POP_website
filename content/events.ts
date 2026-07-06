@@ -71,6 +71,12 @@ export interface Event {
   schedule?: EventScheduleItem[];
   /** Optional grouped line-up with portraits and bios. */
   lineup?: EventLineupGroup[];
+  /**
+   * How the card/hero image is fitted. "contain" shows the whole image
+   * (e.g. portrait artwork) over a blurred fill so nothing is cropped;
+   * defaults to "cover".
+   */
+  imageFit?: "cover" | "contain";
   image: {
     src: string;
     alt: string;
@@ -98,12 +104,13 @@ export const events: Event[] = [
     city: "Zürich",
     status: "upcoming",
     registrationType: "infomaniak-free",
-    // Owner: paste the live Infomaniak embed URL in `registrationEmbedUrl` (or use `registrationUrl`) to go live.
+    // Owner: paste the live registration embed URL in `registrationEmbedUrl` (or use `registrationUrl`) to go live.
     priceLabel: "Free RSVP · Registration opening soon",
     speakers: ["Speaker lineup to be announced"],
+    imageFit: "contain",
     image: {
       src: "/images/events/event2_pic.png",
-      alt: "Participants listening and speaking during a POP Impact Lab event.",
+      alt: "Artwork of a head opening into a colourful brain with hands placing social media logos.",
     },
   },
   {

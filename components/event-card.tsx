@@ -24,17 +24,37 @@ export async function EventCard({
     >
       <div
         className={cn(
-          "bg-brand-lila-dark/40 relative aspect-[16/10]",
+          "bg-brand-lila-dark/40 relative aspect-[16/10] overflow-hidden",
           isHorizontal && "md:aspect-auto md:w-[42%] md:shrink-0 md:self-stretch",
         )}
       >
-        <Image
-          fill
-          className="object-cover object-[center_58%]"
-          src={event.image.src}
-          alt={event.image.alt}
-          sizes={isHorizontal ? "(max-width:1024px) 100vw, 40vw" : "(max-width:1024px) 100vw, 33vw"}
-        />
+        {event.imageFit === "contain" ? (
+          <>
+            <Image
+              fill
+              aria-hidden
+              className="scale-110 object-cover opacity-40 blur-2xl"
+              src={event.image.src}
+              alt=""
+              sizes={isHorizontal ? "(max-width:1024px) 100vw, 40vw" : "(max-width:1024px) 100vw, 33vw"}
+            />
+            <Image
+              fill
+              className="object-contain"
+              src={event.image.src}
+              alt={event.image.alt}
+              sizes={isHorizontal ? "(max-width:1024px) 100vw, 40vw" : "(max-width:1024px) 100vw, 33vw"}
+            />
+          </>
+        ) : (
+          <Image
+            fill
+            className="object-cover object-[center_58%]"
+            src={event.image.src}
+            alt={event.image.alt}
+            sizes={isHorizontal ? "(max-width:1024px) 100vw, 40vw" : "(max-width:1024px) 100vw, 33vw"}
+          />
+        )}
       </div>
       <div className="flex flex-1 flex-col p-6">
         <div className="space-y-4">
