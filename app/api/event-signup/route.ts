@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     ["source", "SOURCE"],
   ];
 
-  const attributes: Record<string, string> = {};
+  const attributes: Record<string, string | number> = {};
   for (const [key, attr] of fieldMap) {
     const value = str(body[key]);
     if (value && !attributes[attr]) {
@@ -77,6 +77,42 @@ export async function POST(request: Request) {
   }
   if (!attributes.SOURCE) {
     attributes.SOURCE = "event";
+  }
+
+  // Which event this registration is for (slug or name). When present, append
+  // it to the contact's EVENTS_ATTENDED history and set EVENT_COUNT to the
+  // number of distinct events. Brevo has no "append" — so we read the current
+  // value first, merge, then write it back (create these as Normal attributes:
+  // EVENTS_ATTENDED = Text, EVENT_COUNT = Number).
+  const event = str(body.event) || str(body.eventSlug) || str(body.eventName);
+  if (event) {
+    let attended: string[] = [];
+    try {
+      const existing = await fetch(
+        `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
+        {headers: {accept: "application/json", "api-key": apiKey}, cache: "no-store"},
+      );
+      if (existing.ok) {
+        const contact = (await existing.json()) as {
+          attributes?: Record<string, unknown>;
+        };
+        const raw = contact.attributes?.EVENTS_ATTENDED;
+        if (typeof raw === "string" && raw.trim()) {
+          attended = raw
+            .split(",")
+            .map((entry) => entry.trim())
+            .filter(Boolean);
+        }
+      }
+    } catch {
+      // Treat an unreadable/absent contact as a fresh history.
+    }
+
+    if (!attended.some((entry) => entry.toLowerCase() === event.toLowerCase())) {
+      attended.push(event);
+    }
+    attributes.EVENTS_ATTENDED = attended.join(", ");
+    attributes.EVENT_COUNT = attended.length;
   }
 
   try {
