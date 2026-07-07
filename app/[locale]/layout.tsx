@@ -84,6 +84,11 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
+      // Tells Next.js the smooth scrolling in globals.css is intentional, so the
+      // router temporarily disables it when navigating between pages. Without
+      // this, the scroll-to-top on navigation animates and gets cut short,
+      // leaving the new page slightly scrolled down under the sticky header.
+      data-scroll-behavior="smooth"
       className={`${anton.variable} ${nunito.variable} ${fraunces.variable}`}
     >
       <body className="bg-brand-night text-brand-fog flex min-h-screen flex-col antialiased">

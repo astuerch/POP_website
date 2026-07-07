@@ -174,7 +174,7 @@ export default async function HomePage() {
         <AnimatedSection delay={0.2}>
           <section
             id="newsletter"
-            className="border-brand-lila/40 relative isolate overflow-hidden rounded-3xl border-2 p-8 text-white shadow-[0_0_70px_-20px_rgba(182,161,210,0.55)] ring-1 ring-white/10 sm:p-10"
+            className="border-brand-lila/40 relative isolate scroll-mt-28 overflow-hidden rounded-3xl border-2 p-8 text-white shadow-[0_0_70px_-20px_rgba(182,161,210,0.55)] ring-1 ring-white/10 sm:scroll-mt-32 sm:p-10"
           >
             <Image
               fill

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import {useLocale, useTranslations} from "next-intl";
-import {useCallback, useEffect, useState} from "react";
+import {type MouseEvent, useCallback, useEffect, useState} from "react";
 
 import {Link, usePathname, useRouter} from "@/i18n/navigation";
 import {navLinks} from "@/lib/site";
@@ -43,7 +43,7 @@ export function SiteNavbar() {
     };
   }, [isOpen]);
 
-  function handleLinkClick() {
+  function handleLinkClick(event?: MouseEvent<HTMLElement>) {
     // Unlock body scroll *synchronously* before the router navigates. While the
     // drawer is open the body is `overflow: hidden`, which freezes the current
     // scroll position; if it's still locked when the new route mounts, the
@@ -52,7 +52,11 @@ export function SiteNavbar() {
     // nudging to top) guarantees the new page starts at the very top.
     document.body.style.overflow = "";
     setIsOpen(false);
-    if (typeof window !== "undefined") {
+    // Skip the top-nudge for in-page anchors (e.g. "/#newsletter") so the
+    // browser can scroll to the target instead — its `scroll-mt` clears the
+    // sticky header.
+    const href = event?.currentTarget?.getAttribute("href") ?? "";
+    if (typeof window !== "undefined" && !href.includes("#")) {
       window.scrollTo(0, 0);
     }
   }
