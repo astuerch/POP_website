@@ -66,7 +66,7 @@ export default async function EventDetailPage({
   return (
     <div>
       <EventSchema event={event} />
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
         <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
           <AnimatedSection amount={0.05}>
             <article className="space-y-8">
@@ -111,7 +111,9 @@ export default async function EventDetailPage({
                 <p className="text-brand-lila-light text-base font-medium">
                   {event.venue} · {event.location}
                 </p>
-                <p className="text-brand-mist text-lg leading-8">{event.summary}</p>
+                <p className="text-brand-mist text-base leading-6 sm:text-lg sm:leading-8">
+                  {event.summary}
+                </p>
               </div>
 
               <div className="bg-brand-surface grid gap-4 rounded-3xl border border-white/10 p-6 sm:grid-cols-3">
@@ -140,7 +142,7 @@ export default async function EventDetailPage({
                     {event.aboutHeading}
                   </p>
                 ) : null}
-                <div className="text-brand-mist mt-4 space-y-4 text-base leading-8">
+                <div className="text-brand-mist mt-4 space-y-4 text-base leading-7 sm:leading-8">
                   {event.description.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
@@ -223,7 +225,7 @@ export default async function EventDetailPage({
                     ))}
                   </div>
                 ) : (
-                  <ul className="text-brand-mist marker:text-brand-lila mt-4 list-disc space-y-3 pl-5 text-base leading-8">
+                  <ul className="text-brand-mist marker:text-brand-lila mt-4 list-disc space-y-3 pl-5 text-base leading-7 sm:leading-8">
                     {event.speakers.map((speaker) => (
                       <li key={speaker}>{speaker}</li>
                     ))}

@@ -15,7 +15,10 @@ export async function getPageMetadata(
   const description = t("description");
 
   return {
-    title,
+    // The home page carries the full brand line ("POP Impact Lab — …"), so it
+    // must bypass the "%s | POP Impact Lab" template from the locale layout.
+    // Every other page keeps the template.
+    title: key === "home" ? {absolute: title} : title,
     description,
     openGraph: {
       title,

@@ -1,5 +1,16 @@
+// Canonical site origin used for metadata (og:image, sitemap, robots, …).
+// OWNER: once the final domain is live, set NEXT_PUBLIC_SITE_URL in the
+// Vercel project settings (e.g. https://popimpactlab.ch) — it always wins.
+// Until then we fall back to the Vercel-provided production/deployment URL
+// so social previews never point at localhost, and finally to localhost for
+// local development.
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
 
 export const siteConfig = {
   name: "POP Impact Lab",

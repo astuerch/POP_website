@@ -28,7 +28,7 @@ export default async function GalleryPage() {
 
   return (
     <div>
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
         <AnimatedSection>
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
         </AnimatedSection>
@@ -45,7 +45,7 @@ export default async function GalleryPage() {
           />
         </div>
 
-        <div className="mt-16 space-y-24 sm:mt-24 sm:space-y-32">
+        <div className="mt-10 space-y-16 sm:mt-24 sm:space-y-32">
           {galleryEvents.map((event, index) => (
             <section
               key={event.id}

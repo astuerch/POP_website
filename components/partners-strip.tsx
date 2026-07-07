@@ -18,7 +18,7 @@ export function PartnersStrip() {
 
   return (
     <section className="border-y border-white/10">
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
         <h2 className="text-brand-fog text-center text-2xl font-semibold tracking-[0.4em] uppercase sm:text-3xl">
           {t("eyebrow")}
         </h2>
@@ -36,6 +36,7 @@ export function PartnersStrip() {
                 alt={partner.alt}
                 width={partner.width}
                 height={partner.height}
+                sizes="(max-width: 640px) 96px, 224px"
                 className="h-full w-auto max-w-full object-contain opacity-90 mix-blend-screen"
               />
             </div>

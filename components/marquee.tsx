@@ -26,13 +26,13 @@ export async function Marquee() {
         <span key={`${item}-${index}`} className="flex shrink-0 items-center">
           <span
             className={cn(
-              "font-heading text-4xl whitespace-nowrap uppercase sm:text-5xl",
+              "font-heading text-3xl whitespace-nowrap uppercase sm:text-5xl",
               index % 2 === 1 ? "text-outline" : "text-brand-fog",
             )}
           >
             {item}
           </span>
-          <span className="text-brand-lila mx-5 text-2xl sm:text-3xl">×</span>
+          <span className="text-brand-lila mx-4 text-xl sm:mx-5 sm:text-3xl">×</span>
         </span>
       ))}
     </div>

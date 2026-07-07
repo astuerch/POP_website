@@ -206,7 +206,7 @@ export const events: Event[] = [
       },
     ],
     image: {
-      src: "/images/events/event1_pic.png",
+      src: "/images/events/event1_pic.jpg",
       alt: "Guests gathered at a POP Impact Lab event in Zürich.",
     },
   },

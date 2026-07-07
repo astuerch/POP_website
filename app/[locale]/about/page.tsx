@@ -28,7 +28,7 @@ export default async function AboutPage() {
 
   return (
     <div>
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-24">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-24">
         {/* Intro: manifesto statement + supporting text on the left, event
             photograph on the right. The big "about POP" title is dropped —
             only the small lilac eyebrow remains. */}
@@ -52,7 +52,7 @@ export default async function AboutPage() {
                 ))}
               </div>
               <div className="bg-brand-lila h-0.5 w-16 rounded-full" />
-              <div className="text-brand-mist max-w-xl space-y-4 text-lg leading-8">
+              <div className="text-brand-mist max-w-xl space-y-4 text-base leading-6 sm:text-lg sm:leading-8">
                 {t("para2")
                   .split("\n\n")
                   .map((paragraph) => (
@@ -84,7 +84,7 @@ export default async function AboutPage() {
                 {t("teamName")}
               </h2>
               <Eyebrow>{t("teamKicker")}</Eyebrow>
-              <p className="text-brand-mist mx-auto max-w-2xl text-base leading-8 sm:text-lg">
+              <p className="text-brand-mist mx-auto max-w-2xl text-base leading-6 sm:text-lg sm:leading-8">
                 {t("teamMotto")}
               </p>
             </div>

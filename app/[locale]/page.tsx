@@ -45,7 +45,7 @@ export default async function HomePage() {
 
       <Marquee />
 
-      <div className="mx-auto max-w-7xl space-y-16 px-6 py-14 sm:space-y-28 sm:px-8 sm:py-20 lg:space-y-32 lg:px-12 lg:py-28">
+      <div className="mx-auto max-w-7xl space-y-16 px-6 py-10 sm:space-y-28 sm:px-8 sm:py-20 lg:space-y-32 lg:px-12 lg:py-28">
         <HowPopWorks />
 
         <AnimatedSection delay={0.05} variant="left">
@@ -78,7 +78,7 @@ export default async function HomePage() {
                 playsInline
                 controls
                 preload="metadata"
-                poster="/images/events/event1_pic.png"
+                poster="/images/events/event1_pic.jpg"
                 aria-label="POP Impact Lab event highlights."
                 className="absolute inset-0 h-full w-full object-cover"
               >
@@ -123,7 +123,7 @@ export default async function HomePage() {
                     }}
                   />
                 ) : nextEvent?.isTentative ? (
-                  <div className="border-brand-lila/40 bg-brand-lila/10 text-brand-lila-light inline-flex items-center gap-2 self-start rounded-full border px-4 py-2 text-sm font-semibold">
+                  <div className="border-brand-lila/40 bg-brand-lila/10 text-brand-lila-light inline-flex items-center gap-2 self-start rounded-full border px-3 py-1.5 text-xs font-semibold sm:px-4 sm:py-2 sm:text-sm">
                     <span
                       aria-hidden="true"
                       className="bg-brand-lila inline-block h-1.5 w-1.5 animate-pulse rounded-full"
@@ -148,7 +148,7 @@ export default async function HomePage() {
                 {tAbout("teamName")}
               </h2>
               <Eyebrow>{tAbout("teamKicker")}</Eyebrow>
-              <p className="text-brand-mist mx-auto max-w-2xl text-base leading-8 sm:text-lg">
+              <p className="text-brand-mist mx-auto max-w-2xl text-base leading-6 sm:text-lg sm:leading-8">
                 {tAbout("teamMotto")}
               </p>
             </div>
@@ -193,7 +193,7 @@ export default async function HomePage() {
                 <h2 className="font-serif text-4xl tracking-tight italic sm:text-5xl">
                   {tNewsletter("headline")}
                 </h2>
-                <p className="text-base leading-8 whitespace-pre-line text-white/80 sm:text-lg">
+                <p className="text-base leading-6 whitespace-pre-line text-white/80 sm:text-lg sm:leading-8">
                   {tNewsletter("subhead")}
                 </p>
               </div>

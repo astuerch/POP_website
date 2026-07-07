@@ -66,13 +66,15 @@ export function HeroIntro({
     return (
       <div className="max-w-4xl space-y-8">
         <div className="space-y-5">
-          <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold tracking-[0.2em] uppercase backdrop-blur">
+          <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold tracking-[0.2em] uppercase backdrop-blur sm:px-4 sm:py-2 sm:text-sm">
             {eyebrow}
           </p>
           <h1 className={headlineClasses}>
             {headlineStart} <span className="text-outline">{headlineAccent}</span>
           </h1>
-          <p className="max-w-2xl text-lg leading-8 text-white/85 sm:text-xl">{subhead}</p>
+          <p className="max-w-[36ch] text-base leading-6 text-white/80 sm:max-w-2xl sm:text-xl sm:leading-8 sm:text-white/85">
+            {subhead}
+          </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">{ctas}</div>
         {chip ? <div>{chip}</div> : null}
@@ -92,7 +94,7 @@ export function HeroIntro({
       <div className="space-y-5">
         <motion.p
           variants={blockVariants}
-          className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold tracking-[0.2em] uppercase backdrop-blur"
+          className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold tracking-[0.2em] uppercase backdrop-blur sm:px-4 sm:py-2 sm:text-sm"
         >
           {eyebrow}
         </motion.p>
@@ -117,7 +119,7 @@ export function HeroIntro({
         </motion.h1>
         <motion.p
           variants={blockVariants}
-          className="max-w-2xl text-lg leading-8 text-white/85 sm:text-xl"
+          className="max-w-[36ch] text-base leading-6 text-white/80 sm:max-w-2xl sm:text-xl sm:leading-8 sm:text-white/85"
         >
           {subhead}
         </motion.p>

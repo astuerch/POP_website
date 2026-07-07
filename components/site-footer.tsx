@@ -40,7 +40,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-brand-ink/40 border-t border-white/10">
       {showFinale ? (
-        <div className="relative overflow-hidden border-b border-white/10 px-6 py-16 text-center sm:py-20">
+        <div className="relative overflow-hidden border-b border-white/10 px-6 py-10 text-center sm:py-20">
           <Glow className="top-1/2 left-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2" />
           <p className="font-heading text-brand-fog relative text-5xl leading-none tracking-tight uppercase sm:text-7xl">
             {finaleStart} <span className="text-brand-lila">{finaleLast}</span>

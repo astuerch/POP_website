@@ -39,7 +39,7 @@ export async function Hero() {
       <div className="from-brand-night/90 absolute inset-0 bg-gradient-to-r via-black/60 to-black/25" />
       <div className="to-brand-night/60 absolute inset-0 bg-gradient-to-b from-transparent via-transparent" />
       <Glow className="-top-32 -right-24 hidden h-[500px] w-[500px] sm:block" />
-      <div className="relative mx-auto max-w-7xl px-6 py-16 sm:px-8 sm:py-24 lg:px-12 lg:py-32">
+      <div className="relative mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-24 lg:px-12 lg:py-32">
         <HeroIntro
           eyebrow={t("eyebrow")}
           headlineStart={t("headlineStart")}

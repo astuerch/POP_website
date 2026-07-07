@@ -58,6 +58,7 @@ export async function HowPopWorks() {
                       alt={card.alt}
                       width={534}
                       height={534}
+                      sizes="176px"
                       className="h-full w-full object-contain"
                     />
                   </div>

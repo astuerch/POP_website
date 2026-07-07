@@ -15,7 +15,7 @@ export function LegalPage({
 }) {
   return (
     <div>
-      <div className="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="mx-auto max-w-5xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
         <AnimatedSection>
           <SectionHeading eyebrow={eyebrow} title={title} description={summary} />
         </AnimatedSection>
@@ -27,7 +27,7 @@ export function LegalPage({
                 <h2 className="font-heading text-brand-fog text-2xl leading-none tracking-tight sm:text-3xl">
                   {section.heading}
                 </h2>
-                <div className="text-brand-mist mt-4 space-y-4 text-base leading-8">
+                <div className="text-brand-mist mt-4 space-y-4 text-base leading-7 sm:leading-8">
                   {section.paragraphs?.map((paragraph, index) => (
                     <p key={`${section.heading}-paragraph-${index}`}>{paragraph}</p>
                   ))}

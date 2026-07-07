@@ -78,7 +78,7 @@ export function SiteNavbar() {
               width={600}
               height={300}
               priority
-              className="h-16 w-auto sm:h-20"
+              className="h-14 w-auto sm:h-20"
             />
             <span
               aria-hidden="true"

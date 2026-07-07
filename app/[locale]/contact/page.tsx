@@ -42,7 +42,7 @@ export default async function ContactPage() {
 
   return (
     <div>
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-24">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-24">
         <AnimatedSection>
           <div className="grid gap-10 md:grid-cols-2 md:items-start md:gap-14">
             {/* Highlighted left panel: the POP network texture behind the
@@ -64,7 +64,7 @@ export default async function ContactPage() {
                   <h1 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl">
                     {t("title")}
                   </h1>
-                  <p className="text-brand-mist max-w-md text-lg leading-8">
+                  <p className="text-brand-mist max-w-md text-base leading-6 sm:text-lg sm:leading-8">
                     {t("description")}
                   </p>
                 </div>
@@ -78,7 +78,7 @@ export default async function ContactPage() {
                       <dt>
                         <Eyebrow className="text-xs">{item.label}</Eyebrow>
                       </dt>
-                      <dd className="text-brand-fog text-lg">
+                      <dd className="text-brand-fog text-base sm:text-lg">
                         {item.href ? (
                           <a
                             className="hover:text-brand-lila-light transition"

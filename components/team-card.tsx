@@ -59,7 +59,9 @@ export function TeamCard({
             fill
             className="object-cover grayscale"
             src={member.roundImage ?? member.image.src}
-            alt={member.image.alt}
+            // Decorative: the member's name and role are rendered as adjacent
+            // text, so a descriptive alt would be read out twice.
+            alt=""
             sizes="(max-width:640px) 60vw, 240px"
           />
         </div>
@@ -98,7 +100,8 @@ export function TeamCard({
             fill
             className="object-cover grayscale transition duration-300 group-hover:grayscale-0"
             src={member.roundImage ?? member.image.src}
-            alt={member.image.alt}
+            // Decorative: name/role text sits directly below the portrait.
+            alt=""
             sizes="(max-width:640px) 55vw, 224px"
           />
         </div>
@@ -118,7 +121,9 @@ export function TeamCard({
           fill
           className="object-cover"
           src={member.image.src}
-          alt={member.image.alt}
+          // Decorative: name/role text sits directly below the portrait.
+          alt=""
+          sizes="(max-width:640px) 100vw, 33vw"
         />
       </div>
       <div className="mt-6 space-y-3">

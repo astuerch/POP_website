@@ -22,7 +22,7 @@ export default async function EventsPage() {
 
   return (
     <div>
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
         <AnimatedSection>
           <Eyebrow>{t("eyebrow")}</Eyebrow>
         </AnimatedSection>

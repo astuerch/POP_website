@@ -22,7 +22,7 @@ export function SectionHeading({
           {title}
         </h2>
         {description ? (
-          <p className="text-brand-mist max-w-3xl text-base leading-8 sm:text-lg">
+          <p className="text-brand-mist max-w-3xl text-base leading-6 sm:text-lg sm:leading-8">
             {description}
           </p>
         ) : null}
