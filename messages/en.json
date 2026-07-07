@@ -54,7 +54,9 @@
     "placeholder": "Email address",
     "button": "Subscribe",
     "success": "Thanks for stepping into the conversation.",
-    "loading": "Submitting..."
+    "loading": "Submitting...",
+    "firstNamePlaceholder": "First name",
+    "surnamePlaceholder": "Surname"
   },
   "partners": {
     "eyebrow": "Collab"
@@ -128,7 +130,9 @@
     "lastNameLabel": "Last name",
     "firstNamePlaceholder": "First name",
     "lastNamePlaceholder": "Last name",
-    "subscribeLabel": "Yes, subscribe me to the newsletter."
+    "subscribeLabel": "Yes, subscribe me to the newsletter.",
+    "success": "Thanks — your message is on its way. We'll be in touch soon.",
+    "error": "Something went wrong. Please email us directly at popimpactlab@gmail.com."
   },
   "footer": {
     "finale": "See you at the next one.",

@@ -54,7 +54,9 @@
     "placeholder": "E-Mail-Adresse",
     "button": "Abonnieren",
     "success": "Danke — wir sehen uns im Gespräch.",
-    "loading": "Wird gesendet..."
+    "loading": "Wird gesendet...",
+    "firstNamePlaceholder": "Vorname",
+    "surnamePlaceholder": "Nachname"
   },
   "partners": {
     "eyebrow": "Collab"
@@ -128,7 +130,9 @@
     "lastNameLabel": "Nachname",
     "firstNamePlaceholder": "Vorname",
     "lastNamePlaceholder": "Nachname",
-    "subscribeLabel": "Ja, ich möchte den Newsletter abonnieren."
+    "subscribeLabel": "Ja, ich möchte den Newsletter abonnieren.",
+    "success": "Danke — deine Nachricht ist unterwegs. Wir melden uns bald.",
+    "error": "Etwas ist schiefgelaufen. Schreib uns direkt an popimpactlab@gmail.com."
   },
   "footer": {
     "finale": "Bis zum nächsten Mal.",

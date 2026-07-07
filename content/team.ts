@@ -41,8 +41,8 @@ export const team: TeamMember[] = [
   },
   {
     name: "Jess Simon",
-    role: "Community Architect & Media Strategist",
-    org: "ex-Forbes",
+    role: "Community Architect &",
+    org: "Media Strategist",
     title: "Community Architect & Media Strategist",
     bio: "Jess brings editorial and network-building experience that helps every POP event feel bold, clear, and easy to share.",
     longBio:
@@ -50,7 +50,7 @@ export const team: TeamMember[] = [
     focus: "Building bridges between research, storytelling, and public curiosity.",
     image: {
       src: "/images/team/pic-jess.png",
-      alt: "Jess Simon, Media & Networks, ex-Forbes",
+      alt: "Jess Simon, Community Architect & Media Strategist",
     },
     roundImage: "/images/team/pic-jess-round.png",
     linkedin: "https://www.linkedin.com/in/jessica-simon-79a42498/",
