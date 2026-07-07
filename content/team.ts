@@ -41,9 +41,9 @@ export const team: TeamMember[] = [
   },
   {
     name: "Jess Simon",
-    role: "Media & Networks",
+    role: "Community Architect & Media Strategist",
     org: "ex-Forbes",
-    title: "Network Architect & Media Strategist",
+    title: "Community Architect & Media Strategist",
     bio: "Jess brings editorial and network-building experience that helps every POP event feel bold, clear, and easy to share.",
     longBio:
       "Jess builds networks at the intersection of media and culture, with experience managing communities of over 5,000 people. With a background at Forbes, she focuses on public-facing storytelling and has moderated events designed to spark collaboration beyond traditional institutional settings.",

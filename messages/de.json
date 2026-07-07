@@ -50,7 +50,7 @@
   "newsletter": {
     "eyebrow": "Newsletter · Immer auf dem Laufenden",
     "headline": "Möchtest du dabei sein?",
-    "subhead": "Frühzeitiger Zugang zu Events, mutige Fragen, kein Spam.\nNur Denkanstöße.",
+    "subhead": "Frühzeitiger Zugang zu Events, mutige Fragen, kein Spam.\nNur Denkanstösse.",
     "placeholder": "E-Mail-Adresse",
     "button": "Abonnieren",
     "success": "Danke — wir sehen uns im Gespräch.",
@@ -90,7 +90,7 @@
     "para2": "POP Impact Lab übersetzt komplexe Forschung in öffentlichen Dialog. Wir bringen bahnbrechende Themen in Räume, wo Menschen sich bereits treffen.\n\nKein Fachjargon. Kein intellektuelles Gehabe. Keine akademische Distanz. Nur echte Fragen. Und Raum zum Denken.\n\nWir arbeiten mit jungen Forschern von ETH Zürich und UZH zusammen, die möchten, dass ihre Arbeit über die Wissenschaft hinaus wirkt. Denn Wissen sollte nicht hinter verschlossenen Türen bleiben. Die Öffentlichkeit verdient Zugang zu den Ideen, die ihre Zukunft prägen.",
     "teamTitle": "Unser Team",
     "teamSubtitle": "Drei Köpfe. Eine Mission: Wissenschaft für die Gesellschaft öffnen.",
-    "teamMotto": "Drei Frauen, verschiedene Kulturen, eine gemeinsame Weigerung: die Wissenschaft, die unsere Zukunft prägt, außer Reichweite zu lassen.",
+    "teamMotto": "Drei Frauen, verschiedene Kulturen, eine gemeinsame Weigerung: die Wissenschaft, die unsere Zukunft prägt, ausser Reichweite zu lassen.",
     "readStory": "Unsere Geschichte lesen",
     "teamName": "Das Team",
     "teamKicker": "Wer wir sind"
@@ -99,7 +99,7 @@
     "eyebrow": "Galerie",
     "title": "Event-Impressionen",
     "description": "Ein Raum voller Neugier, unterschiedlicher Perspektiven und echter Gespräche. So sehen POP Impact Lab Events aus.",
-    "lightboxClose": "Schließen",
+    "lightboxClose": "Schliessen",
     "lightboxPrev": "Vorheriges Bild",
     "lightboxNext": "Nächstes Bild",
     "morePhotos": "+{count} weitere"

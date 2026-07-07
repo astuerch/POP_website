@@ -44,7 +44,17 @@ export function SiteNavbar() {
   }, [isOpen]);
 
   function handleLinkClick() {
+    // Unlock body scroll *synchronously* before the router navigates. While the
+    // drawer is open the body is `overflow: hidden`, which freezes the current
+    // scroll position; if it's still locked when the new route mounts, the
+    // router's scroll-to-top is blocked and the page opens scrolled down — so
+    // its top eyebrow sits hidden behind the sticky header. Restoring here (and
+    // nudging to top) guarantees the new page starts at the very top.
+    document.body.style.overflow = "";
     setIsOpen(false);
+    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
+    }
   }
 
   const handleLocaleSwitch = useCallback(() => {
