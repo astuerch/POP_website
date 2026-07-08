@@ -100,6 +100,23 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
+
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-6 py-6 sm:px-8 lg:px-12">
+          <p className="text-brand-mist text-center text-sm sm:text-left">
+            © {new Date().getFullYear()}{" "}
+            <a
+              href="https://www.linkedin.com/in/astuerch/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-brand-fog transition"
+            >
+              Alessandra Stürchler
+            </a>
+            . {locale === "de" ? "Alle Rechte vorbehalten." : "All rights reserved."}
+          </p>
+        </div>
+      </div>
     </footer>
   );
 }
