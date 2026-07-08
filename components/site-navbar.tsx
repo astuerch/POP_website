@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import {useLocale, useTranslations} from "next-intl";
-import {type MouseEvent, useCallback, useEffect, useState} from "react";
+import {useTranslations} from "next-intl";
+import {type MouseEvent, useEffect, useState} from "react";
 
-import {Link, usePathname, useRouter} from "@/i18n/navigation";
+import {Link, usePathname} from "@/i18n/navigation";
 import {navLinks} from "@/lib/site";
 import {buttonClasses} from "@/components/ui/button";
+import {LanguageSwitch} from "@/components/language-switch";
 import {cn} from "@/lib/utils";
 
 /** Returns true when the given href matches the current pathname. */
@@ -16,13 +17,10 @@ function isActivePath(pathname: string, href: string): boolean {
 
 export function SiteNavbar() {
   const pathname = usePathname();
-  const router = useRouter();
-  const locale = useLocale();
   const t = useTranslations("nav");
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const nextLocale = locale === "en" ? "de" : "en";
   const tagline = t("tagline");
 
   useEffect(() => {
@@ -60,11 +58,6 @@ export function SiteNavbar() {
       window.scrollTo(0, 0);
     }
   }
-
-  const handleLocaleSwitch = useCallback(() => {
-    router.replace(pathname, {locale: nextLocale});
-    setIsOpen(false);
-  }, [router, pathname, nextLocale]);
 
   return (
     <>
@@ -129,23 +122,11 @@ export function SiteNavbar() {
             >
               {t("newsletter")}
             </Link>
-            <button
-              type="button"
-              className="text-brand-fog rounded-full border border-white/15 px-4 py-2 text-sm font-semibold transition hover:bg-white/10"
-              onClick={handleLocaleSwitch}
-            >
-              {t("switchLanguage")}
-            </button>
+            <LanguageSwitch />
           </div>
 
           <div className="flex items-center gap-3 lg:hidden">
-            <button
-              type="button"
-              className="text-brand-fog rounded-full border border-white/15 px-4 py-2 text-sm font-semibold"
-              onClick={handleLocaleSwitch}
-            >
-              {t("switchLanguage")}
-            </button>
+            <LanguageSwitch />
             <button
               type="button"
               className="text-brand-fog inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15"

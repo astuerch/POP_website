@@ -2,20 +2,18 @@
 
 import {useLocale, useTranslations} from "next-intl";
 
-import {Link, usePathname, useRouter} from "@/i18n/navigation";
+import {Link, usePathname} from "@/i18n/navigation";
 import {legalLinks, navLinks, siteConfig} from "@/lib/site";
 import {Eyebrow} from "@/components/eyebrow";
 import {Glow} from "@/components/glow";
+import {LanguageSwitch} from "@/components/language-switch";
 import {PartnersStrip} from "@/components/partners-strip";
 
 export function SiteFooter() {
   const pathname = usePathname();
-  const router = useRouter();
   const locale = useLocale();
   const tNav = useTranslations("nav");
   const tFooter = useTranslations("footer");
-
-  const nextLocale = locale === "en" ? "de" : "en";
 
   // Which top-level page are we on? `usePathname()` strips the locale, so a
   // URL like /en/events/foo comes in here as /events/foo. Legal pages and
@@ -63,13 +61,7 @@ export function SiteFooter() {
           <p className="text-brand-mist text-sm">
             {siteConfig.location} · {siteConfig.email}
           </p>
-          <button
-            type="button"
-            className="text-brand-fog link-slide text-sm font-semibold"
-            onClick={() => router.replace(pathname, {locale: nextLocale})}
-          >
-            {tFooter("switchLanguage")}
-          </button>
+          <LanguageSwitch />
         </div>
 
         <div className="grid grid-cols-2 gap-6 sm:gap-8">
