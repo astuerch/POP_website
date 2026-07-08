@@ -40,6 +40,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Large-screen scaling: every size on the site (type, spacing, max-widths)
+   is rem-based, so raising the root font-size scales the whole design
+   proportionally on big monitors instead of leaving it stranded at 1280px
+   in a sea of empty space. Media-query rem units always use the browser
+   default (16px), so Tailwind breakpoints are unaffected. */
+@media (min-width: 1920px) {
+  html {
+    font-size: 17.5px;
+  }
+}
+
+@media (min-width: 2400px) {
+  html {
+    font-size: 19px;
+  }
+}
+
 body {
   min-height: 100vh;
   margin: 0;
