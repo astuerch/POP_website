@@ -41,19 +41,16 @@ html {
 }
 
 /* Large-screen scaling: every size on the site (type, spacing, max-widths)
-   is rem-based, so raising the root font-size scales the whole design
-   proportionally on big monitors instead of leaving it stranded at 1280px
-   in a sea of empty space. Media-query rem units always use the browser
-   default (16px), so Tailwind breakpoints are unaffected. */
-@media (min-width: 1920px) {
+   is rem-based, so scaling the root font-size scales the whole design
+   proportionally. Above 1536px the root grows linearly with the viewport
+   (16px at 1536 → ~26.7px at 2560), so the layout fills the same share of
+   the screen as on a laptop — it just gets bigger, like a zoom. The 28px
+   cap only guards extreme ultrawide monitors (>2688px). Media-query rem
+   units always use the browser default (16px), so Tailwind breakpoints
+   are unaffected. */
+@media (min-width: 1536px) {
   html {
-    font-size: 17.5px;
-  }
-}
-
-@media (min-width: 2400px) {
-  html {
-    font-size: 19px;
+    font-size: clamp(16px, calc(100vw / 96), 28px);
   }
 }
 
