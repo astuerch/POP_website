@@ -66,10 +66,13 @@ function welcomeEmailHtml(firstName: string, locale: Locale): string {
     <div style="background:#0f0d16;padding:40px 16px;font-family:Arial,Helvetica,sans-serif;">
       <div style="max-width:520px;margin:0 auto;background:#17141f;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
         <div style="padding:44px 40px 0;">
-          <img src="${siteUrl}/images/brand/pop-logo-email.png" alt="POP Impact Lab — where science meets society" width="200" style="display:block;border:0;outline:none;text-decoration:none;height:auto;margin:0 0 36px;">
-          <h1 style="margin:0;color:#f4f1f9;font-size:25px;line-height:1.3;">${escapeHtml(copy.greeting(name))}</h1>
+          <img src="${siteUrl}/images/brand/pop-logo-email.png" alt="POP Impact Lab" width="160" style="display:block;border:0;outline:none;text-decoration:none;height:auto;margin:0 0 9px;">
+          <p style="margin:0;color:#a5a0b0;font-size:9px;letter-spacing:0.6px;text-transform:uppercase;">Where science meets society</p>
         </div>
-        <div style="padding:26px 40px 4px;">${paragraphs}</div>
+        <div style="padding:40px 40px 4px;">
+          <h1 style="margin:0 0 22px;color:#f4f1f9;font-size:23px;line-height:1.3;">${escapeHtml(copy.greeting(name))}</h1>
+          ${paragraphs}
+        </div>
         <div style="padding:16px 40px 44px;">
           <a href="${siteUrl}/${locale}/events" style="display:inline-block;background:#b6a1d2;color:#17141f;text-decoration:none;font-weight:bold;padding:14px 26px;border-radius:999px;font-size:14px;">${copy.cta} →</a>
         </div>
