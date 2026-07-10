@@ -58,23 +58,22 @@ function welcomeEmailHtml(firstName: string, locale: Locale): string {
   const paragraphs = copy.body
     .map(
       (p) =>
-        `<p style="margin:0 0 16px;color:#c9c3d6;font-size:15px;line-height:1.7;">${p}</p>`,
+        `<p style="margin:0 0 20px;color:#c9c3d6;font-size:15px;line-height:1.75;">${p}</p>`,
     )
     .join("");
 
   return `<!doctype html><html><body style="margin:0;background:#0f0d16;">
-    <div style="background:#0f0d16;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;">
+    <div style="background:#0f0d16;padding:40px 16px;font-family:Arial,Helvetica,sans-serif;">
       <div style="max-width:520px;margin:0 auto;background:#17141f;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
-        <div style="padding:32px 32px 8px;">
-          <img src="${siteUrl}/images/brand/pop-logo-email.png" alt="POP Impact Lab" width="170" style="display:block;border:0;outline:none;text-decoration:none;height:auto;margin:0 0 10px;">
-          <p style="margin:0 0 20px;color:#a5a0b0;font-size:10px;letter-spacing:3px;text-transform:uppercase;">Where science meets society</p>
-          <h1 style="margin:0;color:#f4f1f9;font-size:24px;line-height:1.2;">${escapeHtml(copy.greeting(name))}</h1>
+        <div style="padding:44px 40px 0;">
+          <img src="${siteUrl}/images/brand/pop-logo-email.png" alt="POP Impact Lab — where science meets society" width="200" style="display:block;border:0;outline:none;text-decoration:none;height:auto;margin:0 0 36px;">
+          <h1 style="margin:0;color:#f4f1f9;font-size:25px;line-height:1.3;">${escapeHtml(copy.greeting(name))}</h1>
         </div>
-        <div style="padding:0 32px 8px;">${paragraphs}</div>
-        <div style="padding:8px 32px 32px;">
-          <a href="${siteUrl}/${locale}/events" style="display:inline-block;background:#b6a1d2;color:#17141f;text-decoration:none;font-weight:bold;padding:12px 22px;border-radius:999px;font-size:14px;">${copy.cta} →</a>
+        <div style="padding:26px 40px 4px;">${paragraphs}</div>
+        <div style="padding:16px 40px 44px;">
+          <a href="${siteUrl}/${locale}/events" style="display:inline-block;background:#b6a1d2;color:#17141f;text-decoration:none;font-weight:bold;padding:14px 26px;border-radius:999px;font-size:14px;">${copy.cta} →</a>
         </div>
-        <div style="padding:20px 32px;border-top:1px solid rgba(255,255,255,0.08);color:#7d7690;font-size:12px;line-height:1.6;">${copy.footer}</div>
+        <div style="padding:26px 40px;border-top:1px solid rgba(255,255,255,0.08);color:#7d7690;font-size:12px;line-height:1.7;">${copy.footer}</div>
       </div>
     </div>
   </body></html>`;
