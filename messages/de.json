@@ -5,9 +5,10 @@
     "about": "Über uns",
     "gallery": "Galerie",
     "contact": "Kontakt",
+    "press": "Presse",
     "newsletter": "Newsletter",
     "switchLanguage": "EN",
-    "tagline": "Wo Wissenschaft auf Gesellschaft trifft",
+    "tagline": "Where science meets society",
     "menu": "Menü"
   },
   "hero": {
@@ -106,6 +107,15 @@
     "lightboxNext": "Nächstes Bild",
     "morePhotos": "+{count} weitere"
   },
+  "press": {
+    "eyebrow": "Presse",
+    "title": "In den Medien",
+    "description": "Wo POP Impact Lab in den Medien vertreten war — Artikel, Interviews und Erwähnungen.",
+    "readArticle": "Artikel lesen",
+    "emptyEyebrow": "Bald verfügbar",
+    "emptyTitle": "Die Berichterstattung ist unterwegs.",
+    "emptyBody": "Wir sammeln gerade die Artikel und Interviews, in denen POP vorkam. Schau bald wieder vorbei — oder melde dich, wenn du über uns berichten möchtest."
+  },
   "contact": {
     "eyebrow": "Kontakt",
     "title": "Gespräch mit POP beginnen",
@@ -166,6 +176,10 @@
     "gallery": {
       "title": "Galerie",
       "description": "Fotos von POP Impact Lab Events — ein Raum voller Neugier und echter Gespräche."
+    },
+    "press": {
+      "title": "Presse",
+      "description": "Medienberichte über POP Impact Lab — Artikel, Interviews und Erwähnungen aus der Presse."
     },
     "contact": {
       "title": "Kontakt",

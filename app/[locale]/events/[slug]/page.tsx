@@ -20,16 +20,26 @@ export async function generateMetadata({
 }: {
   params: Promise<{locale: string; slug: string}>;
 }): Promise<Metadata> {
-  const {slug} = await params;
+  const {locale, slug} = await params;
   const event = getEventBySlug(slug);
 
   if (!event) {
     return {title: "Event not found"};
   }
 
+  const path = `/events/${slug}`;
+
   return {
     title: event.title,
     description: event.summary,
+    alternates: {
+      canonical: `/${locale}${path}`,
+      languages: {
+        en: `/en${path}`,
+        de: `/de${path}`,
+        "x-default": `/en${path}`,
+      },
+    },
     openGraph: {
       title: event.title,
       description: event.summary,

@@ -1,7 +1,7 @@
 "use client";
 
 import {type FormEvent, useState} from "react";
-import {useTranslations} from "next-intl";
+import {useLocale, useTranslations} from "next-intl";
 
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
@@ -13,6 +13,7 @@ type Status = "idle" | "loading" | "success" | "error";
 
 export function ContactForm() {
   const t = useTranslations("contact");
+  const locale = useLocale();
   const [status, setStatus] = useState<Status>("idle");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -51,6 +52,7 @@ export function ContactForm() {
             firstName,
             surname: lastName,
             source: "contact-form",
+            locale,
           }),
         }).catch(() => {});
       }

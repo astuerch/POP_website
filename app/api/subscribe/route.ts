@@ -1,7 +1,125 @@
 import {NextResponse} from "next/server";
 
+import {siteConfig, siteUrl} from "@/lib/site";
+
 const emailPattern =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+type Locale = "en" | "de";
+
+/** Minimal HTML escaping for values interpolated into the email markup. */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+const welcomeCopy: Record<
+  Locale,
+  {
+    subject: string;
+    greeting: (name: string) => string;
+    body: string[];
+    cta: string;
+    footer: string;
+  }
+> = {
+  en: {
+    subject: "Welcome to POP Impact Lab",
+    greeting: (name) => `Welcome to POP${name ? `, ${name}` : ""}!`,
+    body: [
+      "Thanks for joining the POP Impact Lab newsletter. You're now on the list for early access to our events, the bold questions we're chewing on, and the occasional food for thought — no spam, ever.",
+      "We bring cutting-edge research from ETH Zurich and UZH into bars, cafés and public spaces. No jargon, no academic distance. Just real questions and room to think.",
+      "See you in the room.",
+    ],
+    cta: "Explore upcoming events",
+    footer:
+      "You're receiving this because you signed up at popimpactlab.com. Changed your mind? Just reply to this email and we'll take you off the list.",
+  },
+  de: {
+    subject: "Willkommen bei POP Impact Lab",
+    greeting: (name) => `Willkommen bei POP${name ? `, ${name}` : ""}!`,
+    body: [
+      "Danke, dass du den Newsletter von POP Impact Lab abonniert hast. Du bist jetzt auf der Liste für frühzeitigen Zugang zu unseren Events, die mutigen Fragen, die uns beschäftigen, und ab und zu einen Denkanstoss — kein Spam, versprochen.",
+      "Wir bringen Spitzenforschung der ETH Zürich und UZH in Bars, Cafés und öffentliche Räume. Kein Fachjargon, keine akademische Distanz. Nur echte Fragen und Raum zum Denken.",
+      "Wir sehen uns im Gespräch.",
+    ],
+    cta: "Kommende Events entdecken",
+    footer:
+      "Du erhältst diese E-Mail, weil du dich auf popimpactlab.com angemeldet hast. Meinung geändert? Antworte einfach auf diese E-Mail und wir nehmen dich von der Liste.",
+  },
+};
+
+function welcomeEmailHtml(firstName: string, locale: Locale): string {
+  const copy = welcomeCopy[locale];
+  const name = escapeHtml(firstName);
+  const paragraphs = copy.body
+    .map(
+      (p) =>
+        `<p style="margin:0 0 16px;color:#c9c3d6;font-size:15px;line-height:1.7;">${p}</p>`,
+    )
+    .join("");
+
+  return `<!doctype html><html><body style="margin:0;background:#0f0d16;">
+    <div style="background:#0f0d16;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;">
+      <div style="max-width:520px;margin:0 auto;background:#17141f;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
+        <div style="padding:32px 32px 4px;">
+          <p style="margin:0;color:#b6a1d2;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;">POP Impact Lab</p>
+          <h1 style="margin:12px 0 20px;color:#f4f1f9;font-size:24px;line-height:1.2;">${escapeHtml(copy.greeting(name))}</h1>
+        </div>
+        <div style="padding:0 32px 8px;">${paragraphs}</div>
+        <div style="padding:8px 32px 32px;">
+          <a href="${siteUrl}/${locale}/events" style="display:inline-block;background:#b6a1d2;color:#17141f;text-decoration:none;font-weight:bold;padding:12px 22px;border-radius:999px;font-size:14px;">${copy.cta} →</a>
+        </div>
+        <div style="padding:20px 32px;border-top:1px solid rgba(255,255,255,0.08);color:#7d7690;font-size:12px;line-height:1.6;">${copy.footer}</div>
+      </div>
+    </div>
+  </body></html>`;
+}
+
+/**
+ * Fires a Brevo transactional welcome email. Best-effort: any failure (or a
+ * missing sender) is swallowed so it never blocks the subscription itself.
+ */
+async function sendWelcomeEmail(params: {
+  email: string;
+  firstName: string;
+  locale: Locale;
+  apiKey: string;
+}): Promise<void> {
+  const sender = process.env.BREVO_SENDER_EMAIL;
+  if (!sender) return;
+
+  const copy = welcomeCopy[params.locale];
+
+  try {
+    await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        "api-key": params.apiKey,
+      },
+      body: JSON.stringify({
+        sender: {name: "POP Impact Lab", email: sender},
+        to: [
+          {
+            email: params.email,
+            ...(params.firstName ? {name: params.firstName} : {}),
+          },
+        ],
+        replyTo: {email: siteConfig.email, name: "POP Impact Lab"},
+        subject: copy.subject,
+        htmlContent: welcomeEmailHtml(params.firstName, params.locale),
+      }),
+      cache: "no-store",
+    });
+  } catch {
+    // Ignore — the contact is already saved; the welcome email is a bonus.
+  }
+}
 
 export async function POST(request: Request) {
   let body: {
@@ -9,6 +127,7 @@ export async function POST(request: Request) {
     firstName?: string;
     surname?: string;
     source?: string;
+    locale?: string;
   };
 
   try {
@@ -31,6 +150,7 @@ export async function POST(request: Request) {
   const firstName = typeof body.firstName === "string" ? body.firstName.trim() : "";
   const surname = typeof body.surname === "string" ? body.surname.trim() : "";
   const source = typeof body.source === "string" ? body.source.trim() : "";
+  const locale: Locale = body.locale === "de" ? "de" : "en";
 
   const apiKey = process.env.BREVO_API_KEY;
   // Newsletter list (#3). Falls back to the legacy BREVO_LIST_ID if set.
@@ -73,6 +193,13 @@ export async function POST(request: Request) {
     });
 
     if (brevoResponse.ok || brevoResponse.status === 204) {
+      // Brevo returns 201 when a brand-new contact is created and 204 when an
+      // existing one is updated. Only welcome genuinely new subscribers so we
+      // never re-email people who sign up (or re-submit) more than once.
+      if (brevoResponse.status === 201) {
+        await sendWelcomeEmail({email, firstName, locale, apiKey});
+      }
+
       return NextResponse.json({
         message: "Thanks for joining the POP newsletter.",
         configured: true,

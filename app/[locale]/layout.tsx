@@ -1,4 +1,4 @@
-import type {Metadata} from "next";
+import type {Metadata, Viewport} from "next";
 import {NextIntlClientProvider} from "next-intl";
 import {setRequestLocale} from "next-intl/server";
 import {Anton, Fraunces, Nunito} from "next/font/google";
@@ -55,6 +55,11 @@ export const metadata: Metadata = {
     title: "POP Impact Lab",
     description: siteConfig.description,
   },
+};
+
+// Sets the mobile browser UI colour to the near-black brand background.
+export const viewport: Viewport = {
+  themeColor: "#0a0a0b",
 };
 
 export function generateStaticParams() {

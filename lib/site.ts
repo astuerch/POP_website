@@ -33,6 +33,7 @@ export const navLinks = [
   {href: "/events", key: "events"},
   {href: "/about", key: "about"},
   {href: "/gallery", key: "gallery"},
+  {href: "/press", key: "press"},
   {href: "/contact", key: "contact"},
 ] as const;
 

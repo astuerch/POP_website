@@ -1,7 +1,7 @@
 "use client";
 
 import {type FormEvent, useState} from "react";
-import {useTranslations} from "next-intl";
+import {useLocale, useTranslations} from "next-intl";
 
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
@@ -11,6 +11,7 @@ const inputClasses =
 
 export function NewsletterForm() {
   const t = useTranslations("newsletter");
+  const locale = useLocale();
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
@@ -33,6 +34,7 @@ export function NewsletterForm() {
           firstName,
           surname,
           source: "site-newsletter-form",
+          locale,
         }),
       });
 

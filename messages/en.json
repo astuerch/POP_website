@@ -5,6 +5,7 @@
     "about": "About",
     "gallery": "Gallery",
     "contact": "Contact",
+    "press": "Press",
     "newsletter": "Newsletter",
     "switchLanguage": "DE",
     "tagline": "Where science meets society",
@@ -106,6 +107,15 @@
     "lightboxNext": "Next image",
     "morePhotos": "+{count} more"
   },
+  "press": {
+    "eyebrow": "Press",
+    "title": "In the press",
+    "description": "Where POP Impact Lab has been featured — articles, interviews and mentions from the media.",
+    "readArticle": "Read article",
+    "emptyEyebrow": "Coming soon",
+    "emptyTitle": "Coverage is on its way.",
+    "emptyBody": "We're gathering the articles and interviews POP has been part of. Check back soon — or get in touch if you'd like to feature us."
+  },
   "contact": {
     "eyebrow": "Contact",
     "title": "Start a conversation with POP",
@@ -166,6 +176,10 @@
     "gallery": {
       "title": "Gallery",
       "description": "Photos from POP Impact Lab events — a room full of curiosity and real conversations."
+    },
+    "press": {
+      "title": "Press",
+      "description": "Media coverage of POP Impact Lab — articles, interviews and mentions from the press."
     },
     "contact": {
       "title": "Contact",
