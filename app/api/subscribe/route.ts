@@ -30,7 +30,7 @@ const welcomeCopy: Record<
     subject: "Welcome to POP Impact Lab",
     greeting: (name) => `Welcome to POP${name ? `, ${name}` : ""}!`,
     body: [
-      "Thanks for joining the POP Impact Lab newsletter. You're now on the list for early access to our events, the bold questions we're chewing on, and the occasional food for thought — no spam, ever.",
+      "Thanks for joining the POP Impact Lab newsletter. From now on, you'll be the first to hear about new events and get early access to the deeper context behind each topic. POP thrives on bridging the gap between research and society — so we'll be turning to you to help shape our next chapters and decide which questions matter most.",
       "We bring cutting-edge research from ETH Zurich and UZH into bars, cafés and public spaces. No jargon, no academic distance. Just real questions and room to think.",
       "See you in the room.",
     ],
@@ -42,7 +42,7 @@ const welcomeCopy: Record<
     subject: "Willkommen bei POP Impact Lab",
     greeting: (name) => `Willkommen bei POP${name ? `, ${name}` : ""}!`,
     body: [
-      "Danke, dass du den Newsletter von POP Impact Lab abonniert hast. Du bist jetzt auf der Liste für frühzeitigen Zugang zu unseren Events, die mutigen Fragen, die uns beschäftigen, und ab und zu einen Denkanstoss — kein Spam, versprochen.",
+      "Danke, dass du den Newsletter von POP Impact Lab abonniert hast. Ab jetzt erfährst du als Erste:r von neuen Events und erhältst frühzeitigen Zugang zum tieferen Kontext hinter jedem Thema. POP lebt davon, die Lücke zwischen Forschung und Gesellschaft zu schliessen — deshalb werden wir uns an dich wenden, um gemeinsam unsere nächsten Kapitel zu gestalten und zu entscheiden, welche Fragen am meisten zählen.",
       "Wir bringen Spitzenforschung der ETH Zürich und UZH in Bars, Cafés und öffentliche Räume. Kein Fachjargon, keine akademische Distanz. Nur echte Fragen und Raum zum Denken.",
       "Wir sehen uns im Gespräch.",
     ],
@@ -65,9 +65,10 @@ function welcomeEmailHtml(firstName: string, locale: Locale): string {
   return `<!doctype html><html><body style="margin:0;background:#0f0d16;">
     <div style="background:#0f0d16;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;">
       <div style="max-width:520px;margin:0 auto;background:#17141f;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
-        <div style="padding:32px 32px 4px;">
-          <p style="margin:0;color:#b6a1d2;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;">POP Impact Lab</p>
-          <h1 style="margin:12px 0 20px;color:#f4f1f9;font-size:24px;line-height:1.2;">${escapeHtml(copy.greeting(name))}</h1>
+        <div style="padding:32px 32px 8px;">
+          <img src="${siteUrl}/images/brand/pop-logo-email.png" alt="POP Impact Lab" width="180" style="display:block;border:0;height:auto;margin:0 0 10px;">
+          <p style="margin:0 0 20px;color:#a5a0b0;font-size:10px;letter-spacing:3px;text-transform:uppercase;">Where science meets society</p>
+          <h1 style="margin:0;color:#f4f1f9;font-size:24px;line-height:1.2;">${escapeHtml(copy.greeting(name))}</h1>
         </div>
         <div style="padding:0 32px 8px;">${paragraphs}</div>
         <div style="padding:8px 32px 32px;">
