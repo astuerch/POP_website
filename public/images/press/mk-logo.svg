@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 132" fill="none">
-  <g stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M18 116 L18 62 Q18 44 40 44 Q62 44 62 62 L62 116 M62 62 Q62 44 84 44 Q106 44 106 62 L106 116" stroke="#16A6E0" stroke-width="27"/>
-    <path d="M170 40 L170 116 M170 84 L224 48 M170 84 L224 116" stroke="#E9664C" stroke-width="27"/>
-  </g>
-  <text x="134" y="112" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="64" fill="#111111">&amp;</text>
-</svg>

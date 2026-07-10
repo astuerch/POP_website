@@ -66,7 +66,7 @@ export const pressArticles: PressArticle[] = [
       de: "Rund 50 Gäste aus Wissenschaft, Wirtschaft und Kreativszene diskutierten am Auftaktabend im Vergani Zürich, wie KI und Kreativität unser Denken verändern.",
     },
     language: "de",
-    logo: {src: "/images/press/mk-logo.svg", width: 250, height: 132},
+    logo: {src: "/images/press/mk-logo.png", width: 1000, height: 440},
   },
 ];
 
