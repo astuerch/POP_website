@@ -66,7 +66,7 @@ function welcomeEmailHtml(firstName: string, locale: Locale): string {
     <div style="background:#0f0d16;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;">
       <div style="max-width:520px;margin:0 auto;background:#17141f;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
         <div style="padding:32px 32px 8px;">
-          <img src="${siteUrl}/images/brand/pop-logo-email.png" alt="POP Impact Lab" width="180" style="display:block;border:0;height:auto;margin:0 0 10px;">
+          <img src="${siteUrl}/images/brand/pop-logo-email.png" alt="POP Impact Lab" width="170" style="display:block;border:0;outline:none;text-decoration:none;height:auto;margin:0 0 10px;">
           <p style="margin:0 0 20px;color:#a5a0b0;font-size:10px;letter-spacing:3px;text-transform:uppercase;">Where science meets society</p>
           <h1 style="margin:0;color:#f4f1f9;font-size:24px;line-height:1.2;">${escapeHtml(copy.greeting(name))}</h1>
         </div>
