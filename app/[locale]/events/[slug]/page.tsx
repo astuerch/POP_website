@@ -9,7 +9,7 @@ import {EventSchema} from "@/components/json-ld";
 import {RegistrationWidget} from "@/components/registration-widget";
 import {Reveal} from "@/components/reveal";
 import {Stagger, StaggerItem} from "@/components/stagger";
-import {events, getEventBySlug} from "@/content/events";
+import {events, getEventBySlug, popEditionLabel} from "@/content/events";
 
 export async function generateStaticParams() {
   return events.map((event) => ({slug: event.slug}));
@@ -114,7 +114,11 @@ export default async function EventDetailPage({
               </div>
 
               <div className="space-y-5">
-                <Eyebrow>{event.dateLabel}</Eyebrow>
+                <Eyebrow>
+                  {event.edition
+                    ? popEditionLabel(event.edition)
+                    : event.dateLabel}
+                </Eyebrow>
                 <h1 className="font-heading text-brand-fog text-4xl leading-none tracking-tight sm:text-5xl lg:text-6xl">
                   {event.title}
                 </h1>

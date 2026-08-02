@@ -32,6 +32,8 @@ export interface EventLineupGroup {
 
 export interface Event {
   slug: string;
+  /** Series edition number → rendered as "POP 01", "POP 02", … */
+  edition?: number;
   title: string;
   summary: string;
   description: string[];
@@ -86,6 +88,7 @@ export interface Event {
 export const events: Event[] = [
   {
     slug: "social-media-how-it-changes-your-mind",
+    edition: 2,
     title: "Social Media & How it changes your Mind",
     summary:
       "Where does influence end and manipulation begin? One speaker explores what social media does to the mind, another what it changes in society.",
@@ -114,6 +117,7 @@ export const events: Event[] = [
   },
   {
     slug: "ai-vs-human-creativity",
+    edition: 1,
     title: "AI vs. Human Creativity",
     summary:
       "Can we touch a new way of being creative? As AI learns to paint, write, and compose, what defines human originality in the age of algorithms?",
@@ -217,4 +221,9 @@ export const pastEvents = events.filter((event) => event.status === "past");
 
 export function getEventBySlug(slug: string) {
   return events.find((event) => event.slug === slug);
+}
+
+/** Formats a series edition number as its POP code, e.g. 1 → "POP 01". */
+export function popEditionLabel(edition: number): string {
+  return `POP ${String(edition).padStart(2, "0")}`;
 }

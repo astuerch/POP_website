@@ -2,7 +2,7 @@ import Image from "next/image";
 import {getTranslations} from "next-intl/server";
 
 import {Link} from "@/i18n/navigation";
-import type {Event} from "@/content/events";
+import {type Event, popEditionLabel} from "@/content/events";
 import {Reveal} from "@/components/reveal";
 import {cn} from "@/lib/utils";
 
@@ -62,6 +62,11 @@ export async function EventCard({
       <div className="flex flex-1 flex-col p-6">
         <div className="space-y-4">
           <div className="text-brand-mist flex flex-wrap items-center gap-3 text-sm">
+            {event.edition ? (
+              <span className="border-brand-lila/40 text-brand-lila-light rounded-full border px-3 py-1 text-xs font-semibold tracking-[0.15em] uppercase">
+                {popEditionLabel(event.edition)}
+              </span>
+            ) : null}
             <span className="text-brand-fog rounded-full bg-white/10 px-3 py-1 font-medium">
               {event.status === "upcoming" ? t("upcoming") : t("past")}
             </span>
