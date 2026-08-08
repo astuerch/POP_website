@@ -108,30 +108,28 @@ export default async function HomePage() {
 
         <AnimatedSection delay={0.1} variant="right">
           <section className="space-y-8">
-            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:gap-8">
-                <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
-                  {tNext("eyebrow")}
-                </h2>
-                {nextEvent?.startsAt && !nextEvent.isTentative ? (
-                  <Countdown
-                    startsAt={nextEvent.startsAt}
-                    labels={{
-                      days: tCountdown("days"),
-                      hours: tCountdown("hours"),
-                      minutes: tCountdown("minutes"),
-                    }}
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
+                {tNext("eyebrow")}
+              </h2>
+              {nextEvent?.startsAt && !nextEvent.isTentative ? (
+                <Countdown
+                  startsAt={nextEvent.startsAt}
+                  labels={{
+                    days: tCountdown("days"),
+                    hours: tCountdown("hours"),
+                    minutes: tCountdown("minutes"),
+                  }}
+                />
+              ) : nextEvent?.isTentative ? (
+                <div className="border-brand-lila/40 bg-brand-lila/10 text-brand-lila-light inline-flex items-center gap-2 self-start rounded-full border px-3 py-1.5 text-xs font-semibold sm:px-4 sm:py-2 sm:text-sm">
+                  <span
+                    aria-hidden="true"
+                    className="bg-brand-lila inline-block h-1.5 w-1.5 animate-pulse rounded-full"
                   />
-                ) : nextEvent?.isTentative ? (
-                  <div className="border-brand-lila/40 bg-brand-lila/10 text-brand-lila-light inline-flex items-center gap-2 self-start rounded-full border px-3 py-1.5 text-xs font-semibold sm:px-4 sm:py-2 sm:text-sm">
-                    <span
-                      aria-hidden="true"
-                      className="bg-brand-lila inline-block h-1.5 w-1.5 animate-pulse rounded-full"
-                    />
-                    {tNext("saveTheDate")}
-                  </div>
-                ) : null}
-              </div>
+                  {tNext("saveTheDate")}
+                </div>
+              ) : null}
               <Link
                 className={buttonClasses({variant: "primary", size: "md"})}
                 href="/events"
