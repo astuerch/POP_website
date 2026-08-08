@@ -62,17 +62,17 @@ export async function EventCard({
       <div className="flex flex-1 flex-col p-6">
         <div className="space-y-4">
           <div className="text-brand-mist flex flex-wrap items-center gap-3 text-sm">
-            {event.edition ? (
-              <span className="border-brand-lila/40 text-brand-lila-light rounded-full border px-3 py-1 text-xs font-semibold tracking-[0.15em] uppercase">
-                {popEditionLabel(event.edition)}
-              </span>
-            ) : null}
             <span className="text-brand-fog rounded-full bg-white/10 px-3 py-1 font-medium">
               {event.status === "upcoming" ? t("upcoming") : t("past")}
             </span>
             <span>{event.dateLabel}</span>
           </div>
           <div className="space-y-3">
+            {event.edition ? (
+              <p className="text-brand-lila-light text-sm font-semibold tracking-[0.2em] uppercase">
+                {popEditionLabel(event.edition)}
+              </p>
+            ) : null}
             <h3 className="text-brand-fog text-2xl font-bold">{event.title}</h3>
             <p className="text-brand-lila-light text-sm font-medium">{event.location}</p>
             <p className="text-brand-mist text-base leading-7">{event.summary}</p>
