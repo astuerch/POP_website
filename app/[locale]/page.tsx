@@ -109,10 +109,10 @@ export default async function HomePage() {
         <AnimatedSection delay={0.1} variant="right">
           <section className="space-y-8">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
-                {tNext("eyebrow")}
-              </h2>
-              <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:gap-10">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:gap-8">
+                <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight uppercase sm:text-5xl lg:text-6xl">
+                  {tNext("eyebrow")}
+                </h2>
                 {nextEvent?.startsAt && !nextEvent.isTentative ? (
                   <Countdown
                     startsAt={nextEvent.startsAt}
@@ -131,10 +131,13 @@ export default async function HomePage() {
                     {tNext("saveTheDate")}
                   </div>
                 ) : null}
-                <Link className={buttonClasses({variant: "primary", size: "md"})} href="/events">
-                  {tNext("viewAll")}
-                </Link>
               </div>
+              <Link
+                className={buttonClasses({variant: "primary", size: "md"})}
+                href="/events"
+              >
+                {tNext("viewAll")}
+              </Link>
             </div>
             <EventCard event={nextEvent} orientation="horizontal" />
           </section>
