@@ -109,9 +109,9 @@ export default async function OgImage({
         {/* Official POP Impact Lab logo */}
         <img
           src={logoDataUri}
-          width={480}
-          height={185}
-          style={{marginBottom: "24px", objectFit: "contain"}}
+          width={400}
+          height={154}
+          style={{marginTop: "32px", marginBottom: "20px", objectFit: "contain"}}
           alt="POP Impact Lab"
         />
 
@@ -123,7 +123,7 @@ export default async function OgImage({
             height: "8px",
             background: "#B6A1D2",
             borderRadius: "4px",
-            marginBottom: "36px",
+            marginBottom: "28px",
           }}
         />
 
@@ -146,7 +146,7 @@ export default async function OgImage({
             fontStyle: "italic",
             color: "#D6C8F0",
             lineHeight: 1.15,
-            marginBottom: "48px",
+            marginBottom: "36px",
           }}
         >
           {taglineB}
