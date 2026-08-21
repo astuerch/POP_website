@@ -1,3 +1,6 @@
+import fs from "fs/promises";
+import path from "path";
+
 import {ImageResponse} from "next/og";
 
 import type {AppLocale} from "@/i18n/routing";
@@ -19,6 +22,12 @@ export default async function OgImage({
   params: Promise<{locale: AppLocale}>;
 }) {
   const {locale} = await params;
+
+  // Load the official logo PNG and encode it as a data URI so Satori can
+  // render it without any external network request at build / edge time.
+  const logoPath = path.join(process.cwd(), "public/images/brand/pop-logo-email.png");
+  const logoBuffer = await fs.readFile(logoPath);
+  const logoDataUri = `data:image/png;base64,${logoBuffer.toString("base64")}`;
   const isDE = locale === "de";
 
   const eyebrow = isDE
@@ -97,19 +106,14 @@ export default async function OgImage({
         {/* Spacer to push content down */}
         <div style={{flex: 1, display: "flex"}} />
 
-        {/* Main title */}
-        <div
-          style={{
-            display: "flex",
-            fontSize: "116px",
-            fontWeight: 900,
-            letterSpacing: "-4px",
-            lineHeight: 1,
-            marginBottom: "24px",
-          }}
-        >
-          POP IMPACT LAB
-        </div>
+        {/* Official POP Impact Lab logo */}
+        <img
+          src={logoDataUri}
+          width={480}
+          height={185}
+          style={{marginBottom: "24px", objectFit: "contain"}}
+          alt="POP Impact Lab"
+        />
 
         {/* Accent bar */}
         <div
