@@ -1,5 +1,7 @@
 import {NextResponse} from "next/server";
 
+import {upsertEventContact} from "@/lib/brevo-contact";
+
 const emailPattern =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
@@ -56,105 +58,25 @@ export async function POST(request: Request) {
     );
   }
 
-  // Map incoming payload keys → Brevo attribute names (first match wins).
-  const fieldMap: Array<[string, string]> = [
-    ["firstName", "FIRST_NAME"],
-    ["surname", "SURNAME"],
-    ["lastName", "SURNAME"],
-    ["ageRange", "AGE_RANGE"],
-    ["jobField", "JOB_FIELD"],
-    ["region", "REGION"],
-    ["city", "REGION"],
-    ["source", "SOURCE"],
-  ];
+  // Shared with the Infomaniak cron sync so both paths write identical
+  // contacts (including the cumulative EVENTS_ATTENDED / EVENT_COUNT history).
+  const result = await upsertEventContact(
+    {
+      email,
+      firstName: str(body.firstName),
+      surname: str(body.surname) || str(body.lastName),
+      ageRange: str(body.ageRange),
+      jobField: str(body.jobField),
+      region: str(body.region) || str(body.city),
+      source: str(body.source),
+      event: str(body.event) || str(body.eventSlug) || str(body.eventName),
+    },
+    {apiKey, listId},
+  );
 
-  const attributes: Record<string, string | number> = {};
-  for (const [key, attr] of fieldMap) {
-    const value = str(body[key]);
-    if (value && !attributes[attr]) {
-      attributes[attr] = value;
-    }
-  }
-  if (!attributes.SOURCE) {
-    attributes.SOURCE = "event";
+  if (result.ok) {
+    return NextResponse.json({ok: true});
   }
 
-  // Which event this registration is for (slug or name). When present, append
-  // it to the contact's EVENTS_ATTENDED history and set EVENT_COUNT to the
-  // number of distinct events. Brevo has no "append" — so we read the current
-  // value first, merge, then write it back (create these as Normal attributes:
-  // EVENTS_ATTENDED = Text, EVENT_COUNT = Number).
-  const event = str(body.event) || str(body.eventSlug) || str(body.eventName);
-  if (event) {
-    let attended: string[] = [];
-    try {
-      const existing = await fetch(
-        `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
-        {headers: {accept: "application/json", "api-key": apiKey}, cache: "no-store"},
-      );
-      if (existing.ok) {
-        const contact = (await existing.json()) as {
-          attributes?: Record<string, unknown>;
-        };
-        const raw = contact.attributes?.EVENTS_ATTENDED;
-        if (typeof raw === "string" && raw.trim()) {
-          attended = raw
-            .split(",")
-            .map((entry) => entry.trim())
-            .filter(Boolean);
-        }
-      }
-    } catch {
-      // Treat an unreadable/absent contact as a fresh history.
-    }
-
-    if (!attended.some((entry) => entry.toLowerCase() === event.toLowerCase())) {
-      attended.push(event);
-    }
-    attributes.EVENTS_ATTENDED = attended.join(", ");
-    attributes.EVENT_COUNT = attended.length;
-  }
-
-  try {
-    const brevoResponse = await fetch("https://api.brevo.com/v3/contacts", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        "api-key": apiKey,
-      },
-      body: JSON.stringify({
-        email,
-        updateEnabled: true,
-        attributes,
-        ...(listId ? {listIds: [listId]} : {}),
-      }),
-      cache: "no-store",
-    });
-
-    if (brevoResponse.ok || brevoResponse.status === 204) {
-      return NextResponse.json({ok: true});
-    }
-
-    const errorPayload = (await brevoResponse.json().catch(() => null)) as
-      | {code?: string; message?: string}
-      | null;
-
-    if (
-      errorPayload?.code === "duplicate_parameter" ||
-      errorPayload?.message?.toLowerCase().includes("already")
-    ) {
-      return NextResponse.json({ok: true});
-    }
-
-    return NextResponse.json(
-      {message: "Brevo rejected the contact."},
-      {status: 502},
-    );
-  } catch {
-    return NextResponse.json(
-      {message: "Could not reach Brevo."},
-      {status: 502},
-    );
-  }
+  return NextResponse.json({message: result.message}, {status: result.status});
 }

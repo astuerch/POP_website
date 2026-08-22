@@ -107,7 +107,11 @@ export const events: Event[] = [
     city: "Zürich",
     status: "upcoming",
     registrationType: "infomaniak-free",
-    // Owner: paste the live registration embed URL in `registrationEmbedUrl` (or use `registrationUrl`) to go live.
+    // Registration NOT open yet → the page keeps showing "opening soon".
+    // To go live, set registrationUrl (button) or registrationEmbedUrl (inline widget).
+    // Infomaniak group page (ready when registration opens):
+    //   https://infomaniak.events/group/dd687bd7-ca77-463d-8fb9-a249751f4831
+    //   (prefer a per-event Infomaniak link/embed for this single event if available.)
     priceLabel: "Free RSVP · Registration opening soon",
     speakers: ["Speaker lineup to be announced"],
     image: {

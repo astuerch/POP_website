@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/sync-infomaniak",
+      "schedule": "0 6 * * *"
+    }
+  ]
+}
