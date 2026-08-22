@@ -200,36 +200,38 @@ export async function GET(request: Request) {
     // `diag=1` probes header-name variants one at a time (sent individually so
     // nothing gets merged) to find the exact spelling Infomaniak expects.
     if (diag) {
-      const variants = [
-        "key",
-        "Key",
-        "KEY",
-        "X-Key",
-        "api-key",
-        "Api-Key",
-        "X-Api-Key",
-        "shop-key",
-        "Shop-Key",
-        "Credential",
-        "credential",
+      // `key` is confirmed correct; ticket-office endpoints additionally want a
+      // credential/Authorization header. Probe the plausible forms.
+      const token = credential || apiKey;
+      const variants: Array<{label: string; extra: Record<string, string>}> = [
+        {label: "Authorization: raw", extra: {Authorization: token}},
+        {label: "Authorization: Bearer", extra: {Authorization: `Bearer ${token}`}},
+        {label: "Credential: raw", extra: {Credential: token}},
+        {label: "credential: raw", extra: {credential: token}},
+        {label: "Authorization: Token", extra: {Authorization: `Token ${token}`}},
       ];
 
-      const trace: Array<{header: string; status: number; body: string}> = [];
-      for (const header of variants) {
+      const trace: Array<{form: string; status: number; body: string}> = [];
+      for (const variant of variants) {
         const attempt = await rawGet(ordersUrl, {
           Accept: "application/json",
           "Accept-Language": "en_GB",
-          [header]: apiKey,
+          key: apiKey,
+          ...variant.extra,
         });
         trace.push({
-          header,
+          form: variant.label,
           status: attempt.status,
-          body: attempt.body.replace(/\s+/g, " ").slice(0, 120),
+          body: attempt.body.replace(/\s+/g, " ").slice(0, 140),
         });
         if (attempt.status >= 200 && attempt.status < 300) break;
       }
 
-      return NextResponse.json({diag: true, keyLength: apiKey.length, trace});
+      return NextResponse.json({
+        diag: true,
+        usingSeparateCredential: Boolean(credential),
+        trace,
+      });
     }
 
     const result = await rawGet(ordersUrl, baseHeaders);
