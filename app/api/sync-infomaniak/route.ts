@@ -141,43 +141,89 @@ export async function GET(request: Request) {
     .slice(0, 10);
 
   // The shop is identified by the `key` credential, not by the path — the Shop
-  // API routes carry no shop id (see etickets.infomaniak.com/docs/app). The key
-  // is sent as a header *and* as a query param, because some edge/proxy setups
-  // drop the non-standard `key` header.
-  const query = new URLSearchParams({
-    limit: "200",
-    begin,
-    key: apiKey,
-  });
-  const url = `${INFOMANIAK_BASE}/orders?${query.toString()}`;
+  // API routes carry no shop id (see etickets.infomaniak.com/docs/app).
+  const baseQuery = `limit=200&begin=${begin}`;
+  const ordersUrl = `${INFOMANIAK_BASE}/orders?${baseQuery}`;
 
-  let orders: Array<Record<string, unknown>>;
-  try {
-    const response = await fetch(url, {
+  // Different hosting/proxy layers treat the non-standard `key` header
+  // differently, so we try the documented form first and fall back through a
+  // few equivalents. `diag=1` reports what each attempt returned.
+  const credential = process.env.INFOMANIAK_TICKETING_CREDENTIAL;
+  const attempts: Array<{label: string; url: string; headers: HeadersInit}> = [
+    {
+      label: "header key",
+      url: ordersUrl,
+      headers: {accept: "application/json", "accept-language": "en_GB", key: apiKey},
+    },
+    {
+      label: "query key",
+      url: `${ordersUrl}&key=${encodeURIComponent(apiKey)}`,
+      headers: {accept: "application/json", "accept-language": "en_GB"},
+    },
+    {
+      label: "header key + query key",
+      url: `${ordersUrl}&key=${encodeURIComponent(apiKey)}`,
+      headers: {accept: "application/json", "accept-language": "en_GB", key: apiKey},
+    },
+    {
+      label: "authorization bearer",
+      url: ordersUrl,
       headers: {
         accept: "application/json",
         "accept-language": "en_GB",
+        authorization: credential ? credential : `Bearer ${apiKey}`,
         key: apiKey,
-        Key: apiKey,
-        // Some setups also expect a manager credential/token alongside the key.
-        ...(process.env.INFOMANIAK_TICKETING_CREDENTIAL
-          ? {authorization: process.env.INFOMANIAK_TICKETING_CREDENTIAL}
-          : {}),
       },
-      cache: "no-store",
-    });
+    },
+  ];
 
-    if (!response.ok) {
-      // Surface Infomaniak's own error text so misconfigurations are obvious.
-      // `keyLength` confirms the env var is loaded without ever exposing it.
-      const detail = (await response.text().catch(() => "")).slice(0, 400);
+  const diag = params.get("diag") === "1";
+  const trace: Array<{attempt: string; status: number; body: string}> = [];
+
+  let orders: Array<Record<string, unknown>>;
+  try {
+    let response: Response | null = null;
+
+    for (const attempt of attempts) {
+      const candidate = await fetch(attempt.url, {
+        headers: attempt.headers,
+        redirect: "follow",
+        cache: "no-store",
+      });
+
+      if (diag) {
+        trace.push({
+          attempt: attempt.label,
+          status: candidate.status,
+          body: (await candidate.clone().text().catch(() => "")).slice(0, 180),
+        });
+      }
+
+      if (candidate.ok) {
+        response = candidate;
+        break;
+      }
+      if (!diag) {
+        // Keep the last failure so we can report it if every attempt fails.
+        response = candidate;
+      }
+    }
+
+    if (diag) {
+      return NextResponse.json({diag: true, keyLength: apiKey.length, trace});
+    }
+
+    if (!response || !response.ok) {
+      const detail = response
+        ? (await response.text().catch(() => "")).slice(0, 400)
+        : "";
       return NextResponse.json(
         {
           message: "Infomaniak rejected the request.",
-          status: response.status,
+          status: response?.status ?? 0,
           detail,
           keyLength: apiKey.length,
-          hint: "Check the API key (Ticketing → Store/Go Live → API Access).",
+          hint: "Run the same URL with &diag=1 to see which auth form works.",
         },
         {status: 502},
       );
