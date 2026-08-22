@@ -197,16 +197,42 @@ export async function GET(request: Request) {
 
   let orders: Array<Record<string, unknown>>;
   try {
-    const result = await rawGet(ordersUrl, baseHeaders);
-
+    // `diag=1` probes header-name variants one at a time (sent individually so
+    // nothing gets merged) to find the exact spelling Infomaniak expects.
     if (diag) {
-      return NextResponse.json({
-        diag: true,
-        keyLength: apiKey.length,
-        status: result.status,
-        body: result.body.slice(0, 400),
-      });
+      const variants = [
+        "key",
+        "Key",
+        "KEY",
+        "X-Key",
+        "api-key",
+        "Api-Key",
+        "X-Api-Key",
+        "shop-key",
+        "Shop-Key",
+        "Credential",
+        "credential",
+      ];
+
+      const trace: Array<{header: string; status: number; body: string}> = [];
+      for (const header of variants) {
+        const attempt = await rawGet(ordersUrl, {
+          Accept: "application/json",
+          "Accept-Language": "en_GB",
+          [header]: apiKey,
+        });
+        trace.push({
+          header,
+          status: attempt.status,
+          body: attempt.body.replace(/\s+/g, " ").slice(0, 120),
+        });
+        if (attempt.status >= 200 && attempt.status < 300) break;
+      }
+
+      return NextResponse.json({diag: true, keyLength: apiKey.length, trace});
     }
+
+    const result = await rawGet(ordersUrl, baseHeaders);
 
     if (result.status < 200 || result.status >= 300) {
       return NextResponse.json(
