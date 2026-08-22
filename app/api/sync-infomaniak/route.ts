@@ -112,14 +112,13 @@ export async function GET(request: Request) {
   }
 
   const apiKey = process.env.INFOMANIAK_TICKETING_API_KEY;
-  const shopId = process.env.INFOMANIAK_SHOP_ID;
   const brevoKey = process.env.BREVO_API_KEY;
 
-  if (!apiKey || !shopId || !brevoKey) {
+  if (!apiKey || !brevoKey) {
     return NextResponse.json(
       {
         message:
-          "Missing config: INFOMANIAK_TICKETING_API_KEY, INFOMANIAK_SHOP_ID and BREVO_API_KEY are required.",
+          "Missing config: INFOMANIAK_TICKETING_API_KEY and BREVO_API_KEY are required.",
         configured: false,
       },
       {status: 503},
@@ -141,24 +140,34 @@ export async function GET(request: Request) {
     .toISOString()
     .slice(0, 10);
 
-  const url = `${INFOMANIAK_BASE}/${encodeURIComponent(shopId)}/orders?limit=200&begin=${begin}`;
+  // The shop is identified by the `key` header, not by the path — the Shop API
+  // routes carry no shop id (see etickets.infomaniak.com/docs/app).
+  const url = `${INFOMANIAK_BASE}/orders?limit=200&begin=${begin}`;
 
   let orders: Array<Record<string, unknown>>;
   try {
     const response = await fetch(url, {
       headers: {
         accept: "application/json",
-        authorization: `Bearer ${apiKey}`,
+        "accept-language": "en_GB",
+        key: apiKey,
+        // Some setups also expect a manager credential/token alongside the key.
+        ...(process.env.INFOMANIAK_TICKETING_CREDENTIAL
+          ? {authorization: process.env.INFOMANIAK_TICKETING_CREDENTIAL}
+          : {}),
       },
       cache: "no-store",
     });
 
     if (!response.ok) {
+      // Surface Infomaniak's own error text so misconfigurations are obvious.
+      const detail = (await response.text().catch(() => "")).slice(0, 400);
       return NextResponse.json(
         {
           message: "Infomaniak rejected the request.",
           status: response.status,
-          hint: "Check INFOMANIAK_SHOP_ID and that the API key is valid.",
+          detail,
+          hint: "Check the API key (Ticketing → Store/Go Live → API Access).",
         },
         {status: 502},
       );
