@@ -140,9 +140,16 @@ export async function GET(request: Request) {
     .toISOString()
     .slice(0, 10);
 
-  // The shop is identified by the `key` header, not by the path — the Shop API
-  // routes carry no shop id (see etickets.infomaniak.com/docs/app).
-  const url = `${INFOMANIAK_BASE}/orders?limit=200&begin=${begin}`;
+  // The shop is identified by the `key` credential, not by the path — the Shop
+  // API routes carry no shop id (see etickets.infomaniak.com/docs/app). The key
+  // is sent as a header *and* as a query param, because some edge/proxy setups
+  // drop the non-standard `key` header.
+  const query = new URLSearchParams({
+    limit: "200",
+    begin,
+    key: apiKey,
+  });
+  const url = `${INFOMANIAK_BASE}/orders?${query.toString()}`;
 
   let orders: Array<Record<string, unknown>>;
   try {
@@ -151,6 +158,7 @@ export async function GET(request: Request) {
         accept: "application/json",
         "accept-language": "en_GB",
         key: apiKey,
+        Key: apiKey,
         // Some setups also expect a manager credential/token alongside the key.
         ...(process.env.INFOMANIAK_TICKETING_CREDENTIAL
           ? {authorization: process.env.INFOMANIAK_TICKETING_CREDENTIAL}
@@ -161,12 +169,14 @@ export async function GET(request: Request) {
 
     if (!response.ok) {
       // Surface Infomaniak's own error text so misconfigurations are obvious.
+      // `keyLength` confirms the env var is loaded without ever exposing it.
       const detail = (await response.text().catch(() => "")).slice(0, 400);
       return NextResponse.json(
         {
           message: "Infomaniak rejected the request.",
           status: response.status,
           detail,
+          keyLength: apiKey.length,
           hint: "Check the API key (Ticketing → Store/Go Live → API Access).",
         },
         {status: 502},
