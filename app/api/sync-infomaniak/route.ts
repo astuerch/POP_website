@@ -57,11 +57,16 @@ function rawGet(
  * `probe=1` is the safe way to inspect the real field names the first time,
  * since Infomaniak's custom registration questions vary per ticketing setup.
  *
+ * Auth (both headers are required — verified against the live API):
+ *   `key`           = the ticketing shop API key, with "Ticket office access"
+ *                     enabled on the key, and
+ *   `Authorization` = an Infomaniak Manager API token, sent RAW (no "Bearer").
+ *
  * Env vars required:
- *   INFOMANIAK_TICKETING_API_KEY  — Ticketing → Store/Go Live → API Access
- *   INFOMANIAK_SHOP_ID            — numeric id of your ticketing shop
+ *   INFOMANIAK_TICKETING_API_KEY    — Ticketing → Store/Go Live → API Access
+ *   INFOMANIAK_TICKETING_CREDENTIAL — Manager → Profile → API tokens
  *   BREVO_API_KEY, BREVO_EVENT_LIST_ID, BREVO_WEBHOOK_SECRET
- *   POP_EVENT_LABEL               — optional, defaults to "POP 02"
+ *   POP_EVENT_LABEL                 — optional, defaults to "POP 02"
  */
 
 const INFOMANIAK_BASE = "https://etickets.infomaniak.com/api/shop";
@@ -199,42 +204,15 @@ export async function GET(request: Request) {
   try {
     // `diag=1` probes header-name variants one at a time (sent individually so
     // nothing gets merged) to find the exact spelling Infomaniak expects.
+    const result = await rawGet(ordersUrl, baseHeaders);
+
     if (diag) {
-      // `key` is confirmed correct; ticket-office endpoints additionally want a
-      // credential/Authorization header. Probe the plausible forms.
-      const token = credential || apiKey;
-      const variants: Array<{label: string; extra: Record<string, string>}> = [
-        {label: "Authorization: raw", extra: {Authorization: token}},
-        {label: "Authorization: Bearer", extra: {Authorization: `Bearer ${token}`}},
-        {label: "Credential: raw", extra: {Credential: token}},
-        {label: "credential: raw", extra: {credential: token}},
-        {label: "Authorization: Token", extra: {Authorization: `Token ${token}`}},
-      ];
-
-      const trace: Array<{form: string; status: number; body: string}> = [];
-      for (const variant of variants) {
-        const attempt = await rawGet(ordersUrl, {
-          Accept: "application/json",
-          "Accept-Language": "en_GB",
-          key: apiKey,
-          ...variant.extra,
-        });
-        trace.push({
-          form: variant.label,
-          status: attempt.status,
-          body: attempt.body.replace(/\s+/g, " ").slice(0, 140),
-        });
-        if (attempt.status >= 200 && attempt.status < 300) break;
-      }
-
       return NextResponse.json({
         diag: true,
-        usingSeparateCredential: Boolean(credential),
-        trace,
+        status: result.status,
+        body: result.body.replace(/\s+/g, " ").slice(0, 400),
       });
     }
-
-    const result = await rawGet(ordersUrl, baseHeaders);
 
     if (result.status < 200 || result.status >= 300) {
       return NextResponse.json(
