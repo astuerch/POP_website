@@ -1,6 +1,46 @@
+import https from "node:https";
 import {NextResponse} from "next/server";
 
 import {upsertEventContact, type EventRegistrant} from "@/lib/brevo-contact";
+
+// Must run on Node (not Edge): we use node:https to control raw headers.
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+/**
+ * Infomaniak requires a non-standard `key` header. Platform `fetch`
+ * implementations normalise/drop it, so we issue the request with Node's raw
+ * HTTP client, which sends header names exactly as written.
+ */
+function rawGet(
+  url: string,
+  headers: Record<string, string>,
+): Promise<{status: number; body: string}> {
+  return new Promise((resolve, reject) => {
+    const target = new URL(url);
+    const request = https.request(
+      {
+        hostname: target.hostname,
+        path: `${target.pathname}${target.search}`,
+        method: "GET",
+        headers,
+      },
+      (response) => {
+        let body = "";
+        response.setEncoding("utf8");
+        response.on("data", (chunk) => {
+          body += chunk;
+        });
+        response.on("end", () =>
+          resolve({status: response.statusCode ?? 0, body}),
+        );
+      },
+    );
+    request.on("error", reject);
+    request.setTimeout(15_000, () => request.destroy(new Error("timeout")));
+    request.end();
+  });
+}
 
 /**
  * Syncs Infomaniak ticketing orders into the Brevo event list (#4).
@@ -145,91 +185,43 @@ export async function GET(request: Request) {
   const baseQuery = `limit=200&begin=${begin}`;
   const ordersUrl = `${INFOMANIAK_BASE}/orders?${baseQuery}`;
 
-  // Different hosting/proxy layers treat the non-standard `key` header
-  // differently, so we try the documented form first and fall back through a
-  // few equivalents. `diag=1` reports what each attempt returned.
   const credential = process.env.INFOMANIAK_TICKETING_CREDENTIAL;
-  const attempts: Array<{label: string; url: string; headers: HeadersInit}> = [
-    {
-      label: "header key",
-      url: ordersUrl,
-      headers: {accept: "application/json", "accept-language": "en_GB", key: apiKey},
-    },
-    {
-      label: "query key",
-      url: `${ordersUrl}&key=${encodeURIComponent(apiKey)}`,
-      headers: {accept: "application/json", "accept-language": "en_GB"},
-    },
-    {
-      label: "header key + query key",
-      url: `${ordersUrl}&key=${encodeURIComponent(apiKey)}`,
-      headers: {accept: "application/json", "accept-language": "en_GB", key: apiKey},
-    },
-    {
-      label: "authorization bearer",
-      url: ordersUrl,
-      headers: {
-        accept: "application/json",
-        "accept-language": "en_GB",
-        authorization: credential ? credential : `Bearer ${apiKey}`,
-        key: apiKey,
-      },
-    },
-  ];
+  const baseHeaders: Record<string, string> = {
+    Accept: "application/json",
+    "Accept-Language": "en_GB",
+    key: apiKey,
+    ...(credential ? {Authorization: credential} : {}),
+  };
 
   const diag = params.get("diag") === "1";
-  const trace: Array<{attempt: string; status: number; body: string}> = [];
 
   let orders: Array<Record<string, unknown>>;
   try {
-    let response: Response | null = null;
-
-    for (const attempt of attempts) {
-      const candidate = await fetch(attempt.url, {
-        headers: attempt.headers,
-        redirect: "follow",
-        cache: "no-store",
-      });
-
-      if (diag) {
-        trace.push({
-          attempt: attempt.label,
-          status: candidate.status,
-          body: (await candidate.clone().text().catch(() => "")).slice(0, 180),
-        });
-      }
-
-      if (candidate.ok) {
-        response = candidate;
-        break;
-      }
-      if (!diag) {
-        // Keep the last failure so we can report it if every attempt fails.
-        response = candidate;
-      }
-    }
+    const result = await rawGet(ordersUrl, baseHeaders);
 
     if (diag) {
-      return NextResponse.json({diag: true, keyLength: apiKey.length, trace});
+      return NextResponse.json({
+        diag: true,
+        keyLength: apiKey.length,
+        status: result.status,
+        body: result.body.slice(0, 400),
+      });
     }
 
-    if (!response || !response.ok) {
-      const detail = response
-        ? (await response.text().catch(() => "")).slice(0, 400)
-        : "";
+    if (result.status < 200 || result.status >= 300) {
       return NextResponse.json(
         {
           message: "Infomaniak rejected the request.",
-          status: response?.status ?? 0,
-          detail,
+          status: result.status,
+          detail: result.body.slice(0, 400),
           keyLength: apiKey.length,
-          hint: "Run the same URL with &diag=1 to see which auth form works.",
+          hint: "Check the API key (Ticketing → Store/Go Live → API Access).",
         },
         {status: 502},
       );
     }
 
-    const payload = (await response.json()) as unknown;
+    const payload = JSON.parse(result.body) as unknown;
     const data =
       (payload as {data?: unknown})?.data ??
       (payload as {orders?: unknown})?.orders ??
