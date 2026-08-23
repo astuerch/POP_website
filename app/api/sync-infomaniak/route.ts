@@ -245,6 +245,17 @@ function toRegistrant(
     ),
     source: "infomaniak",
     event: eventLabel,
+    // Infomaniak's built-in newsletter opt-in ("Enable registering for the
+    // newsletter") arrives as a boolean, or as "1"/"true" on some payloads.
+    newsletter: (() => {
+      const raw = flat.newsletter ?? flat.newsletter_optin ?? flat.optin;
+      if (typeof raw === "boolean") return raw;
+      if (typeof raw === "number") return raw === 1;
+      if (typeof raw === "string") {
+        return ["1", "true", "yes", "oui", "ja"].includes(raw.trim().toLowerCase());
+      }
+      return false;
+    })(),
   };
 }
 
@@ -542,8 +553,18 @@ export async function GET(request: Request) {
     });
   }
 
+  // Buyers who ticked Infomaniak's newsletter opt-in also join the newsletter
+  // list, so marketing consent is captured at checkout.
+  const parsedNewsletterList = Number(
+    process.env.BREVO_NEWSLETTER_LIST_ID ?? process.env.BREVO_LIST_ID,
+  );
+  const newsletterListId = Number.isFinite(parsedNewsletterList)
+    ? parsedNewsletterList
+    : null;
+
   let synced = 0;
   let skipped = 0;
+  let newsletterOptIns = 0;
   const failures: string[] = [];
   const seen = new Set<string>();
 
@@ -561,9 +582,15 @@ export async function GET(request: Request) {
     if (seen.has(key)) continue;
     seen.add(key);
 
+    const listIds = [
+      ...(listId ? [listId] : []),
+      ...(registrant.newsletter && newsletterListId ? [newsletterListId] : []),
+    ];
+    if (registrant.newsletter && newsletterListId) newsletterOptIns += 1;
+
     const result = await upsertEventContact(registrant, {
       apiKey: brevoKey,
-      listId,
+      listIds,
     });
 
     if (result.ok) synced += 1;
@@ -576,6 +603,7 @@ export async function GET(request: Request) {
     ordersFetched: orders.length,
     synced,
     skipped,
+    newsletterOptIns,
     failed: failures.length,
     ...(failures.length ? {failures: failures.slice(0, 10)} : {}),
   });

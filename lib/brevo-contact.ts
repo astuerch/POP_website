@@ -16,6 +16,8 @@ export interface EventRegistrant {
   source?: string;
   /** Event label stored in the cumulative history, e.g. "POP 02". */
   event?: string;
+  /** True when the buyer ticked the newsletter opt-in at checkout. */
+  newsletter?: boolean;
 }
 
 const BREVO = "https://api.brevo.com/v3";
@@ -64,9 +66,13 @@ export type UpsertResult =
  */
 export async function upsertEventContact(
   registrant: EventRegistrant,
-  options: {apiKey: string; listId: number | null},
+  options: {apiKey: string; listId?: number | null; listIds?: number[]},
 ): Promise<UpsertResult> {
-  const {apiKey, listId} = options;
+  const {apiKey} = options;
+  // Accept a single list or several (e.g. event list + newsletter opt-in).
+  const lists = (
+    options.listIds ?? (options.listId ? [options.listId] : [])
+  ).filter((id): id is number => Number.isFinite(id));
 
   const attributes: Record<string, string | number> = {};
   const set = (key: string, value?: string) => {
@@ -103,7 +109,7 @@ export async function upsertEventContact(
         email: registrant.email,
         updateEnabled: true,
         attributes,
-        ...(listId ? {listIds: [listId]} : {}),
+        ...(lists.length ? {listIds: lists} : {}),
       }),
       cache: "no-store",
     });
