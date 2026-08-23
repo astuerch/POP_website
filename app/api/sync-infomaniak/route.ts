@@ -6,6 +6,8 @@ import {upsertEventContact, type EventRegistrant} from "@/lib/brevo-contact";
 // Must run on Node (not Edge): we use node:https to control raw headers.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+// Each order needs a detail lookup, so allow headroom for busy sync runs.
+export const maxDuration = 60;
 
 /**
  * Infomaniak requires a non-standard `key` header. Platform `fetch`
@@ -110,19 +112,32 @@ function flatten(order: Record<string, unknown>): Record<string, unknown> {
     }
   }
 
-  // Custom registration questions usually arrive as an array of
-  // {label/question/name, value/answer} pairs.
+  // Custom registration questions arrive as arrays of {label, value} pairs,
+  // either on the order itself or on each ticket.
   const answerKeys = ["fields", "custom_fields", "answers", "form", "options"];
-  for (const key of answerKeys) {
-    const list = order[key];
-    if (!Array.isArray(list)) continue;
-    for (const entry of list) {
-      if (!entry || typeof entry !== "object") continue;
-      const row = entry as Record<string, unknown>;
-      const label = pick(row, ["label", "question", "name", "title", "key"]);
-      const value = pick(row, ["value", "answer", "response", "content"]);
-      if (label && value) {
-        flat[label.toLowerCase().replace(/[^a-z0-9]+/g, "_")] = value;
+  const absorbAnswers = (source: Record<string, unknown>) => {
+    for (const key of answerKeys) {
+      const list = source[key];
+      if (!Array.isArray(list)) continue;
+      for (const entry of list) {
+        if (!entry || typeof entry !== "object") continue;
+        const row = entry as Record<string, unknown>;
+        const label = pick(row, ["label", "question", "name", "title", "key"]);
+        const value = pick(row, ["value", "answer", "response", "content"]);
+        if (label && value) {
+          flat[label.toLowerCase().replace(/[^a-z0-9]+/g, "_")] = value;
+        }
+      }
+    }
+  };
+
+  absorbAnswers(order);
+
+  const tickets = order.tickets;
+  if (Array.isArray(tickets)) {
+    for (const ticket of tickets) {
+      if (ticket && typeof ticket === "object") {
+        absorbAnswers(ticket as Record<string, unknown>);
       }
     }
   }
@@ -200,10 +215,39 @@ export async function GET(request: Request) {
 
   const diag = params.get("diag") === "1";
 
+  /**
+   * GET /orders returns a summary only (no email). The buyer's details live on
+   * the order detail, so we expand each summary into its full record.
+   */
+  async function loadOrderDetail(
+    summary: Record<string, unknown>,
+  ): Promise<Record<string, unknown>> {
+    const id = summary.order_id ?? summary.id;
+    if (id === undefined || id === null) return summary;
+
+    try {
+      const detail = await rawGet(
+        `${INFOMANIAK_BASE}/order/${encodeURIComponent(String(id))}`,
+        baseHeaders,
+      );
+      if (detail.status < 200 || detail.status >= 300) return summary;
+
+      const parsed = JSON.parse(detail.body) as unknown;
+      const record =
+        (parsed as {data?: unknown})?.data ??
+        (parsed as {order?: unknown})?.order ??
+        parsed;
+
+      return record && typeof record === "object" && !Array.isArray(record)
+        ? {...summary, ...(record as Record<string, unknown>)}
+        : summary;
+    } catch {
+      return summary;
+    }
+  }
+
   let orders: Array<Record<string, unknown>>;
   try {
-    // `diag=1` probes header-name variants one at a time (sent individually so
-    // nothing gets merged) to find the exact spelling Infomaniak expects.
     const result = await rawGet(ordersUrl, baseHeaders);
 
     if (diag) {
@@ -242,7 +286,8 @@ export async function GET(request: Request) {
 
   // Inspect the real payload shape without touching Brevo.
   if (probe) {
-    const sample = orders[0] ?? null;
+    const summary = orders[0] ?? null;
+    const sample = summary ? await loadOrderDetail(summary) : null;
     return NextResponse.json({
       probe: true,
       orderCount: orders.length,
@@ -257,9 +302,11 @@ export async function GET(request: Request) {
   const failures: string[] = [];
   const seen = new Set<string>();
 
-  for (const order of orders) {
+  for (const summary of orders) {
+    const order = await loadOrderDetail(summary);
     const registrant = toRegistrant(order, eventLabel);
     if (!registrant) {
+      // No usable email — e.g. box-office sales entered without customer data.
       skipped += 1;
       continue;
     }
