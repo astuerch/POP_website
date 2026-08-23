@@ -246,6 +246,64 @@ export async function GET(request: Request) {
     }
   }
 
+  /**
+   * Custom registration answers (age range, job field, city…) are stored on the
+   * tickets, not the order. Fetch them once and index by order id so each
+   * registrant can be enriched without an extra call per order.
+   */
+  async function loadTicketAnswers(): Promise<{
+    byOrder: Map<string, Record<string, unknown>>;
+    sample: Record<string, unknown> | null;
+  }> {
+    const byOrder = new Map<string, Record<string, unknown>>();
+    let sample: Record<string, unknown> | null = null;
+
+    try {
+      const response = await rawGet(
+        `${INFOMANIAK_BASE}/tickets?limit=500&begin=${begin}`,
+        baseHeaders,
+      );
+      if (response.status < 200 || response.status >= 300) {
+        return {byOrder, sample};
+      }
+
+      const parsed = JSON.parse(response.body) as unknown;
+      const data =
+        (parsed as {data?: unknown})?.data ??
+        (parsed as {tickets?: unknown})?.tickets ??
+        parsed;
+      const tickets = Array.isArray(data)
+        ? (data as Array<Record<string, unknown>>)
+        : [];
+
+      if (tickets.length) sample = tickets[0];
+
+      for (const ticket of tickets) {
+        const orderId = pick(ticket, [
+          "order_id",
+          "orderId",
+          "id_order",
+          "order",
+        ]);
+        if (!orderId) continue;
+
+        const flat = flatten(ticket);
+        const existing = byOrder.get(orderId) ?? {};
+        // Keep the first non-empty answer seen for this order.
+        for (const [key, value] of Object.entries(flat)) {
+          if (existing[key] === undefined && value !== null && value !== "") {
+            existing[key] = value;
+          }
+        }
+        byOrder.set(orderId, existing);
+      }
+    } catch {
+      // Answers are a bonus — never fail the sync because of them.
+    }
+
+    return {byOrder, sample};
+  }
+
   let orders: Array<Record<string, unknown>>;
   try {
     const result = await rawGet(ordersUrl, baseHeaders);
@@ -284,15 +342,29 @@ export async function GET(request: Request) {
     );
   }
 
+  const {byOrder: ticketAnswers, sample: ticketSample} =
+    await loadTicketAnswers();
+
+  /** Order detail + that order's ticket answers, ready for mapping. */
+  function withAnswers(order: Record<string, unknown>) {
+    const orderId = pick(order, ["order_id", "id"]);
+    const answers = orderId ? ticketAnswers.get(orderId) : undefined;
+    return answers ? {...answers, ...order} : order;
+  }
+
   // Inspect the real payload shape without touching Brevo.
   if (probe) {
     const summary = orders[0] ?? null;
-    const sample = summary ? await loadOrderDetail(summary) : null;
+    const detail = summary ? await loadOrderDetail(summary) : null;
+    const sample = detail ? withAnswers(detail) : null;
     return NextResponse.json({
       probe: true,
       orderCount: orders.length,
-      topLevelKeys: sample ? Object.keys(sample) : [],
       flattenedKeys: sample ? Object.keys(flatten(sample)) : [],
+      // The ticket record is where custom question answers live — inspect its
+      // keys to finalise the mapping to Brevo attributes.
+      ticketSampleKeys: ticketSample ? Object.keys(ticketSample) : [],
+      ticketSample: ticketSample ?? null,
       mappedPreview: sample ? toRegistrant(sample, eventLabel) : null,
     });
   }
@@ -303,7 +375,7 @@ export async function GET(request: Request) {
   const seen = new Set<string>();
 
   for (const summary of orders) {
-    const order = await loadOrderDetail(summary);
+    const order = withAnswers(await loadOrderDetail(summary));
     const registrant = toRegistrant(order, eventLabel);
     if (!registrant) {
       // No usable email — e.g. box-office sales entered without customer data.
