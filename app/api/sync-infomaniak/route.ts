@@ -131,7 +131,26 @@ function flatten(order: Record<string, unknown>): Record<string, unknown> {
     }
   };
 
+  // Period custom fields arrive as an object keyed by the label you typed in
+  // Infomaniak, e.g. {"Age Range": "tOption_2", "Job Field": "Biotech"}.
+  const absorbCustomObject = (source: Record<string, unknown>) => {
+    for (const key of ["custom_fields", "customFields", "custom"]) {
+      const value = source[key];
+      if (!value || typeof value !== "object" || Array.isArray(value)) continue;
+      for (const [label, raw] of Object.entries(
+        value as Record<string, unknown>,
+      )) {
+        if (typeof raw !== "string" && typeof raw !== "number") continue;
+        const text = String(raw).trim();
+        if (label && text) {
+          flat[label.toLowerCase().replace(/[^a-z0-9]+/g, "_")] = text;
+        }
+      }
+    }
+  };
+
   absorbAnswers(order);
+  absorbCustomObject(order);
 
   const tickets = order.tickets;
   if (Array.isArray(tickets)) {
@@ -145,22 +164,85 @@ function flatten(order: Record<string, unknown>): Record<string, unknown> {
   return flat;
 }
 
+/**
+ * Dropdown custom fields come back as opaque option ids ("tOption_2"). Walks a
+ * form definition and collects every id → human label pair it can find.
+ */
+function collectOptionLabels(
+  node: unknown,
+  map: Map<string, string>,
+): Map<string, string> {
+  if (Array.isArray(node)) {
+    for (const item of node) collectOptionLabels(item, map);
+    return map;
+  }
+  if (!node || typeof node !== "object") return map;
+
+  const entries = Object.entries(node as Record<string, unknown>);
+
+  // Shape A: {"tOption_2": "25-34"}
+  for (const [key, value] of entries) {
+    if (/^tOption_\d+$/i.test(key) && typeof value === "string") {
+      map.set(key, value);
+    }
+  }
+
+  // Shape B: {id: "tOption_2", label: "25-34"}
+  const idEntry = entries.find(
+    ([, value]) => typeof value === "string" && /^tOption_\d+$/i.test(value),
+  );
+  if (idEntry) {
+    const labelEntry = entries.find(
+      ([key, value]) =>
+        typeof value === "string" &&
+        /label|name|title|text|value/i.test(key) &&
+        !/^tOption_\d+$/i.test(value),
+    );
+    if (labelEntry) map.set(idEntry[1] as string, labelEntry[1] as string);
+  }
+
+  for (const [, value] of entries) collectOptionLabels(value, map);
+  return map;
+}
+
 function toRegistrant(
   order: Record<string, unknown>,
   eventLabel: string,
+  optionLabels?: Map<string, string>,
 ): EventRegistrant | null {
   const flat = flatten(order);
 
   const email = pick(flat, ["email", "mail", "email_address", "e_mail"]);
   if (!email.includes("@")) return null;
 
+  // Replace dropdown option ids with their human labels when we know them, and
+  // fall back to the configured list order (tOption_1 = first option, …).
+  const readable = (value: string): string => {
+    if (!/^tOption_\d+$/i.test(value)) return value;
+    const known = optionLabels?.get(value);
+    if (known) return known;
+
+    const fallback = (process.env.INFOMANIAK_AGE_RANGE_OPTIONS ?? "")
+      .split(",")
+      .map((entry) => entry.trim())
+      .filter(Boolean);
+    const index = Number(value.split("_")[1]) - 1;
+    return fallback[index] ?? value;
+  };
+
   return {
     email,
     firstName: pick(flat, ["firstname", "first_name", "firstName", "prenom", "vorname"]),
     surname: pick(flat, ["lastname", "last_name", "lastName", "surname", "nom", "nachname"]),
-    ageRange: pick(flat, ["age_range", "agerange", "age", "tranche_d_age", "altersgruppe"]),
-    jobField: pick(flat, ["job_field", "jobfield", "job", "profession", "industry", "branche", "domaine"]),
-    region: pick(flat, ["region", "city", "ville", "stadt", "canton", "location", "wohnort"]),
+    ageRange: readable(
+      pick(flat, ["age_range", "agerange", "age", "tranche_d_age", "altersgruppe"]),
+    ),
+    jobField: readable(
+      pick(flat, ["job_field", "jobfield", "job", "profession", "industry", "branche", "domaine"]),
+    ),
+    region: readable(
+      pick(flat, ["region", "city", "ville", "stadt", "canton", "location", "wohnort"]),
+    ),
     source: "infomaniak",
     event: eventLabel,
   };
@@ -389,6 +471,22 @@ export async function GET(request: Request) {
   const {byEmail: customerRecords, sample: customerSample} =
     await loadCustomerRecords();
 
+  // The registration form definition holds the dropdown option labels.
+  let formDefinition: unknown = null;
+  const optionLabels = new Map<string, string>();
+  try {
+    const response = await rawGet(
+      `${INFOMANIAK_BASE}/customers/form`,
+      baseHeaders,
+    );
+    if (response.status >= 200 && response.status < 300) {
+      formDefinition = JSON.parse(response.body) as unknown;
+      collectOptionLabels(formDefinition, optionLabels);
+    }
+  } catch {
+    // Option labels are cosmetic — fall back to the configured list order.
+  }
+
   /**
    * Order detail + that order's ticket answers + the buyer's customer record
    * (which carries the period custom fields), ready for mapping.
@@ -437,8 +535,10 @@ export async function GET(request: Request) {
       flattenedKeys: sample ? Object.keys(flatten(sample)) : [],
       // Where the period custom fields (Age Range, Job Field, Region) should be.
       customerSample: customerSample ?? null,
+      formDefinition,
+      optionLabels: Object.fromEntries(optionLabels),
       ticketDetail,
-      mappedPreview: sample ? toRegistrant(sample, eventLabel) : null,
+      mappedPreview: sample ? toRegistrant(sample, eventLabel, optionLabels) : null,
     });
   }
 
@@ -449,7 +549,7 @@ export async function GET(request: Request) {
 
   for (const summary of orders) {
     const order = withAnswers(await loadOrderDetail(summary));
-    const registrant = toRegistrant(order, eventLabel);
+    const registrant = toRegistrant(order, eventLabel, optionLabels);
     if (!registrant) {
       // No usable email — e.g. box-office sales entered without customer data.
       skipped += 1;
