@@ -304,6 +304,48 @@ export async function GET(request: Request) {
     return {byOrder, sample};
   }
 
+  /**
+   * Period-level custom fields (Age Range, Job Field, Region) live on the
+   * customer record, so fetch the customer list once and index it by email.
+   */
+  async function loadCustomerRecords(): Promise<{
+    byEmail: Map<string, Record<string, unknown>>;
+    sample: Record<string, unknown> | null;
+  }> {
+    const byEmail = new Map<string, Record<string, unknown>>();
+    let sample: Record<string, unknown> | null = null;
+
+    try {
+      const response = await rawGet(
+        `${INFOMANIAK_BASE}/customers?limit=500`,
+        baseHeaders,
+      );
+      if (response.status < 200 || response.status >= 300) {
+        return {byEmail, sample};
+      }
+
+      const parsed = JSON.parse(response.body) as unknown;
+      const data =
+        (parsed as {data?: unknown})?.data ??
+        (parsed as {customers?: unknown})?.customers ??
+        parsed;
+      const customers = Array.isArray(data)
+        ? (data as Array<Record<string, unknown>>)
+        : [];
+
+      if (customers.length) sample = customers[0];
+
+      for (const customer of customers) {
+        const email = pick(customer, ["email", "mail"]).toLowerCase();
+        if (email) byEmail.set(email, customer);
+      }
+    } catch {
+      // Custom fields are a bonus — never fail the sync because of them.
+    }
+
+    return {byEmail, sample};
+  }
+
   let orders: Array<Record<string, unknown>>;
   try {
     const result = await rawGet(ordersUrl, baseHeaders);
@@ -344,12 +386,24 @@ export async function GET(request: Request) {
 
   const {byOrder: ticketAnswers, sample: ticketSample} =
     await loadTicketAnswers();
+  const {byEmail: customerRecords, sample: customerSample} =
+    await loadCustomerRecords();
 
-  /** Order detail + that order's ticket answers, ready for mapping. */
+  /**
+   * Order detail + that order's ticket answers + the buyer's customer record
+   * (which carries the period custom fields), ready for mapping.
+   */
   function withAnswers(order: Record<string, unknown>) {
     const orderId = pick(order, ["order_id", "id"]);
     const answers = orderId ? ticketAnswers.get(orderId) : undefined;
-    return answers ? {...answers, ...order} : order;
+    const merged: Record<string, unknown> = answers
+      ? {...answers, ...order}
+      : {...order};
+
+    const email = pick(flatten(merged), ["email", "mail"]).toLowerCase();
+    const customer = email ? customerRecords.get(email) : undefined;
+    // Customer fields fill gaps without overwriting the order's own values.
+    return customer ? {...flatten(customer), ...merged} : merged;
   }
 
   // Inspect the real payload shape without touching Brevo.
@@ -357,14 +411,33 @@ export async function GET(request: Request) {
     const summary = orders[0] ?? null;
     const detail = summary ? await loadOrderDetail(summary) : null;
     const sample = detail ? withAnswers(detail) : null;
+
+    // The list endpoints omit per-ticket form answers, so pull one full ticket
+    // record to discover where the custom questions are stored.
+    let ticketDetail: unknown = null;
+    const ticketId = ticketSample ? pick(ticketSample, ["ticket_id", "id"]) : "";
+    if (ticketId) {
+      try {
+        const response = await rawGet(
+          `${INFOMANIAK_BASE}/ticket/${encodeURIComponent(ticketId)}`,
+          baseHeaders,
+        );
+        ticketDetail =
+          response.status >= 200 && response.status < 300
+            ? (JSON.parse(response.body) as unknown)
+            : {status: response.status, body: response.body.slice(0, 200)};
+      } catch {
+        ticketDetail = null;
+      }
+    }
+
     return NextResponse.json({
       probe: true,
       orderCount: orders.length,
       flattenedKeys: sample ? Object.keys(flatten(sample)) : [],
-      // The ticket record is where custom question answers live — inspect its
-      // keys to finalise the mapping to Brevo attributes.
-      ticketSampleKeys: ticketSample ? Object.keys(ticketSample) : [],
-      ticketSample: ticketSample ?? null,
+      // Where the period custom fields (Age Range, Job Field, Region) should be.
+      customerSample: customerSample ?? null,
+      ticketDetail,
       mappedPreview: sample ? toRegistrant(sample, eventLabel) : null,
     });
   }
