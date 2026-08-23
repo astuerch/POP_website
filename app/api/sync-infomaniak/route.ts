@@ -278,6 +278,19 @@ export async function GET(request: Request) {
     );
   }
 
+  // Every ticket buyer belongs in the event list, so a missing/invalid id is a
+  // hard error rather than a silent partial sync.
+  if (!Number.isFinite(Number(process.env.BREVO_EVENT_LIST_ID))) {
+    return NextResponse.json(
+      {
+        message:
+          "BREVO_EVENT_LIST_ID is missing or not a number — set it in Vercel (event list id, e.g. 4) and redeploy.",
+        configured: false,
+      },
+      {status: 503},
+    );
+  }
+
   const params = new URL(request.url).searchParams;
   const probe = params.get("probe") === "1";
   const days = Math.min(Number(params.get("days")) || 30, 365);
@@ -567,6 +580,7 @@ export async function GET(request: Request) {
   let newsletterOptIns = 0;
   const failures: string[] = [];
   const seen = new Set<string>();
+  const listsUsed: number[][] = [];
 
   for (const summary of orders) {
     const order = withAnswers(await loadOrderDetail(summary));
@@ -587,6 +601,7 @@ export async function GET(request: Request) {
       ...(registrant.newsletter && newsletterListId ? [newsletterListId] : []),
     ];
     if (registrant.newsletter && newsletterListId) newsletterOptIns += 1;
+    listsUsed.push(listIds);
 
     const result = await upsertEventContact(registrant, {
       apiKey: brevoKey,
@@ -604,6 +619,10 @@ export async function GET(request: Request) {
     synced,
     skipped,
     newsletterOptIns,
+    // Diagnostics: confirms both lists are being written to.
+    eventListId: listId,
+    newsletterListId,
+    listsUsed: listsUsed.slice(0, 5),
     failed: failures.length,
     ...(failures.length ? {failures: failures.slice(0, 10)} : {}),
   });
