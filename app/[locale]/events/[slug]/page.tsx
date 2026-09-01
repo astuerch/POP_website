@@ -76,87 +76,79 @@ export default async function EventDetailPage({
   return (
     <div>
       <EventSchema event={event} />
-      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-        <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
+      {/* Full-bleed hero + title block: the artwork and headline get the whole
+          column width instead of being squeezed beside the sidebar. */}
+      <div className="mx-auto max-w-7xl px-6 pt-8 sm:px-8 sm:pt-12 lg:px-12">
+        <AnimatedSection amount={0.05}>
+          <div className="bg-brand-surface relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/10 sm:aspect-[21/9]">
+            {!event.heroImage && event.imageFit === "contain" ? (
+              <>
+                <Image
+                  fill
+                  aria-hidden
+                  className="scale-110 object-cover opacity-40 blur-2xl"
+                  src={event.image.src}
+                  alt=""
+                  sizes="100vw"
+                />
+                <Image
+                  fill
+                  className="object-contain"
+                  src={event.image.src}
+                  alt={event.image.alt}
+                  sizes="100vw"
+                  priority
+                />
+              </>
+            ) : (
+              <Reveal className="absolute inset-0">
+                <Image
+                  fill
+                  className="object-cover"
+                  src={event.heroImage?.src ?? event.image.src}
+                  alt={event.heroImage?.alt ?? event.image.alt}
+                  sizes="100vw"
+                  priority
+                />
+              </Reveal>
+            )}
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection className="mt-10" delay={0.05}>
+          <div className="max-w-4xl space-y-5">
+            <Eyebrow>
+              {event.edition
+                ? popEditionLabel(event.edition)
+                : event.dateLabel}
+            </Eyebrow>
+            <h1 className="font-heading text-brand-fog text-4xl leading-none tracking-tight sm:text-6xl lg:text-7xl">
+              {event.title}
+            </h1>
+            <p className="text-brand-lila-light text-base font-medium">
+              {event.venue} · {event.location}
+            </p>
+            <p className="text-brand-mist max-w-3xl text-lg leading-8 sm:text-xl sm:leading-9">
+              {event.summary}
+            </p>
+          </div>
+        </AnimatedSection>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-16 lg:px-12">
+        <div className="grid gap-12 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-16">
           <AnimatedSection amount={0.05}>
-            <article className="space-y-8">
-              <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
-                {!event.heroImage && event.imageFit === "contain" ? (
-                  <>
-                    <Image
-                      fill
-                      aria-hidden
-                      className="scale-110 object-cover opacity-40 blur-2xl"
-                      src={event.image.src}
-                      alt=""
-                      sizes="(max-width:1280px) 100vw, 800px"
-                    />
-                    <Image
-                      fill
-                      className="object-contain"
-                      src={event.image.src}
-                      alt={event.image.alt}
-                      sizes="(max-width:1280px) 100vw, 800px"
-                      priority
-                    />
-                  </>
-                ) : (
-                  <Reveal className="absolute inset-0">
-                    <Image
-                      fill
-                      className="object-cover"
-                      src={event.heroImage?.src ?? event.image.src}
-                      alt={event.heroImage?.alt ?? event.image.alt}
-                      priority
-                    />
-                  </Reveal>
-                )}
-              </div>
-
-              <div className="space-y-5">
-                <Eyebrow>
-                  {event.edition
-                    ? popEditionLabel(event.edition)
-                    : event.dateLabel}
-                </Eyebrow>
-                <h1 className="font-heading text-brand-fog text-4xl leading-none tracking-tight sm:text-5xl lg:text-6xl">
-                  {event.title}
-                </h1>
-                <p className="text-brand-lila-light text-base font-medium">
-                  {event.venue} · {event.location}
-                </p>
-                <p className="text-brand-mist text-base leading-6 sm:text-lg sm:leading-8">
-                  {event.summary}
-                </p>
-              </div>
-
-              <div className="bg-brand-surface grid gap-4 rounded-3xl border border-white/10 p-6 sm:grid-cols-3">
-                <div>
-                  <Eyebrow>{t("date")}</Eyebrow>
-                  <p className="text-brand-fog mt-2 text-base">{event.dateLabel}</p>
-                </div>
-                <div>
-                  <Eyebrow>{t("location")}</Eyebrow>
-                  <p className="text-brand-fog mt-2 text-base">{event.location}</p>
-                </div>
-                <div>
-                  <Eyebrow>{t("format")}</Eyebrow>
-                  <p className="text-brand-fog mt-2 text-base">
-                    {event.priceLabel ?? t("eventDetails")}
-                  </p>
-                </div>
-              </div>
-
+            <article className="space-y-14">
               <section>
-                <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight">
+                <h2 className="font-heading text-brand-fog text-3xl leading-none tracking-tight uppercase sm:text-4xl">
                   {t("about")}
                 </h2>
                 {event.aboutHeading ? (
-                  <p className="font-serif text-brand-fog mt-5 text-2xl leading-snug italic sm:text-3xl">
+                  <p className="font-serif text-brand-fog mt-6 max-w-3xl text-2xl leading-snug italic sm:text-3xl">
                     {event.aboutHeading}
                   </p>
                 ) : null}
-                <div className="text-brand-mist mt-4 space-y-4 text-base leading-7 sm:leading-8">
+                <div className="text-brand-mist mt-6 max-w-3xl space-y-5 text-base leading-8 sm:text-lg sm:leading-9">
                   {event.description.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
@@ -165,7 +157,7 @@ export default async function EventDetailPage({
 
               {event.schedule ? (
                 <section>
-                  <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight">
+                  <h2 className="font-heading text-brand-fog text-3xl leading-none tracking-tight uppercase sm:text-4xl">
                     {t("schedule")}
                   </h2>
                   <ol className="mt-6 space-y-6">
@@ -196,7 +188,7 @@ export default async function EventDetailPage({
               ) : null}
 
               <section>
-                <h2 className="font-heading text-brand-fog text-4xl leading-none tracking-tight">
+                <h2 className="font-heading text-brand-fog text-3xl leading-none tracking-tight uppercase sm:text-4xl">
                   {t("hosts")}
                 </h2>
                 {event.lineup ? (
@@ -204,7 +196,7 @@ export default async function EventDetailPage({
                     {event.lineup.map((group) => (
                       <div key={group.title} className="space-y-5">
                         <Eyebrow>{group.title}</Eyebrow>
-                        <Stagger className="grid gap-6 sm:grid-cols-2" amount={0.15}>
+                        <Stagger className="grid gap-8 sm:grid-cols-2" amount={0.15}>
                           {group.people.map((person) => (
                             <StaggerItem
                               key={person.name}
@@ -216,7 +208,7 @@ export default async function EventDetailPage({
                                   className="object-cover"
                                   src={person.image}
                                   alt={person.name}
-                                  sizes="(max-width:640px) 100vw, 40vw"
+                                  sizes="(max-width:640px) 100vw, 45vw"
                                 />
                               </div>
                               <div className="flex flex-1 flex-col p-6">
@@ -228,7 +220,7 @@ export default async function EventDetailPage({
                                     ? `“${person.talkTitle}”`
                                     : person.role}
                                 </p>
-                                <p className="text-brand-mist mt-3 text-sm leading-7">
+                                <p className="text-brand-mist mt-4 text-sm leading-7">
                                   {person.bio}
                                 </p>
                               </div>
@@ -250,7 +242,28 @@ export default async function EventDetailPage({
           </AnimatedSection>
 
           <AnimatedSection delay={0.08}>
-            <aside className="xl:sticky xl:top-28">
+            {/* Key facts live beside the content so the column carries weight
+                even while registration is still "opening soon". */}
+            <aside className="space-y-6 xl:sticky xl:top-28">
+              <div className="bg-brand-surface divide-y divide-white/10 rounded-3xl border border-white/10">
+                <div className="p-6">
+                  <Eyebrow>{t("date")}</Eyebrow>
+                  <p className="text-brand-fog mt-2 text-base">
+                    {event.dateLabel}
+                  </p>
+                </div>
+                <div className="p-6">
+                  <Eyebrow>{t("location")}</Eyebrow>
+                  <p className="text-brand-fog mt-2 text-base">{event.venue}</p>
+                  <p className="text-brand-mist text-sm">{event.location}</p>
+                </div>
+                <div className="p-6">
+                  <Eyebrow>{t("format")}</Eyebrow>
+                  <p className="text-brand-fog mt-2 text-base">
+                    {event.priceLabel ?? t("eventDetails")}
+                  </p>
+                </div>
+              </div>
               <RegistrationWidget event={event} />
             </aside>
           </AnimatedSection>
