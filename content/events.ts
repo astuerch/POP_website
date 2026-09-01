@@ -151,14 +151,14 @@ export const events: Event[] = [
             role: "Postdoctoral researcher, ETH Zurich",
             talkTitle:
               "Who sees what: How social media design choices shape work, opinion, and culture",
-            bio: "Stefania studies what happens when algorithms decide what people see, and what that does to opinion, work and culture. She read mathematics at Cambridge, took a master's in Logic in Amsterdam (cum laude) and a PhD at the University of Zurich (summa cum laude), and won the 2025 FAN Award in Law and Economics. Now a postdoctoral researcher at ETH Zurich, she recently used Bluesky feeds to test how much changing a ranking changes what people actually see.",
+            bio: "Stefania studies what happens when algorithms decide what people see. Her research looks at recommendation, moderation and filtering tools, the invisible machinery behind every feed, and asks what they do to opinion, to work, and to culture. She read mathematics at Cambridge, took a master's in Logic in Amsterdam (cum laude), and earned her PhD at the University of Zurich (summa cum laude) on the societal impact of these systems. In 2025 she received the FAN Award for outstanding scientific achievement in Law and Economics. Now a postdoctoral researcher at ETH Zurich working on responsible automation, she recently used Bluesky feeds to test a deceptively simple question: change how posts are ranked, and how much does what people see change with it? She also co-designs university courses that put this research in front of the engineers who will build the next generation of these systems. Outside the lab: board games, Dungeons & Dragons, and hiking.",
             image: "/images/events/event-02/speaker-stefania.jpg",
           },
           {
             name: "Sophia Kramer",
             role: "CEO and co-founder, Smove AI",
             talkTitle: "Is social media making us anti-social?",
-            bio: "Sophia has spent ten years on the other side of the feed, building communication for Audemars Piguet, FC Bayern, BMW, Burger King and Coop. Trained as a designer, with a BA in International Business Studies, she was named 30u30 Swiss Communication and is a Cannes Young Lion medalist. She now runs Smove AI, which builds AI agents that draft social content for Swiss and German agencies, with a human approving every post.",
+            bio: "Sophia has spent ten years on the other side of the feed. As a designer and strategist in agency and brand roles, she has built communication for Audemars Piguet, FC Bayern, BMW, Burger King, Paulaner and Coop, work that reached millions of people through the platforms we'll be talking about. She trained as a designer and holds a BA in International Business Studies from FAU Erlangen-Nürnberg, was named 30u30 Swiss Communication, and is a Cannes Young Lion medalist. She now runs Smove AI, which builds AI agents for Swiss and German creative agencies, one each for Instagram, LinkedIn and Facebook, that draft social content and pass it to a human for approval before publishing. Outside the work she runs MAPO, an NGO supporting education for children in Tanzania, is a committed Rotarian, and plays chess and piano.",
             image: "/images/events/event-02/speaker-sophia.jpg",
           },
         ],
@@ -169,7 +169,7 @@ export const events: Event[] = [
           {
             name: "Mihai Barascu",
             role: "Live DJ Set",
-            bio: "Mihai works at the intersection of technology, arts and humanities. With a background in mechanical engineering and finance, he is currently a chef by day and a music explorer by night, from electric guitars to digital instruments. His current focus is minimal house and techno.",
+            bio: "Mihai works at the intersection of technology, arts and humanities. With a background in mechanical engineering and finance, he is currently working as a chef while exploring music, sharing an interest in media from electric guitars to digital instruments. His current attention in electronic music is focused on minimal house and techno.",
             image: "/images/events/event-01/artist-mihai.jpg",
           },
         ],
