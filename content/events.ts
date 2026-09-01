@@ -91,17 +91,20 @@ export const events: Event[] = [
     edition: 2,
     title: "Social Media & How it changes your Mind",
     summary:
-      "Where does influence end and manipulation begin? One speaker explores what social media does to the mind, another what it changes in society.",
+      "Two speakers. One question: what is social media actually doing to us? A researcher who studies the systems, and a strategist who builds inside them.",
+    aboutHeading:
+      "Two speakers. One question: what is social media actually doing to us?",
     description: [
-      "This POP evening in Zürich asks how social platforms shape attention, identity, and public discourse.",
-      "The format combines research-based input with open discussion so participants can compare scientific evidence with lived experience.",
-      "Registration details will be published once the event setup is finalized.",
+      "Every feed you scroll has been shaped by decisions someone made. What surfaces. What disappears. What you never see at all. Those decisions are made by people, inside companies, using systems most of us never look at directly.",
+      "For POP 02 we've brought together someone who studies those systems and someone who builds inside them. Stefania Ionescu researches how recommendation and moderation tools shape what a society sees. Sophia Kramer has spent a decade building communication for brands on exactly those platforms, and now builds AI tools for the people who do that work.",
+      "Two vantage points on the same machinery, in the same room.",
     ],
     isoDate: "2026-10-26",
-    // Confirmed 19:00 start (CET, UTC+1 — DST ends 25 Oct 2026). Adjust the time if it changes.
-    startsAt: "2026-10-26T19:00:00+01:00",
+    // Doors 19:00, talks start 19:30 (CET, UTC+1 since DST ends 25 Oct 2026).
+    // The countdown targets the talk start.
+    startsAt: "2026-10-26T19:30:00+01:00",
     isTentative: false,
-    dateLabel: "Mon, Oct 26, 2026 · 19:00",
+    dateLabel: "Mon, Oct 26, 2026 · Doors 19:00 · Talks 19:30",
     location: "Zürich, Switzerland",
     venue: "Amboss Rampe, Zürich",
     city: "Zürich",
@@ -113,7 +116,64 @@ export const events: Event[] = [
     //   https://infomaniak.events/group/dd687bd7-ca77-463d-8fb9-a249751f4831
     //   (prefer a per-event Infomaniak link/embed for this single event if available.)
     priceLabel: "Free RSVP · Registration opening soon",
-    speakers: ["Speaker lineup to be announced"],
+    speakers: ["Stefania Ionescu", "Sophia Kramer", "Mihai Barascu (DJ set)"],
+    schedule: [
+      {
+        time: "19:00",
+        title: "Welcome Apéro",
+        details: ["Arrival, drinks and informal networking."],
+      },
+      {
+        time: "19:30",
+        title: "Talks",
+        details: [
+          "Who sees what: How social media design choices shape work, opinion, and culture — Stefania Ionescu",
+          "Is social media making us anti-social? — Sophia Kramer",
+          "20 minutes each, followed by Q&A with the room.",
+        ],
+      },
+      {
+        time: "From 20:30",
+        title: "Open discussion, networking & DJ set",
+        details: [
+          "The floor opens up: questions, conversations and new connections.",
+          "DJ Set by Mihai Barascu.",
+        ],
+      },
+    ],
+    lineup: [
+      {
+        title: "Talks",
+        people: [
+          {
+            name: "Stefania Ionescu",
+            role: "Postdoctoral researcher, ETH Zurich",
+            talkTitle:
+              "Who sees what: How social media design choices shape work, opinion, and culture",
+            bio: "Stefania studies what happens when algorithms decide what people see. Her research looks at recommendation, moderation and filtering tools, the invisible machinery behind every feed, and asks what they do to opinion, to work, and to culture. She started in mathematics at the University of Cambridge, then took a master's in Logic at the ILLC in Amsterdam, cum laude. Her PhD at the University of Zurich, on the societal impact of these systems, was awarded summa cum laude, and in 2025 she received the FAN Award for outstanding scientific achievement in Law and Economics. She is now a postdoctoral researcher at ETH Zurich working on responsible automation. Recently she worked with Bluesky feeds to test a deceptively simple question: change how posts are ranked, and how much does what people see change with it? She also co-designs university courses, Game Theory and Algorithmic Concepts and Social Computing, that put this research in front of the engineers who will build the next generation of these systems. Outside the lab: board games, Dungeons & Dragons, and hiking.",
+            image: "/images/events/event-02/speaker-stefania.jpg",
+          },
+          {
+            name: "Sophia Kramer",
+            role: "CEO and co-founder, Smove AI",
+            talkTitle: "Is social media making us anti-social?",
+            bio: "Sophia has spent ten years on the other side of the feed. As a designer and strategist in agency and brand roles, she has built communication platforms for Audemars Piguet, FC Bayern, BMW, Burger King, Paulaner and Coop, work that reached millions of people through the platforms we'll be talking about. She trained as a designer and holds a BA in International Business Studies from FAU Erlangen-Nürnberg. She was named 30u30 Swiss Communication and is a Cannes Young Lion medalist. She now runs Smove AI, which builds AI agents for Swiss and German creative agencies, one each for Instagram, LinkedIn and Facebook, that draft social content and pass it to a human for approval before publishing. Ten years of building for these platforms, and a daily view of where they're heading next. Outside the work: she runs MAPO, an NGO supporting education for children in Tanzania, is a committed Rotarian, and plays chess and piano.",
+            image: "/images/events/event-02/speaker-sophia.jpg",
+          },
+        ],
+      },
+      {
+        title: "Live Music",
+        people: [
+          {
+            name: "Mihai Barascu",
+            role: "Live DJ Set",
+            bio: "Mihai has cultivated passions at the intersection of technology, arts, and humanities. With a background in mechanical engineering and finance, he is currently working as a chef while engaging in music exploration. Sharing an interest in various media, from electric guitars to digital instruments, his current electronic music attention has been focused on minimal house and techno.",
+            image: "/images/events/event-01/artist-mihai.jpg",
+          },
+        ],
+      },
+    ],
     image: {
       src: "/images/events/event2_pic.jpg",
       alt: "Artwork of a head opening into a colourful brain with hands placing social media logos.",
