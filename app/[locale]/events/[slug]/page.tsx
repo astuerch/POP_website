@@ -77,8 +77,27 @@ export default async function EventDetailPage({
     <div>
       <EventSchema event={event} />
       <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+        {/* Title first, so mobile readers know what the page is before the
+            columns stack into artwork → registration → story. */}
+        <AnimatedSection amount={0.05}>
+          <div className="max-w-4xl space-y-5">
+            <Eyebrow>
+              {event.edition ? popEditionLabel(event.edition) : event.dateLabel}
+            </Eyebrow>
+            <h1 className="font-heading text-brand-fog text-4xl leading-none tracking-tight sm:text-5xl lg:text-6xl">
+              {event.title}
+            </h1>
+            <p className="text-brand-lila-light text-base font-medium">
+              {event.venue} · {event.location}
+            </p>
+            <p className="text-brand-mist text-base leading-7 sm:text-lg sm:leading-8">
+              {event.summary}
+            </p>
+          </div>
+        </AnimatedSection>
+
         {/* Row 1 — artwork on the left, registration beside it. */}
-        <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-14">
+        <div className="mt-10 grid gap-10 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-14">
           <AnimatedSection amount={0.05}>
             <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
               {!event.heroImage && event.imageFit === "contain" ? (
@@ -124,21 +143,6 @@ export default async function EventDetailPage({
         <div className="mt-14 grid gap-12 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-14">
           <AnimatedSection amount={0.05}>
             <article className="space-y-12">
-              <div className="space-y-5">
-                <Eyebrow>
-                  {event.edition ? popEditionLabel(event.edition) : event.dateLabel}
-                </Eyebrow>
-                <h1 className="font-heading text-brand-fog text-4xl leading-none tracking-tight sm:text-5xl lg:text-6xl">
-                  {event.title}
-                </h1>
-                <p className="text-brand-lila-light text-base font-medium">
-                  {event.venue} · {event.location}
-                </p>
-                <p className="text-brand-mist text-base leading-7 sm:text-lg sm:leading-8">
-                  {event.summary}
-                </p>
-              </div>
-
               <section>
                 <h2 className="font-heading text-brand-fog text-3xl leading-none tracking-tight uppercase sm:text-4xl">
                   {t("about")}
@@ -206,7 +210,7 @@ export default async function EventDetailPage({
             </article>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.08}>
+          <AnimatedSection className="order-first xl:order-none" delay={0.08}>
             <aside className="xl:sticky xl:top-28">
               <div className="bg-brand-surface divide-y divide-white/10 rounded-3xl border border-white/10">
                 <div className="p-6">
