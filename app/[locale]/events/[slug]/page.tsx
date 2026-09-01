@@ -77,43 +77,53 @@ export default async function EventDetailPage({
     <div>
       <EventSchema event={event} />
       <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-        <div className="grid gap-12 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-16">
+        {/* Row 1 — artwork on the left, registration beside it. */}
+        <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-14">
+          <AnimatedSection amount={0.05}>
+            <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
+              {!event.heroImage && event.imageFit === "contain" ? (
+                <>
+                  <Image
+                    fill
+                    aria-hidden
+                    className="scale-110 object-cover opacity-40 blur-2xl"
+                    src={event.image.src}
+                    alt=""
+                    sizes="(max-width:1280px) 100vw, 800px"
+                  />
+                  <Image
+                    fill
+                    className="object-contain"
+                    src={event.image.src}
+                    alt={event.image.alt}
+                    sizes="(max-width:1280px) 100vw, 800px"
+                    priority
+                  />
+                </>
+              ) : (
+                <Reveal className="absolute inset-0">
+                  <Image
+                    fill
+                    className="object-cover"
+                    src={event.heroImage?.src ?? event.image.src}
+                    alt={event.heroImage?.alt ?? event.image.alt}
+                    sizes="(max-width:1280px) 100vw, 800px"
+                    priority
+                  />
+                </Reveal>
+              )}
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.08}>
+            <RegistrationWidget event={event} />
+          </AnimatedSection>
+        </div>
+
+        {/* Row 2 — story on the left, the event facts beside it. */}
+        <div className="mt-14 grid gap-12 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-14">
           <AnimatedSection amount={0.05}>
             <article className="space-y-12">
-              <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
-                {!event.heroImage && event.imageFit === "contain" ? (
-                  <>
-                    <Image
-                      fill
-                      aria-hidden
-                      className="scale-110 object-cover opacity-40 blur-2xl"
-                      src={event.image.src}
-                      alt=""
-                      sizes="(max-width:1280px) 100vw, 800px"
-                    />
-                    <Image
-                      fill
-                      className="object-contain"
-                      src={event.image.src}
-                      alt={event.image.alt}
-                      sizes="(max-width:1280px) 100vw, 800px"
-                      priority
-                    />
-                  </>
-                ) : (
-                  <Reveal className="absolute inset-0">
-                    <Image
-                      fill
-                      className="object-cover"
-                      src={event.heroImage?.src ?? event.image.src}
-                      alt={event.heroImage?.alt ?? event.image.alt}
-                      sizes="(max-width:1280px) 100vw, 800px"
-                      priority
-                    />
-                  </Reveal>
-                )}
-              </div>
-
               <div className="space-y-5">
                 <Eyebrow>
                   {event.edition ? popEditionLabel(event.edition) : event.dateLabel}
@@ -197,9 +207,7 @@ export default async function EventDetailPage({
           </AnimatedSection>
 
           <AnimatedSection delay={0.08}>
-            {/* Key facts beside the content, so the column carries weight even
-                while registration is still "opening soon". */}
-            <aside className="space-y-6 xl:sticky xl:top-28">
+            <aside className="xl:sticky xl:top-28">
               <div className="bg-brand-surface divide-y divide-white/10 rounded-3xl border border-white/10">
                 <div className="p-6">
                   <Eyebrow>{t("date")}</Eyebrow>
@@ -217,12 +225,11 @@ export default async function EventDetailPage({
                   </p>
                 </div>
               </div>
-              <RegistrationWidget event={event} />
             </aside>
           </AnimatedSection>
         </div>
 
-        {/* Speakers span the full page width, below the two-column block. */}
+        {/* Speakers span the full page width, outside the two-column blocks. */}
         <AnimatedSection className="mt-20 sm:mt-28" amount={0.05}>
           <section>
             <h2 className="font-heading text-brand-fog text-3xl leading-none tracking-tight uppercase sm:text-4xl">
@@ -232,11 +239,8 @@ export default async function EventDetailPage({
               <div className="mt-8 space-y-12">
                 {event.lineup.map((group) => (
                   <div key={group.title} className="space-y-6">
-                    <Eyebrow>{group.title}</Eyebrow>
-                    <Stagger
-                      className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-                      amount={0.15}
-                    >
+                    {group.title ? <Eyebrow>{group.title}</Eyebrow> : null}
+                    <Stagger className="grid gap-8 sm:grid-cols-2" amount={0.15}>
                       {group.people.map((person) => (
                         <StaggerItem
                           key={person.name}
@@ -248,7 +252,7 @@ export default async function EventDetailPage({
                               className="object-cover"
                               src={person.image}
                               alt={person.name}
-                              sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+                              sizes="(max-width:640px) 100vw, 45vw"
                             />
                           </div>
                           <div className="flex flex-1 flex-col p-6">

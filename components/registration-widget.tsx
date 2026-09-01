@@ -18,6 +18,13 @@ export async function RegistrationWidget({event}: {event: Event}) {
         <p className="text-brand-mist mt-3 text-base leading-7">
           {t("registrationClosedBody")}
         </p>
+        {/* The gallery is live, so send visitors straight to the photos. */}
+        <Link
+          className={cn("mt-6", buttonClasses({variant: "primary", size: "md"}))}
+          href="/gallery"
+        >
+          {t("registrationClosedCta")}
+        </Link>
       </div>
     );
   }

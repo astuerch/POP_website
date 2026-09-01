@@ -143,7 +143,8 @@ export const events: Event[] = [
     ],
     lineup: [
       {
-        title: "Talks",
+        // No label: these are the speakers, shown directly under the heading.
+        title: "",
         people: [
           {
             name: "Stefania Ionescu",
