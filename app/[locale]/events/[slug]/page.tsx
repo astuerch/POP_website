@@ -76,79 +76,69 @@ export default async function EventDetailPage({
   return (
     <div>
       <EventSchema event={event} />
-      {/* Full-bleed hero + title block: the artwork and headline get the whole
-          column width instead of being squeezed beside the sidebar. */}
-      <div className="mx-auto max-w-7xl px-6 pt-8 sm:px-8 sm:pt-12 lg:px-12">
-        <AnimatedSection amount={0.05}>
-          <div className="bg-brand-surface relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/10 sm:aspect-[21/9]">
-            {!event.heroImage && event.imageFit === "contain" ? (
-              <>
-                <Image
-                  fill
-                  aria-hidden
-                  className="scale-110 object-cover opacity-40 blur-2xl"
-                  src={event.image.src}
-                  alt=""
-                  sizes="100vw"
-                />
-                <Image
-                  fill
-                  className="object-contain"
-                  src={event.image.src}
-                  alt={event.image.alt}
-                  sizes="100vw"
-                  priority
-                />
-              </>
-            ) : (
-              <Reveal className="absolute inset-0">
-                <Image
-                  fill
-                  className="object-cover"
-                  src={event.heroImage?.src ?? event.image.src}
-                  alt={event.heroImage?.alt ?? event.image.alt}
-                  sizes="100vw"
-                  priority
-                />
-              </Reveal>
-            )}
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection className="mt-10" delay={0.05}>
-          <div className="max-w-4xl space-y-5">
-            <Eyebrow>
-              {event.edition
-                ? popEditionLabel(event.edition)
-                : event.dateLabel}
-            </Eyebrow>
-            <h1 className="font-heading text-brand-fog text-4xl leading-none tracking-tight sm:text-6xl lg:text-7xl">
-              {event.title}
-            </h1>
-            <p className="text-brand-lila-light text-base font-medium">
-              {event.venue} · {event.location}
-            </p>
-            <p className="text-brand-mist max-w-3xl text-lg leading-8 sm:text-xl sm:leading-9">
-              {event.summary}
-            </p>
-          </div>
-        </AnimatedSection>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-16 lg:px-12">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
         <div className="grid gap-12 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-16">
           <AnimatedSection amount={0.05}>
-            <article className="space-y-14">
+            <article className="space-y-12">
+              <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
+                {!event.heroImage && event.imageFit === "contain" ? (
+                  <>
+                    <Image
+                      fill
+                      aria-hidden
+                      className="scale-110 object-cover opacity-40 blur-2xl"
+                      src={event.image.src}
+                      alt=""
+                      sizes="(max-width:1280px) 100vw, 800px"
+                    />
+                    <Image
+                      fill
+                      className="object-contain"
+                      src={event.image.src}
+                      alt={event.image.alt}
+                      sizes="(max-width:1280px) 100vw, 800px"
+                      priority
+                    />
+                  </>
+                ) : (
+                  <Reveal className="absolute inset-0">
+                    <Image
+                      fill
+                      className="object-cover"
+                      src={event.heroImage?.src ?? event.image.src}
+                      alt={event.heroImage?.alt ?? event.image.alt}
+                      sizes="(max-width:1280px) 100vw, 800px"
+                      priority
+                    />
+                  </Reveal>
+                )}
+              </div>
+
+              <div className="space-y-5">
+                <Eyebrow>
+                  {event.edition ? popEditionLabel(event.edition) : event.dateLabel}
+                </Eyebrow>
+                <h1 className="font-heading text-brand-fog text-4xl leading-none tracking-tight sm:text-5xl lg:text-6xl">
+                  {event.title}
+                </h1>
+                <p className="text-brand-lila-light text-base font-medium">
+                  {event.venue} · {event.location}
+                </p>
+                <p className="text-brand-mist text-base leading-7 sm:text-lg sm:leading-8">
+                  {event.summary}
+                </p>
+              </div>
+
               <section>
                 <h2 className="font-heading text-brand-fog text-3xl leading-none tracking-tight uppercase sm:text-4xl">
                   {t("about")}
                 </h2>
                 {event.aboutHeading ? (
-                  <p className="font-serif text-brand-fog mt-6 max-w-3xl text-2xl leading-snug italic sm:text-3xl">
+                  <p className="font-serif text-brand-fog mt-6 text-2xl leading-snug italic sm:text-3xl">
                     {event.aboutHeading}
                   </p>
                 ) : null}
-                <div className="text-brand-mist mt-6 max-w-3xl space-y-5 text-base leading-8 sm:text-lg sm:leading-9">
+                <div className="text-brand-mist mt-6 space-y-5 text-base leading-8 sm:text-lg sm:leading-9">
                   {event.description.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
@@ -160,25 +150,42 @@ export default async function EventDetailPage({
                   <h2 className="font-heading text-brand-fog text-3xl leading-none tracking-tight uppercase sm:text-4xl">
                     {t("schedule")}
                   </h2>
-                  <ol className="mt-6 space-y-6">
+                  <ol className="mt-8 space-y-8">
                     {event.schedule.map((item) => (
                       <li
                         key={item.title}
-                        className="border-brand-lila/30 border-l-2 pl-5"
+                        className="border-brand-lila/30 border-l-2 pl-6"
                       >
-                        <div className="flex flex-wrap items-baseline gap-x-3">
-                          <span className="text-brand-lila-light text-sm font-semibold tracking-wide uppercase">
+                        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                          <span className="text-brand-lila-light text-sm font-semibold tracking-[0.15em] uppercase">
                             {item.time}
                           </span>
-                          <span className="text-brand-fog text-lg font-bold">
+                          <span className="text-brand-fog text-xl font-bold sm:text-2xl">
                             {item.title}
                           </span>
                         </div>
                         {item.details ? (
-                          <ul className="text-brand-mist mt-2 space-y-1 text-base leading-7">
-                            {item.details.map((detail) => (
-                              <li key={detail}>{detail}</li>
-                            ))}
+                          <ul className="mt-3 space-y-2">
+                            {item.details.map((detail) => {
+                              // "Talk title — Speaker" renders with the speaker
+                              // highlighted so names stand out at a glance.
+                              const [main, person] = detail.split(" — ");
+                              return (
+                                <li
+                                  key={detail}
+                                  className="text-brand-mist text-base leading-7 sm:text-lg sm:leading-8"
+                                >
+                                  <span className={person ? "text-brand-fog font-medium" : undefined}>
+                                    {main}
+                                  </span>
+                                  {person ? (
+                                    <span className="text-brand-lila-light font-semibold">
+                                      {" "}· {person}
+                                    </span>
+                                  ) : null}
+                                </li>
+                              );
+                            })}
                           </ul>
                         ) : null}
                       </li>
@@ -186,71 +193,17 @@ export default async function EventDetailPage({
                   </ol>
                 </section>
               ) : null}
-
-              <section>
-                <h2 className="font-heading text-brand-fog text-3xl leading-none tracking-tight uppercase sm:text-4xl">
-                  {t("hosts")}
-                </h2>
-                {event.lineup ? (
-                  <div className="mt-6 space-y-10">
-                    {event.lineup.map((group) => (
-                      <div key={group.title} className="space-y-5">
-                        <Eyebrow>{group.title}</Eyebrow>
-                        <Stagger className="grid gap-8 sm:grid-cols-2" amount={0.15}>
-                          {group.people.map((person) => (
-                            <StaggerItem
-                              key={person.name}
-                              className="bg-brand-surface flex flex-col overflow-hidden rounded-3xl border border-white/10"
-                            >
-                              <div className="bg-brand-lila-dark/40 relative aspect-square">
-                                <Image
-                                  fill
-                                  className="object-cover"
-                                  src={person.image}
-                                  alt={person.name}
-                                  sizes="(max-width:640px) 100vw, 45vw"
-                                />
-                              </div>
-                              <div className="flex flex-1 flex-col p-6">
-                                <h3 className="text-brand-fog text-xl font-bold">
-                                  {person.name}
-                                </h3>
-                                <p className="text-brand-lila-light mt-1 text-sm font-semibold">
-                                  {person.talkTitle
-                                    ? `“${person.talkTitle}”`
-                                    : person.role}
-                                </p>
-                                <p className="text-brand-mist mt-4 text-sm leading-7">
-                                  {person.bio}
-                                </p>
-                              </div>
-                            </StaggerItem>
-                          ))}
-                        </Stagger>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <ul className="text-brand-mist marker:text-brand-lila mt-4 list-disc space-y-3 pl-5 text-base leading-7 sm:leading-8">
-                    {event.speakers.map((speaker) => (
-                      <li key={speaker}>{speaker}</li>
-                    ))}
-                  </ul>
-                )}
-              </section>
             </article>
           </AnimatedSection>
 
           <AnimatedSection delay={0.08}>
-            {/* Key facts live beside the content so the column carries weight
-                even while registration is still "opening soon". */}
+            {/* Key facts beside the content, so the column carries weight even
+                while registration is still "opening soon". */}
             <aside className="space-y-6 xl:sticky xl:top-28">
               <div className="bg-brand-surface divide-y divide-white/10 rounded-3xl border border-white/10">
                 <div className="p-6">
                   <Eyebrow>{t("date")}</Eyebrow>
-                  <p className="text-brand-fog mt-2 text-base">
-                    {event.dateLabel}
-                  </p>
+                  <p className="text-brand-fog mt-2 text-base">{event.dateLabel}</p>
                 </div>
                 <div className="p-6">
                   <Eyebrow>{t("location")}</Eyebrow>
@@ -268,6 +221,67 @@ export default async function EventDetailPage({
             </aside>
           </AnimatedSection>
         </div>
+
+        {/* Speakers span the full page width, below the two-column block. */}
+        <AnimatedSection className="mt-20 sm:mt-28" amount={0.05}>
+          <section>
+            <h2 className="font-heading text-brand-fog text-3xl leading-none tracking-tight uppercase sm:text-4xl">
+              {t("speakers")}
+            </h2>
+            {event.lineup ? (
+              <div className="mt-8 space-y-12">
+                {event.lineup.map((group) => (
+                  <div key={group.title} className="space-y-6">
+                    <Eyebrow>{group.title}</Eyebrow>
+                    <Stagger
+                      className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+                      amount={0.15}
+                    >
+                      {group.people.map((person) => (
+                        <StaggerItem
+                          key={person.name}
+                          className="bg-brand-surface flex flex-col overflow-hidden rounded-3xl border border-white/10"
+                        >
+                          <div className="bg-brand-lila-dark/40 relative aspect-square">
+                            <Image
+                              fill
+                              className="object-cover"
+                              src={person.image}
+                              alt={person.name}
+                              sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+                            />
+                          </div>
+                          <div className="flex flex-1 flex-col p-6">
+                            <h3 className="text-brand-fog text-xl font-bold">
+                              {person.name}
+                            </h3>
+                            <p className="text-brand-lila-light mt-1 text-sm font-semibold">
+                              {person.role}
+                            </p>
+                            {person.talkTitle ? (
+                              <p className="text-brand-fog mt-3 font-serif text-lg leading-snug italic">
+                                “{person.talkTitle}”
+                              </p>
+                            ) : null}
+                            <p className="text-brand-mist mt-4 text-sm leading-7">
+                              {person.bio}
+                            </p>
+                          </div>
+                        </StaggerItem>
+                      ))}
+                    </Stagger>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <ul className="text-brand-mist marker:text-brand-lila mt-4 list-disc space-y-3 pl-5 text-base leading-7 sm:leading-8">
+                {event.speakers.map((speaker) => (
+                  <li key={speaker}>{speaker}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        </AnimatedSection>
       </div>
     </div>
   );
