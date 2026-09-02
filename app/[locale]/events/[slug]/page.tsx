@@ -271,9 +271,11 @@ export default async function EventDetailPage({
                                 “{person.talkTitle}”
                               </p>
                             ) : null}
-                            <p className="text-brand-mist mt-4 text-sm leading-7">
-                              {person.bio}
-                            </p>
+                            <div className="text-brand-mist mt-4 space-y-3 text-sm leading-7">
+                              {person.bio.split("\n\n").map((paragraph) => (
+                                <p key={paragraph}>{paragraph}</p>
+                              ))}
+                            </div>
                           </div>
                         </StaggerItem>
                       ))}
