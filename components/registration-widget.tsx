@@ -64,9 +64,6 @@ export async function RegistrationWidget({event}: {event: Event}) {
             {event.priceLabel ?? t("eventDetails")}
           </h2>
         </div>
-        <p className="text-brand-mist text-base leading-7">
-          {t("registrationLiveBody")}
-        </p>
       </div>
 
       {hasEmbed ? (
