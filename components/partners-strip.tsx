@@ -9,6 +9,7 @@ const partners = [
   {src: "/images/brand/eth-logo.png", alt: "ETH Zürich logo", width: 1080, height: 1080},
   {src: "/images/brand/uzh-logo.jpg", alt: "UZH logo", width: 1080, height: 1080},
   {src: "/images/brand/lszy-logo.png", alt: "Life Science Zurich logo", width: 1181, height: 1181},
+  {src: "/images/brand/ls2-logo.png", alt: "LS2 — Life Sciences Switzerland logo", width: 1080, height: 1080},
   {src: "/images/brand/reach-logo.png", alt: "Reach logo", width: 1080, height: 1080},
   {src: "/images/brand/vergani-logo.png", alt: "Vergani logo", width: 1080, height: 1080},
 ] as const;
@@ -25,7 +26,7 @@ export function PartnersStrip() {
         {/* Original square-format logos: mix-blend-screen drops the (black) PNG
             backgrounds so the wordmarks read white on the dark surface. Cell
             is a fixed square so all five logos render at identical visual size. */}
-        <div className="mt-10 grid grid-cols-3 items-center gap-x-4 gap-y-4 sm:mt-16 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-3 items-center gap-x-4 gap-y-4 sm:mt-16 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-6">
           {partners.map((partner) => (
             <div
               key={partner.alt}
