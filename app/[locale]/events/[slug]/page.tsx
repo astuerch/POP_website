@@ -97,7 +97,7 @@ export default async function EventDetailPage({
         </AnimatedSection>
 
         {/* Row 1 — artwork on the left, registration beside it. */}
-        <div className="mt-10 grid gap-10 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-14">
+        <div className="mt-10 grid gap-10 xl:grid-cols-[2.2fr_1fr] xl:items-start xl:gap-14">
           <AnimatedSection amount={0.05}>
             <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
               {!event.heroImage && event.imageFit === "contain" ? (
@@ -140,7 +140,7 @@ export default async function EventDetailPage({
         </div>
 
         {/* Row 2 — story on the left, the event facts beside it. */}
-        <div className="mt-14 grid gap-12 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start xl:gap-14">
+        <div className="mt-14 grid gap-12 xl:grid-cols-[2.2fr_1fr] xl:items-start xl:gap-14">
           <AnimatedSection amount={0.05}>
             <article className="space-y-12">
               <section>
