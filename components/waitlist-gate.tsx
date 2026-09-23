@@ -24,28 +24,34 @@ export interface WaitlistCopy {
 
 /**
  * Shows the normal registration CTA until the event sells out, then swaps in
- * the waiting-list form. The switch is automatic: `/api/event-status` compares
- * valid tickets against the configured capacity, so nobody has to flip it by
- * hand the moment the last place goes.
+ * the waiting-list form.
  *
- * While the status is unknown (loading, or Infomaniak unreachable) the normal
- * CTA stays visible — failing "open" is far safer than wrongly closing sales.
+ * Two modes:
+ *  - `always` (event.waitlistOnly): the form is there from the first paint.
+ *    No network call, so no flicker between the button and the form.
+ *  - otherwise: `/api/event-status` compares valid tickets against the
+ *    configured capacity and flips the switch on its own. While the status is
+ *    unknown (loading, or Infomaniak unreachable) the normal CTA stays visible
+ *    — failing "open" is far safer than wrongly closing sales.
  */
 export function WaitlistGate({
   slug,
   copy,
+  always = false,
   children,
 }: {
   slug: string;
   copy: WaitlistCopy;
+  always?: boolean;
   children: ReactNode;
 }) {
-  const [soldOut, setSoldOut] = useState(false);
+  const [soldOut, setSoldOut] = useState(always);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
   );
 
   useEffect(() => {
+    if (always) return;
     let active = true;
     fetch(`/api/event-status?slug=${encodeURIComponent(slug)}`)
       .then((response) => (response.ok ? response.json() : null))
@@ -58,7 +64,7 @@ export function WaitlistGate({
     return () => {
       active = false;
     };
-  }, [slug]);
+  }, [slug, always]);
 
   if (!soldOut) return <>{children}</>;
 

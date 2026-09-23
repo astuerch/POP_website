@@ -71,8 +71,13 @@ export async function RegistrationWidget({event}: {event: Event}) {
 
   return (
     <div className="bg-brand-surface rounded-3xl border border-white/10 p-6">
-      {/* Flips to the waiting list on its own once the event sells out. */}
-      <WaitlistGate slug={event.slug} copy={waitlistCopy}>
+      {/* waitlistOnly: form from the first paint. Otherwise it flips to the
+          waiting list on its own once the event sells out. */}
+      <WaitlistGate
+        slug={event.slug}
+        copy={waitlistCopy}
+        always={event.waitlistOnly === true}
+      >
       <div className="space-y-4">
         <div>
           <Eyebrow>{t("registrationEyebrow")}</Eyebrow>

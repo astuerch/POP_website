@@ -57,8 +57,18 @@ export interface Event {
   city: string;
   status: EventStatus;
   /**
+   * Always show the waiting-list form instead of the ticket button, whatever
+   * the ticket count says. Use this once an edition is full: everybody signs
+   * up here, and we send the Infomaniak link by email as places free up.
+   *
+   * It also renders instantly — no live ticket check, so no flicker between
+   * the button and the form.
+   */
+  waitlistOnly?: boolean;
+  /**
    * Seats on sale. Once this many valid tickets exist, the event page switches
    * itself to "Fully booked" + waiting-list form. Omit to never sell out.
+   * Ignored when `waitlistOnly` is true.
    */
   capacity?: number;
   /** Infomaniak event id, used to count sold tickets for this event only. */
@@ -116,6 +126,9 @@ export const events: Event[] = [
     venue: "Amboss Rampe",
     city: "Zürich",
     status: "upcoming",
+    // Full: everyone goes on the waiting list, and we send the Infomaniak
+    // link by email as places free up. Set to false to sell tickets again.
+    waitlistOnly: true,
     capacity: 120,
     infomaniakEventId: "397878",
     registrationType: "infomaniak-free",
