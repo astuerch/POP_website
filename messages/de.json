@@ -86,7 +86,17 @@
     "registrationRegisterRsvp": "Anmelden / RSVP",
     "registrationBuyTickets": "Tickets kaufen",
     "registrationIframeTitle": "Event-Anmeldung",
-    "schedule": "Programm"
+    "schedule": "Programm",
+    "waitlistEyebrow": "Warteliste",
+    "waitlistTitle": "Ausgebucht",
+    "waitlistBody": "POP 02 ist ausgebucht. Trag dich in die Warteliste ein und wir melden uns per E-Mail, falls ein Platz frei wird. Dies ist kein Ticket.",
+    "waitlistFirstName": "Vorname",
+    "waitlistLastName": "Nachname",
+    "waitlistEmail": "E-Mail-Adresse",
+    "waitlistSubmit": "Auf die Warteliste",
+    "waitlistSending": "Wird gesendet...",
+    "waitlistSuccess": "Du stehst auf der Liste. Wir melden uns, sobald ein Platz frei wird.",
+    "waitlistError": "Etwas ist schiefgelaufen. Versuch es nochmals oder schreib an popimpactlab@gmail.com."
   },
   "about": {
     "eyebrow": "Über POP",

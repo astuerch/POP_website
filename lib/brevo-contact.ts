@@ -18,6 +18,8 @@ export interface EventRegistrant {
   event?: string;
   /** True when the buyer ticked the newsletter opt-in at checkout. */
   newsletter?: boolean;
+  /** True for waiting-list sign-ups (not attendance). */
+  waitlist?: boolean;
 }
 
 const BREVO = "https://api.brevo.com/v3";

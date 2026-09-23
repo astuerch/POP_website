@@ -32,6 +32,7 @@ export const maxDuration = 60;
  *   INFOMANIAK_TICKETING_API_KEY    — Ticketing → Store/Go Live → API Access
  *   INFOMANIAK_TICKETING_CREDENTIAL — Manager → Profile → API tokens
  *   BREVO_API_KEY, BREVO_EVENT_LIST_ID, BREVO_NEWSLETTER_LIST_ID
+ *   INFOMANIAK_WAITLIST_MATCH       — optional, defaults to "wait"
  *   BREVO_WEBHOOK_SECRET, CRON_SECRET (set so Vercel Cron can authenticate)
  *   POP_EVENT_LABEL                 — optional, defaults to "POP 02"
  */
@@ -218,6 +219,13 @@ export async function GET(request: Request) {
     ? parsedNewsletterList
     : null;
 
+  // Waiting-list sign-ups live in their own Infomaniak event (or price
+  // category) whose name contains this word. They join the same community
+  // list as everyone else and are told apart by SOURCE.
+  const waitlistMatch = (
+    process.env.INFOMANIAK_WAITLIST_MATCH ?? "wait"
+  ).toLowerCase();
+
   const params = new URL(request.url).searchParams;
   const probe = params.get("probe") === "1";
   const days = Math.min(Number(params.get("days")) || 60, 365);
@@ -309,6 +317,11 @@ export async function GET(request: Request) {
     const email = pick(buyer, ["email", "mail"]) || pick(ticket, ["email"]);
     if (!email.includes("@")) return null;
 
+    // A waiting-list registration is not attendance: it goes to its own list
+    // and must not be written into the EVENTS_ATTENDED history.
+    const ticketLabels = `${pick(ticket, ["event_name"])} ${pick(ticket, ["category_name"])} ${pick(ticket, ["zone_name"])}`.toLowerCase();
+    const isWaitlist = waitlistMatch.length > 0 && ticketLabels.includes(waitlistMatch);
+
     const customer = customerByEmail.get(email.toLowerCase()) ?? {};
 
     // Period custom fields arrive as {"Age Range": "tOption_2", …}
@@ -346,9 +359,11 @@ export async function GET(request: Request) {
       region:
         pick(custom, ["region", "city", "canton"]) ||
         pick(customer, ["city"]),
-      source: "infomaniak",
-      event: eventLabel,
+      source: isWaitlist ? "infomaniak-waitlist" : "infomaniak",
+      // Only real ticket holders get the event added to their history.
+      event: isWaitlist ? undefined : eventLabel,
       newsletter,
+      waitlist: isWaitlist,
     };
   }
 
@@ -389,6 +404,7 @@ export async function GET(request: Request) {
   }
 
   const people = [...registrants.values()];
+  const waitlistCount = people.filter((person) => person.waitlist).length;
   let newsletterOptIns = 0;
   const failures: string[] = [];
 
@@ -413,6 +429,7 @@ export async function GET(request: Request) {
     ticketsFetched: tickets.length,
     validTickets: validTickets.length,
     people: people.length,
+    waitlist: waitlistCount,
     synced: people.length - failures.length,
     skipped,
     newsletterOptIns,

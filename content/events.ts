@@ -56,6 +56,13 @@ export interface Event {
   venue: string;
   city: string;
   status: EventStatus;
+  /**
+   * Seats on sale. Once this many valid tickets exist, the event page switches
+   * itself to "Fully booked" + waiting-list form. Omit to never sell out.
+   */
+  capacity?: number;
+  /** Infomaniak event id, used to count sold tickets for this event only. */
+  infomaniakEventId?: string;
   registrationType: RegistrationType;
   // Paste the future Infomaniak embed URL here to switch from placeholder to live registration.
   registrationEmbedUrl?: string;
@@ -109,6 +116,8 @@ export const events: Event[] = [
     venue: "Amboss Rampe",
     city: "Zürich",
     status: "upcoming",
+    capacity: 120,
+    infomaniakEventId: "397878",
     registrationType: "infomaniak-free",
     // Registration is LIVE: the widget shows the "Register / RSVP" button.
     registrationUrl: "https://infomaniak.events/group/dd687bd7-ca77-463d-8fb9-a249751f4831",

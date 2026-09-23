@@ -4,6 +4,7 @@ import {Link} from "@/i18n/navigation";
 import type {Event} from "@/content/events";
 import {buttonClasses} from "@/components/ui/button";
 import {Eyebrow} from "@/components/eyebrow";
+import {WaitlistGate} from "@/components/waitlist-gate";
 import {cn} from "@/lib/utils";
 
 export async function RegistrationWidget({event}: {event: Event}) {
@@ -55,8 +56,23 @@ export async function RegistrationWidget({event}: {event: Event}) {
     );
   }
 
+  const waitlistCopy = {
+    eyebrow: t("waitlistEyebrow"),
+    title: t("waitlistTitle"),
+    body: t("waitlistBody"),
+    firstName: t("waitlistFirstName"),
+    lastName: t("waitlistLastName"),
+    email: t("waitlistEmail"),
+    submit: t("waitlistSubmit"),
+    sending: t("waitlistSending"),
+    success: t("waitlistSuccess"),
+    error: t("waitlistError"),
+  };
+
   return (
     <div className="bg-brand-surface rounded-3xl border border-white/10 p-6">
+      {/* Flips to the waiting list on its own once the event sells out. */}
+      <WaitlistGate slug={event.slug} copy={waitlistCopy}>
       <div className="space-y-4">
         <div>
           <Eyebrow>{t("registrationEyebrow")}</Eyebrow>
@@ -88,6 +104,7 @@ export async function RegistrationWidget({event}: {event: Event}) {
           {actionLabel}
         </Link>
       ) : null}
+      </WaitlistGate>
     </div>
   );
 }

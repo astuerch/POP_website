@@ -86,7 +86,17 @@
     "registrationRegisterRsvp": "Register / RSVP",
     "registrationBuyTickets": "Buy tickets",
     "registrationIframeTitle": "Event registration",
-    "schedule": "Event flow"
+    "schedule": "Event flow",
+    "waitlistEyebrow": "Waiting list",
+    "waitlistTitle": "Fully booked",
+    "waitlistBody": "POP 02 is sold out. Join the waiting list and we'll email you if a place frees up. This is not a ticket.",
+    "waitlistFirstName": "First name",
+    "waitlistLastName": "Last name",
+    "waitlistEmail": "Email address",
+    "waitlistSubmit": "Join the waiting list",
+    "waitlistSending": "Sending...",
+    "waitlistSuccess": "You're on the list. We'll be in touch if a place opens up.",
+    "waitlistError": "Something went wrong. Please try again, or email popimpactlab@gmail.com."
   },
   "about": {
     "eyebrow": "About POP",
