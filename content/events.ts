@@ -116,7 +116,7 @@ export const events: Event[] = [
     venue: "Amboss Rampe",
     city: "Zürich",
     status: "upcoming",
-    capacity: 115,
+    capacity: 120,
     infomaniakEventId: "397878",
     registrationType: "infomaniak-free",
     // Registration is LIVE: the widget shows the "Register / RSVP" button.
