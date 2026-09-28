@@ -57,6 +57,39 @@ async function readAttendedHistory(
   }
 }
 
+/**
+ * Reads a contact's current SOURCE, or null if the contact is new / has none.
+ *
+ * SOURCE is a single-value attribute, so the last write wins. The newsletter
+ * form uses this to leave an existing SOURCE alone: someone who joined the
+ * waiting list and later subscribed to the newsletter must keep
+ * `SOURCE = waitlist`, otherwise they vanish from the list of people to
+ * re-contact when a place frees up.
+ */
+export async function readContactSource(
+  email: string,
+  apiKey: string,
+): Promise<string | null> {
+  try {
+    const response = await fetch(
+      `${BREVO}/contacts/${encodeURIComponent(email)}`,
+      {
+        headers: {accept: "application/json", "api-key": apiKey},
+        cache: "no-store",
+      },
+    );
+    if (!response.ok) return null;
+
+    const contact = (await response.json()) as {
+      attributes?: Record<string, unknown>;
+    };
+    const raw = contact.attributes?.SOURCE;
+    return typeof raw === "string" && raw.trim() ? raw.trim() : null;
+  } catch {
+    return null;
+  }
+}
+
 export type UpsertResult =
   | {ok: true}
   | {ok: false; status: number; message: string};

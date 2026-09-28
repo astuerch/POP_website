@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
 
+import {readContactSource} from "@/lib/brevo-contact";
 import {siteConfig, siteUrl} from "@/lib/site";
 
 const emailPattern =
@@ -176,7 +177,13 @@ export async function POST(request: Request) {
   const attributes: Record<string, string> = {};
   if (firstName) attributes.FIRST_NAME = firstName;
   if (surname) attributes.SURNAME = surname;
-  if (source) attributes.SOURCE = source;
+  // SOURCE is first-touch: never overwrite one that is already there. A
+  // waiting-list or Infomaniak registrant who also subscribes here must keep
+  // their original SOURCE, or they drop out of the segments used to decide who
+  // to contact.
+  if (source && !(await readContactSource(email, apiKey))) {
+    attributes.SOURCE = source;
+  }
 
   try {
     const brevoResponse = await fetch("https://api.brevo.com/v3/contacts", {
