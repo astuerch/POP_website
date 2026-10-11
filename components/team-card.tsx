@@ -1,7 +1,9 @@
 import Image from "next/image";
+import {useLocale} from "next-intl";
 
 import {Eyebrow} from "@/components/eyebrow";
-import type {TeamMember} from "@/content/team";
+import {localized, type TeamMember} from "@/content/team";
+import type {AppLocale} from "@/i18n/routing";
 import {Link} from "@/i18n/navigation";
 
 function LinkedInIcon() {
@@ -49,6 +51,15 @@ export function TeamCard({
   member: TeamMember;
   variant?: "full" | "compact" | "detailed";
 }) {
+  // Bios, roles and titles are written in both languages in content/team.ts.
+  const locale = useLocale() as AppLocale;
+  const role = localized(member.role, locale);
+  const org = localized(member.org, locale);
+  const title = localized(member.title, locale);
+  const bio = localized(member.bio, locale);
+  const longBio = localized(member.longBio, locale);
+  const focus = localized(member.focus, locale);
+
   if (variant === "detailed") {
     const displayName = member.fullName ?? member.name;
 
@@ -68,11 +79,11 @@ export function TeamCard({
         <h3 className="font-heading text-brand-fog mt-8 text-3xl leading-none tracking-tight uppercase sm:text-4xl">
           {displayName}
         </h3>
-        {member.title ? (
-          <p className="text-brand-fog mt-4 text-base font-bold">{member.title}</p>
+        {title ? (
+          <p className="text-brand-fog mt-4 text-base font-bold">{title}</p>
         ) : null}
         <p className="text-brand-mist mx-auto mt-4 max-w-xs text-sm leading-6">
-          {member.longBio ?? member.bio}
+          {longBio ?? bio}
         </p>
         {member.linkedin || member.instagram ? (
           <div className="mt-6 flex items-center gap-3">
@@ -106,9 +117,9 @@ export function TeamCard({
           />
         </div>
         <h3 className="text-brand-fog mt-6 text-2xl font-bold">{member.name}</h3>
-        <p className="text-brand-mist mt-2 text-base leading-6">{member.role}</p>
-        {member.org ? (
-          <p className="text-brand-mist text-base leading-6">{member.org}</p>
+        <p className="text-brand-mist mt-2 text-base leading-6">{role}</p>
+        {org ? (
+          <p className="text-brand-mist text-base leading-6">{org}</p>
         ) : null}
       </Link>
     );
@@ -130,11 +141,11 @@ export function TeamCard({
         <div>
           <h3 className="text-brand-fog text-xl font-bold">{member.name}</h3>
           <Eyebrow className="mt-1 text-xs">
-            {member.org ? `${member.role} · ${member.org}` : member.role}
+            {org ? `${role} · ${org}` : role}
           </Eyebrow>
         </div>
-        <p className="text-brand-mist text-base leading-7">{member.bio}</p>
-        <p className="text-brand-fog text-sm font-medium">{member.focus}</p>
+        <p className="text-brand-mist text-base leading-7">{bio}</p>
+        <p className="text-brand-fog text-sm font-medium">{focus}</p>
       </div>
     </article>
   );
