@@ -1,6 +1,8 @@
 import type {Metadata} from "next";
 
+import {buttonClasses} from "@/components/ui/button";
 import {Link} from "@/i18n/navigation";
+import {cn} from "@/lib/utils";
 
 /**
  * Seat released confirmation.
@@ -62,15 +64,16 @@ export default function CancelPage() {
 
           <p className="text-brand-mist mx-auto mt-5 max-w-sm text-lg leading-8">
             No hard feelings, these things happen. We&apos;re already working on
-            the next POP event. Subscribe to the{" "}
-            <Link
-              href="/#newsletter"
-              className="text-brand-lila-light decoration-brand-lila/50 font-semibold underline underline-offset-4"
-            >
-              newsletter
-            </Link>{" "}
-            to stay in the loop.
+            the next POP event.
           </p>
+
+          {/* One clear action, rather than a link buried in the sentence. */}
+          <Link
+            className={cn("mt-8", buttonClasses({variant: "primary", size: "md"}))}
+            href="/#newsletter"
+          >
+            Subscribe to the newsletter
+          </Link>
 
           {/* Hairline that fades out at both ends, as on /vote. */}
           <span
