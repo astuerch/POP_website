@@ -64,7 +64,7 @@ export default function CancelPage() {
 
           <p className="text-brand-mist mx-auto mt-5 max-w-sm text-lg leading-8">
             No hard feelings, these things happen. We&apos;re already working on
-            the next POP event.
+            the next POP event, and we really hope to see you there instead.
           </p>
 
           {/* One clear action, rather than a link buried in the sentence. */}
