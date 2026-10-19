@@ -57,14 +57,18 @@ export default function CancelPage() {
             <span className="text-brand-lila">is free.</span>
           </h1>
 
-          <p className="text-brand-mist mx-auto mt-8 max-w-sm text-lg leading-8">
-            Thanks for telling us instead of just not showing up. Your seat is
-            already on its way to the next person on the waitlist.
+          {/* Fraunces, as on /vote, with the heart kept upright. */}
+          <p className="font-serif text-brand-fog mt-12 text-2xl leading-tight italic sm:mt-14 sm:text-3xl">
+            Thanks for letting us know
+            <span className="ml-2 inline-block not-italic">🤍</span>
           </p>
 
-          <p className="text-brand-mist mx-auto mt-5 max-w-sm text-lg leading-8">
-            No hard feelings, these things happen. We&apos;re already working on
-            the next POP event, and we really hope to see you there instead.
+          <p className="text-brand-mist mx-auto mt-8 max-w-sm text-lg leading-8">
+            We&apos;ll offer your place to someone on the waitlist.
+          </p>
+
+          <p className="text-brand-mist mx-auto mt-2 max-w-sm text-lg leading-8">
+            We hope to see you at the next POP event.
           </p>
 
           {/* One clear action, rather than a link buried in the sentence. */}
