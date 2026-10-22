@@ -21,6 +21,9 @@ export const siteConfig = {
   email: "popimpactlab@gmail.com",
   phone: "+41 78 923 18 14",
   instagram: "https://www.instagram.com/pop_impactlab/",
+  // Company page. <SocialIcons /> hides the icon if this is ever emptied, so
+  // we never ship a link that goes nowhere.
+  linkedin: "https://www.linkedin.com/company/pop-impact-lab/",
   location: "Zurich, Switzerland",
 };
 
@@ -44,8 +47,5 @@ export const legalLinks = [
   {href: "/legal/imprint", label: "Imprint"},
 ] as const;
 
-export const socialLinks = [
-  {href: "mailto:popimpactlab@gmail.com", label: "Email"},
-  {href: "/contact", label: "Instagram"},
-  {href: "/contact", label: "LinkedIn"},
-] as const;
+// Social profiles are rendered as icons by <SocialIcons />, which reads the
+// URLs straight from siteConfig above.

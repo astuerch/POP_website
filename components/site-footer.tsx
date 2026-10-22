@@ -8,6 +8,7 @@ import {Eyebrow} from "@/components/eyebrow";
 import {Glow} from "@/components/glow";
 import {LanguageSwitch} from "@/components/language-switch";
 import {PartnersStrip} from "@/components/partners-strip";
+import {SocialIcons} from "@/components/social-icons";
 
 export function SiteFooter() {
   const pathname = usePathname();
@@ -61,6 +62,7 @@ export function SiteFooter() {
           <p className="text-brand-mist text-sm">
             {siteConfig.location} · {siteConfig.email}
           </p>
+          <SocialIcons className="pt-1" />
           <LanguageSwitch />
         </div>
 

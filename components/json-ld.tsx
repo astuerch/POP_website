@@ -39,9 +39,9 @@ export function OrganizationSchema() {
       addressLocality: "Zurich",
       addressCountry: "CH",
     },
-    sameAs: [
-      "https://www.instagram.com/pop_impactlab/",
-    ],
+    // Helps Google tie the social profiles to the organisation. Entries are
+    // read from siteConfig so an empty one is simply left out.
+    sameAs: [siteConfig.instagram, siteConfig.linkedin].filter(Boolean),
   };
   return <LdScript data={data} />;
 }

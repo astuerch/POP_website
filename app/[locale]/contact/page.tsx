@@ -4,6 +4,7 @@ import {getTranslations} from "next-intl/server";
 import {AnimatedSection} from "@/components/animated-section";
 import {ContactForm} from "@/components/contact-form";
 import {Eyebrow} from "@/components/eyebrow";
+import {SocialIcons} from "@/components/social-icons";
 import type {AppLocale} from "@/i18n/routing";
 import {getPageMetadata} from "@/lib/metadata";
 import {siteConfig} from "@/lib/site";
@@ -95,6 +96,12 @@ export default async function ContactPage() {
                     </div>
                   ))}
                 </dl>
+
+                {/* Tap targets for the profiles, next to the written details. */}
+                <div className="space-y-3">
+                  <Eyebrow className="text-xs">{t("followUs")}</Eyebrow>
+                  <SocialIcons />
+                </div>
               </div>
             </div>
 
