@@ -59,10 +59,9 @@ export function SiteFooter() {
           <p className="text-brand-mist max-w-md text-base leading-7">
             {tFooter("tagline")}
           </p>
-          <p className="text-brand-mist text-sm">
-            {siteConfig.location} · {siteConfig.email}
-          </p>
-          <SocialIcons className="pt-1" />
+          {/* The address lives in the mail icon below, not spelled out here. */}
+          <p className="text-brand-mist text-sm">{siteConfig.location}</p>
+          <SocialIcons className="pt-1" includeEmail />
           <LanguageSwitch />
         </div>
 

@@ -46,12 +46,22 @@ export function MailIcon({className}: {className?: string}) {
 }
 
 /**
- * Round social buttons, same shape as the ones on the team cards.
+ * Social buttons, same shape as the ones on the team cards.
  *
  * Each entry renders only when its URL is set in `siteConfig`, so an account
  * we don't have yet simply doesn't appear instead of linking nowhere.
+ *
+ * `includeEmail` adds a mail button. The footer uses it (and drops the written
+ * address); the contact page doesn't, because the address is already spelled
+ * out in the details list right above.
  */
-export function SocialIcons({className}: {className?: string}) {
+export function SocialIcons({
+  className,
+  includeEmail = false,
+}: {
+  className?: string;
+  includeEmail?: boolean;
+}) {
   const items = [
     siteConfig.instagram && {
       href: siteConfig.instagram,
@@ -63,7 +73,7 @@ export function SocialIcons({className}: {className?: string}) {
       label: "POP Impact Lab on LinkedIn",
       icon: <LinkedInIcon />,
     },
-    {
+    includeEmail && {
       href: `mailto:${siteConfig.email}`,
       label: `Email POP Impact Lab at ${siteConfig.email}`,
       icon: <MailIcon />,

@@ -32,12 +32,7 @@ export default async function ContactPage() {
       value: siteConfig.phone,
       href: `tel:${siteConfig.phone.replace(/\s+/g, "")}`,
     },
-    {
-      label: t("instagram"),
-      value: "@pop_impactlab",
-      href: siteConfig.instagram,
-      external: true,
-    },
+    // No Instagram row: the icon under "Follow us" already links to it.
     {label: t("base"), value: siteConfig.location},
   ];
 
@@ -84,8 +79,6 @@ export default async function ContactPage() {
                           <a
                             className="hover:text-brand-lila-light transition"
                             href={item.href}
-                            target={item.external ? "_blank" : undefined}
-                            rel={item.external ? "noreferrer" : undefined}
                           >
                             {item.value}
                           </a>
