@@ -182,7 +182,7 @@ export function GalleryGrid({
   return (
     <div>
       {featureFirst && feature ? (
-        <Reveal className="mb-4">
+        <Reveal className="mx-auto mb-4 max-w-3xl">
           <button
             type="button"
             className="focus-visible:ring-brand-lila block w-full cursor-zoom-in overflow-hidden rounded-2xl focus-visible:ring-2 focus-visible:outline-none"
@@ -193,7 +193,7 @@ export function GalleryGrid({
               alt={feature.alt}
               width={feature.width}
               height={feature.height}
-              sizes="(max-width:1280px) 100vw, 1216px"
+              sizes="(max-width:768px) 100vw, 768px"
               quality={85}
               className="h-auto w-full rounded-2xl"
               priority={priority}
@@ -212,9 +212,17 @@ export function GalleryGrid({
       >
         {gridItems.map((item, index) => {
           const globalIndex = featureFirst ? index + 1 : index;
+          // Every seventh tile runs two columns wide. Sets shot mostly in one
+          // orientation otherwise land as a uniform contact sheet; this gives
+          // the wall a rhythm without reordering anything.
+          const isWide = index % 7 === 3;
 
           return (
-            <div key={item.src} data-tile>
+            <div
+              key={item.src}
+              data-tile
+              className={isWide ? "sm:col-span-2" : undefined}
+            >
               <button
                 type="button"
                 className="focus-visible:ring-brand-lila group block w-full cursor-zoom-in overflow-hidden rounded-xl focus-visible:ring-2 focus-visible:outline-none"
@@ -225,9 +233,14 @@ export function GalleryGrid({
                   alt={item.alt}
                   width={item.width}
                   height={item.height}
-                  // Rounded up from the real column width (~22vw): under-
-                  // serving shows, over-serving costs a few KB.
-                  sizes="(max-width:640px) 50vw, (max-width:1024px) 34vw, 24vw"
+                  // Rounded up from the real column width (~22vw, double for
+                  // the wide tiles): under-serving shows, over-serving costs
+                  // a few KB.
+                  sizes={
+                    isWide
+                      ? "(max-width:640px) 50vw, (max-width:1024px) 68vw, 48vw"
+                      : "(max-width:640px) 50vw, (max-width:1024px) 34vw, 24vw"
+                  }
                   quality={85}
                   className="h-auto w-full rounded-xl transition duration-500 group-hover:scale-105"
                 />

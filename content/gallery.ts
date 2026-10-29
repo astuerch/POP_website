@@ -14,6 +14,9 @@ export interface GalleryItem {
 export interface GalleryEventCollection {
   /** URL-safe slug — used as the anchor id for the sticky tab-bar. */
   id: string;
+  /** POP edition number, shown as "Edition 02". Kept explicit so the page can
+   *  list the newest event first without renumbering the older ones. */
+  edition: number;
   title: string;
   dateLabel: string;
   venue?: string;
@@ -348,10 +351,10 @@ export const galleryItems: GalleryItem[] = [
  */
 export const galleryItemsEvent02: GalleryItem[] = [
   {
-    src: "/images/gallery/event-02/web/00.png",
+    src: "/images/gallery/event-02/web/00.jpg",
     alt: "Opening slide with the partners of POP 02, Social Media & How it Changes Your Mind.",
-    width: 993,
-    height: 559,
+    width: 2400,
+    height: 1350,
   },
   {
     src: "/images/gallery/event-02/web/01.jpg",
@@ -692,23 +695,26 @@ export const galleryItemsEvent02: GalleryItem[] = [
  * automatically. The homepage teaser continues to read `galleryItems` (the
  * flattened list below), which stays in sync as new events are appended.
  */
+// Newest edition first: visitors land on the most recent event.
 export const galleryEvents: GalleryEventCollection[] = [
   {
-    id: "ai-vs-human-creativity",
-    title: "AI vs Human Creativity",
-    dateLabel: "April 2026",
-    venue: "Vergani, Zürich",
-    description:
-      "Our first edition — art, live painting, generative AI, and open conversation.",
-    items: galleryItems,
-  },
-  {
     id: "social-media-how-it-changes-your-mind",
+    edition: 2,
     title: "Social Media & How it Changes Your Mind",
     dateLabel: "October 2026",
     venue: "Amboss Rampe, Zürich",
     description:
       "Our second edition — two talks on how social media is built, followed by open discussion, networking and a DJ set.",
     items: galleryItemsEvent02,
+  },
+  {
+    id: "ai-vs-human-creativity",
+    edition: 1,
+    title: "AI vs Human Creativity",
+    dateLabel: "April 2026",
+    venue: "Vergani, Zürich",
+    description:
+      "Our first edition — art, live painting, generative AI, and open conversation.",
+    items: galleryItems,
   },
 ];

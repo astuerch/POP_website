@@ -4,6 +4,7 @@ import {AnimatedSection} from "@/components/animated-section";
 import {GalleryEventsNav} from "@/components/gallery-events-nav";
 import {GalleryGrid} from "@/components/gallery-grid";
 import {SectionHeading} from "@/components/section-heading";
+import {popEditionLabel} from "@/content/events";
 import {galleryEvents} from "@/content/gallery";
 import type {AppLocale} from "@/i18n/routing";
 import {getPageMetadata} from "@/lib/metadata";
@@ -57,7 +58,10 @@ export default async function GalleryPage() {
               <header className="mb-8 flex flex-col gap-3 border-b border-white/10 pb-6">
                 <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
                   <p className="text-brand-lila-light text-xs font-semibold tracking-[0.28em] uppercase">
-                    Edition {String(index + 1).padStart(2, "0")}
+                    {/* From the event's own number, not its position: the
+                        newest edition is listed first. Same helper as the
+                        events pages, so the naming stays in one place. */}
+                    {popEditionLabel(event.edition)}
                   </p>
                   <span className="text-brand-mist text-xs">
                     {event.dateLabel}
