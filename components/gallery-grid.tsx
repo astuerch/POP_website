@@ -59,11 +59,18 @@ export function GalleryGrid({
   items,
   labels,
   featureFirst = true,
+  priority = false,
 }: {
   items: GalleryItem[];
   labels: GalleryLightboxLabels;
   /** When true the first item is rendered as a full-width feature tile. */
   featureFirst?: boolean;
+  /**
+   * Eager-load the feature tile. Only the first section on the page should
+   * set this: with several editions, marking every feature as priority makes
+   * them all compete for bandwidth and hurts the real LCP.
+   */
+  priority?: boolean;
 }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -187,8 +194,9 @@ export function GalleryGrid({
               width={feature.width}
               height={feature.height}
               sizes="(max-width:1280px) 100vw, 1216px"
+              quality={85}
               className="h-auto w-full rounded-2xl"
-              priority
+              priority={priority}
             />
           </button>
         </Reveal>
@@ -217,7 +225,10 @@ export function GalleryGrid({
                   alt={item.alt}
                   width={item.width}
                   height={item.height}
-                  sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 20vw"
+                  // Rounded up from the real column width (~22vw): under-
+                  // serving shows, over-serving costs a few KB.
+                  sizes="(max-width:640px) 50vw, (max-width:1024px) 34vw, 24vw"
+                  quality={85}
                   className="h-auto w-full rounded-xl transition duration-500 group-hover:scale-105"
                 />
               </button>
@@ -246,6 +257,7 @@ export function GalleryGrid({
               width={activeItem.width}
               height={activeItem.height}
               sizes="100vw"
+              quality={85}
               className="h-auto max-h-[90vh] w-auto rounded-lg object-contain"
             />
           </div>

@@ -74,7 +74,11 @@ export default async function GalleryPage() {
                 ) : null}
               </header>
 
-              <GalleryGrid items={event.items} labels={labels} />
+              <GalleryGrid
+                items={event.items}
+                labels={labels}
+                priority={index === 0}
+              />
             </section>
           ))}
         </div>
