@@ -45,6 +45,18 @@ export interface PressArticle {
 export const pressArticles: PressArticle[] = [
   {
     outlet: "Reach",
+    title: "POP Impact Lab bringt Zürich zum Nachdenken",
+    date: "2026-10-29",
+    url: "https://www.reachmag.ch/post/pop-impact-lab-bringt-zürich-zum-nachdenken",
+    excerpt: {
+      en: "A sold-out Monday night at the Amboss Rampe: 100 guests, two researchers and one question — what is social media actually doing to us?",
+      de: "Ein ausverkaufter Montagabend in der Amboss Rampe: 100 Gäste, zwei Wissenschaftlerinnen und eine Frage — was macht Social Media eigentlich mit uns?",
+    },
+    language: "de",
+    logo: {src: "/images/press/reach-logo.png", width: 805, height: 234},
+  },
+  {
+    outlet: "Reach",
     title:
       "The New Intellectual Coolness: Where Science, Society and Creativity Finally Met",
     date: "2026-05-21",
