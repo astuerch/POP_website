@@ -704,7 +704,7 @@ export const galleryEvents: GalleryEventCollection[] = [
     dateLabel: "October 2026",
     venue: "Amboss Rampe, Zürich",
     description:
-      "Our second edition — two talks on how social media is built, followed by open discussion, networking and a DJ set.",
+      "Our second edition — two speakers on how social media rewires attention, opinion and belonging. Followed by open discussion, networking and a DJ set.",
     items: galleryItemsEvent02,
   },
   {
