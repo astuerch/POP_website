@@ -75,7 +75,6 @@ export function GalleryGrid({
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
 
   const open = useCallback((index: number, trigger: HTMLElement) => {
     triggerRef.current = trigger;
@@ -126,54 +125,6 @@ export function GalleryGrid({
     };
   }, [isOpen, close, step]);
 
-  // Row-ordered masonry: give each grid cell a row span proportional to the
-  // photo's rendered height. Tiles are placed left-to-right in source order,
-  // so reading flows by row (not down columns) and nothing is cropped.
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) {
-      return;
-    }
-
-    const ROW = 8; // grid-auto-rows track height (px)
-    const GAP = 12; // must match the grid gap (gap-3 = 0.75rem)
-
-    // Enable the fine row grid only once JS is running. Before this, the grid
-    // falls back to a normal aligned grid (no overlap, no crop).
-    grid.style.gridAutoRows = `${ROW}px`;
-
-    const layout = () => {
-      const tiles = grid.querySelectorAll<HTMLElement>("[data-tile]");
-      tiles.forEach((tile) => {
-        const content = (tile.firstElementChild as HTMLElement | null) ?? tile;
-        const height = content.getBoundingClientRect().height;
-        if (!height) {
-          return;
-        }
-        const span = Math.max(1, Math.round((height + GAP) / (ROW + GAP)));
-        tile.style.gridRowEnd = `span ${span}`;
-      });
-    };
-
-    layout();
-
-    const resizeObserver = new ResizeObserver(layout);
-    resizeObserver.observe(grid);
-
-    const images = Array.from(grid.querySelectorAll("img"));
-    images.forEach((img) => {
-      if (!img.complete) {
-        img.addEventListener("load", layout);
-      }
-    });
-    window.addEventListener("resize", layout);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", layout);
-      images.forEach((img) => img.removeEventListener("load", layout));
-    };
-  }, [items]);
 
   const feature = featureFirst ? items[0] : undefined;
   const gridItems = featureFirst ? items.slice(1) : items;
@@ -202,52 +153,66 @@ export function GalleryGrid({
         </Reveal>
       ) : null}
 
-      {/* Row-ordered masonry: a CSS grid with fine-grained auto-rows. Each
-          tile spans as many rows as its natural height needs, so photos keep
-          their aspect ratio (no cropping) while reading order flows by row,
-          left to right — 2 cols on mobile up to 5 on wide desktops. */}
+      {/* Justified rows, the layout newspapers and Google Photos use.
+          Every photo keeps its own shape and its place in the sequence, but
+          each row is scaled to exactly fill the width — so there are no
+          leftover holes, which is what a column masonry can't avoid.
+
+          How it works: each tile gets `flex-grow` and `flex-basis`
+          proportional to its aspect ratio. Flexbox then hands each row's
+          spare width out in the same proportion, which makes every photo in
+          that row land on the same height. No JavaScript, no measuring, and
+          nothing jumps while the images load.
+
+          `--row-h` is the target height per breakpoint; rows end up near it,
+          never exactly, because filling the width wins. */}
       <div
-        ref={gridRef}
-        className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        className="flex flex-wrap gap-3 [--row-h:9rem] sm:[--row-h:11rem] lg:[--row-h:13rem] xl:[--row-h:15rem]"
       >
         {gridItems.map((item, index) => {
           const globalIndex = featureFirst ? index + 1 : index;
-          // Every seventh tile runs two columns wide. Sets shot mostly in one
-          // orientation otherwise land as a uniform contact sheet; this gives
-          // the wall a rhythm without reordering anything.
-          const isWide = index % 7 === 3;
+          const ratio = item.width / item.height;
 
           return (
-            <div
+            <button
               key={item.src}
-              data-tile
-              className={isWide ? "sm:col-span-2" : undefined}
+              type="button"
+              style={{
+                flexGrow: ratio,
+                flexBasis: `calc(var(--row-h) * ${ratio})`,
+              }}
+              className="focus-visible:ring-brand-lila group block cursor-zoom-in overflow-hidden rounded-xl focus-visible:ring-2 focus-visible:outline-none"
+              onClick={(event) => open(globalIndex, event.currentTarget)}
             >
-              <button
-                type="button"
-                className="focus-visible:ring-brand-lila group block w-full cursor-zoom-in overflow-hidden rounded-xl focus-visible:ring-2 focus-visible:outline-none"
-                onClick={(event) => open(globalIndex, event.currentTarget)}
-              >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  width={item.width}
-                  height={item.height}
-                  // Rounded up from the real column width (~22vw, double for
-                  // the wide tiles): under-serving shows, over-serving costs
-                  // a few KB.
-                  sizes={
-                    isWide
-                      ? "(max-width:640px) 50vw, (max-width:1024px) 68vw, 48vw"
-                      : "(max-width:640px) 50vw, (max-width:1024px) 34vw, 24vw"
-                  }
-                  quality={85}
-                  className="h-auto w-full rounded-xl transition duration-500 group-hover:scale-105"
-                />
-              </button>
-            </div>
+              <Image
+                src={item.src}
+                alt={item.alt}
+                width={item.width}
+                height={item.height}
+                // Rows hold roughly 3 photos on desktop, 2 on mobile, and a
+                // panorama can run wider — generous on purpose.
+                sizes="(max-width:640px) 70vw, (max-width:1024px) 45vw, 34vw"
+                quality={85}
+                className="h-auto w-full rounded-xl transition duration-500 group-hover:scale-105"
+              />
+            </button>
           );
         })}
+
+        {/* Without these, the final row would stretch its few photos across
+            the full width and they'd tower over everything else. The spacers
+            are zero-height, so they only ever absorb that spare width. */}
+        {[1.5, 1.5, 1.5, 1.5].map((ratio, index) => (
+          <i
+            key={`spacer-${index}`}
+            aria-hidden
+            style={{
+              flexGrow: ratio,
+              flexBasis: `calc(var(--row-h) * ${ratio})`,
+            }}
+            className="h-0"
+          />
+        ))}
       </div>
 
       {activeItem && activeIndex !== null ? (
