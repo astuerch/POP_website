@@ -104,6 +104,40 @@ export interface Event {
 
 export const events: Event[] = [
   {
+    slug: "microbiome-and-the-brain",
+    edition: 3,
+    title: "Microbiome & Brain",
+    summary:
+      "Can your gut change your mood? The microbiome, your immune system, and the signals running between your gut and your brain.",
+    aboutHeading: "Can your gut change your mood?",
+    description: [
+      "Trillions of microbes live in your gut. They break down what you eat, train your immune system, and send chemical signals that reach the brain. POP 03 asks how much of that traffic actually shapes how you feel.",
+      "One side of the evening is the research itself: how everyday things like diet, sleep and jet lag reshape the microbiome, and how those shifts change what we are vulnerable to, from immune conditions to the brain's ability to adapt and rewire.",
+      "The other side is what happens to that science once it reaches the shelf. Probiotics, fermented foods and gut-health claims sell far faster than the evidence arrives, so we'll take apart a few of the promises on those labels and see which ones hold up.",
+      "Speakers to be announced.",
+    ],
+    // Date not fixed yet: no `startsAt`, so no countdown runs.
+    isoDate: "2027-02-01",
+    isTentative: true,
+    dateLabel: "February 2027 · Date coming soon",
+    location: "Zürich, Switzerland",
+    venue: "Labor5",
+    city: "Zürich",
+    status: "upcoming",
+    // Registration opens once the date is locked in.
+    registrationType: "infomaniak-free",
+    priceLabel: "Free RSVP · Limited places",
+    speakers: [],
+    heroImage: {
+      src: "/images/events/event-03/hero.jpg",
+      alt: "Illustration of a brain and a gut connected by a tin-can telephone, with bacteria strung along the line.",
+    },
+    image: {
+      src: "/images/events/event3_pic.jpg",
+      alt: "Illustration of a brain and a gut connected by a tin-can telephone, with bacteria strung along the line.",
+    },
+  },
+  {
     slug: "social-media-how-it-changes-your-mind",
     edition: 2,
     title: "Social Media & How it changes your Mind",
@@ -125,16 +159,14 @@ export const events: Event[] = [
     location: "Zürich, Switzerland",
     venue: "Amboss Rampe",
     city: "Zürich",
-    status: "upcoming",
-    // Full: everyone goes on the waiting list, and we send the Infomaniak
-    // link by email as places free up. Set to false to sell tickets again.
-    waitlistOnly: true,
+    status: "past",
+    // Sold out, took place on 26 Oct 2026. Capacity and the Infomaniak id are
+    // kept for the record; the waiting-list gate is off now that the event is
+    // over, and the widget shows the archive state with a link to the photos.
     capacity: 120,
     infomaniakEventId: "397878",
-    registrationType: "infomaniak-free",
-    // Registration is LIVE: the widget shows the "Register / RSVP" button.
-    registrationUrl: "https://infomaniak.events/group/dd687bd7-ca77-463d-8fb9-a249751f4831",
-    priceLabel: "Free RSVP · Limited places",
+    registrationType: "closed",
+    priceLabel: "Archive recap",
     speakers: ["Stefania Ionescu", "Sophia Kramer", "Mihai Barascu (DJ set)"],
     schedule: [
       {

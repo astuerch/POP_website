@@ -283,12 +283,18 @@ export default async function EventDetailPage({
                   </div>
                 ))}
               </div>
-            ) : (
+            ) : event.speakers.length > 0 ? (
               <ul className="text-brand-mist marker:text-brand-lila mt-4 list-disc space-y-3 pl-5 text-base leading-7 sm:leading-8">
                 {event.speakers.map((speaker) => (
                   <li key={speaker}>{speaker}</li>
                 ))}
               </ul>
+            ) : (
+              // Announced edition with the line-up still open: say so rather
+              // than leaving an empty heading.
+              <p className="text-brand-mist mt-4 text-base leading-7 sm:leading-8">
+                {t("speakersTba")}
+              </p>
             )}
           </section>
         </AnimatedSection>

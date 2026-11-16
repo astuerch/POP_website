@@ -46,7 +46,7 @@
     "eyebrow": "Nächstes Event",
     "title": "Als Nächstes",
     "viewAll": "Alle Events ansehen",
-    "saveTheDate": "Datum vormerken · Details folgen bald"
+    "saveTheDate": "Datum folgt bald"
   },
   "newsletter": {
     "eyebrow": "Newsletter · Immer auf dem Laufenden",
@@ -75,6 +75,7 @@
     "about": "Über dieses Event",
     "hosts": "Gastgeber & Gesprächsstarter",
     "speakers": "Speaker",
+    "speakersTba": "Wird noch bekannt gegeben.",
     "registrationEyebrow": "Anmeldung",
     "registrationClosedTitle": "Anmeldung geschlossen",
     "registrationClosedBody": "Dieses Event ist jetzt Teil des POP-Archivs. Die Fotos des Abends findest du in der Galerie.",

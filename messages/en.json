@@ -46,7 +46,7 @@
     "eyebrow": "Next event",
     "title": "Next up",
     "viewAll": "View all events",
-    "saveTheDate": "Save the date · details coming soon"
+    "saveTheDate": "Date coming soon"
   },
   "newsletter": {
     "eyebrow": "Newsletter · Stay in the loop",
@@ -75,6 +75,7 @@
     "about": "About this event",
     "hosts": "Hosts & conversation starters",
     "speakers": "Speakers",
+    "speakersTba": "To be announced.",
     "registrationEyebrow": "Registration",
     "registrationClosedTitle": "Registration closed",
     "registrationClosedBody": "This event now lives in the POP archive. Photos from the night are in the gallery.",
