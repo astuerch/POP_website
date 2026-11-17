@@ -128,6 +128,11 @@ export const events: Event[] = [
     registrationType: "infomaniak-free",
     priceLabel: "Free RSVP · Limited places",
     speakers: [],
+    // The home page card is a wide, short frame that would crop a landscape
+    // picture. "contain" shows the whole illustration there instead, over a
+    // blurred copy of itself. On /events the frame is already 16:10, so the
+    // card looks exactly as before, and the event page keeps its own hero.
+    imageFit: "contain",
     heroImage: {
       src: "/images/events/event-03/hero.jpg",
       alt: "Illustration of a brain and a gut connected by a tin-can telephone, with bacteria strung along the line.",
