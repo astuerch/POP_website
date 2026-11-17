@@ -96,6 +96,12 @@ export interface Event {
    * defaults to "cover".
    */
   imageFit?: "cover" | "contain";
+  /**
+   * Colour filling the card frame around a "contain" image. Set it to the
+   * artwork's own paper tone so the picture and its surround read as one
+   * sheet. Defaults to a near-white.
+   */
+  imageBackground?: string;
   image: {
     src: string;
     alt: string;
@@ -133,6 +139,8 @@ export const events: Event[] = [
     // blurred copy of itself. On /events the frame is already 16:10, so the
     // card looks exactly as before, and the event page keeps its own hero.
     imageFit: "contain",
+    // Sampled from the illustration's own paper, so the fill is invisible.
+    imageBackground: "#fbf9f3",
     heroImage: {
       src: "/images/events/event-03/hero.jpg",
       alt: "Illustration of a brain and a gut connected by a tin-can telephone, with bacteria strung along the line.",
@@ -231,6 +239,14 @@ export const events: Event[] = [
         ],
       },
     ],
+    // The artwork is a 16:9 sheet, so the card shows all of it on its own
+    // light grey instead of cropping into the hands.
+    imageFit: "contain",
+    imageBackground: "#f0efef",
+    heroImage: {
+      src: "/images/events/event-02/hero.jpg",
+      alt: "Artwork of a head opening into a colourful brain with hands placing social media logos.",
+    },
     image: {
       src: "/images/events/event2_pic.jpg",
       alt: "Artwork of a head opening into a colourful brain with hands placing social media logos.",

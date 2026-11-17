@@ -31,13 +31,12 @@ export async function EventCard({
       >
         {event.imageFit === "contain" ? (
           <>
-            <Image
-              fill
+            {/* Flat paper colour behind the artwork rather than a blurred copy
+                of it: the blur turned the edges into a grey smear. */}
+            <div
               aria-hidden
-              className="scale-110 object-cover opacity-40 blur-2xl"
-              src={event.image.src}
-              alt=""
-              sizes={isHorizontal ? "(max-width:1024px) 100vw, 40vw" : "(max-width:1024px) 100vw, 33vw"}
+              className="absolute inset-0"
+              style={{backgroundColor: event.imageBackground ?? "#faf9f5"}}
             />
             <Image
               fill

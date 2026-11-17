@@ -102,13 +102,12 @@ export default async function EventDetailPage({
             <div className="bg-brand-surface relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
               {!event.heroImage && event.imageFit === "contain" ? (
                 <>
-                  <Image
-                    fill
+                  {/* Flat paper colour, matching the card: a blurred copy of
+                      the artwork left a grey smear around the edges. */}
+                  <div
                     aria-hidden
-                    className="scale-110 object-cover opacity-40 blur-2xl"
-                    src={event.image.src}
-                    alt=""
-                    sizes="(max-width:1280px) 100vw, 800px"
+                    className="absolute inset-0"
+                    style={{backgroundColor: event.imageBackground ?? "#faf9f5"}}
                   />
                   <Image
                     fill
