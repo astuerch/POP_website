@@ -15,6 +15,10 @@ export async function EventCard({
 }) {
   const t = await getTranslations("events");
   const isHorizontal = orientation === "horizontal";
+  // "contain" only matters in the wide, short frame on the home page, where a
+  // landscape picture would lose its sides. The vertical card is 16:10, close
+  // enough to the artwork that cropping a sliver beats letterboxing it.
+  const useContain = event.imageFit === "contain" && isHorizontal;
 
   return (
     <article
@@ -29,7 +33,7 @@ export async function EventCard({
           isHorizontal && "md:aspect-auto md:w-[42%] md:shrink-0 md:self-stretch",
         )}
       >
-        {event.imageFit === "contain" ? (
+        {useContain ? (
           <>
             {/* Flat paper colour behind the artwork rather than a blurred copy
                 of it: the blur turned the edges into a grey smear. */}
