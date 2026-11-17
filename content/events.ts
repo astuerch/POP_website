@@ -108,7 +108,7 @@ export const events: Event[] = [
     edition: 3,
     title: "Microbiome & Brain",
     summary:
-      "Can your gut change your mood? The microbiome, your immune system, and the signals running between your gut and your brain.",
+      "Can your gut change your mood? Trillions of microbes talk to your brain all day. We look at what the science shows, and what your probiotics promise.",
     aboutHeading: "Can your gut change your mood?",
     description: [
       "Trillions of microbes live in your gut. They break down what you eat, train your immune system, and send chemical signals that reach the brain. POP 03 asks how much of that traffic actually shapes how you feel.",
